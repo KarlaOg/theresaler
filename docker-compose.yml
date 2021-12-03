@@ -53,6 +53,6 @@ services:
 
   node:
     build:
-      context: ./front
+      context: ./front-vue
     ports:
       - "8080:8080"

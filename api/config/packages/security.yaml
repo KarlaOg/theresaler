@@ -13,14 +13,18 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        jwt:
+            lexik_jwt: ~
+            
     firewalls:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
             
         login:
-            pattern: ^/api/login
+            pattern: ^/api/login_check
             stateless: true
+            provider: app_user_provider
             json_login:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -28,15 +32,16 @@ security:
         api:
             pattern: ^/api/
             stateless: true
-            provider: app_user_provider
+            provider: jwt
             jwt: ~
-        main:
-            json_login:
-                check_path: /authentication_token
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        # main:
+        #     json_login:
+        #         check_path: /authentication_token
+        #         username_path: email
+        #         password_path: password
+        #         success_handler: lexik_jwt_authentication.handler.authentication_success
+        #         failure_handler: lexik_jwt_authentication.handler.authentication_failure
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html

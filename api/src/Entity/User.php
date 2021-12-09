@@ -39,6 +39,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity=DeliveryInformation::class, mappedBy="userID", cascade={"persist", "remove"})
+     */
+    private $deliveryInformation;
+
     public function getId(): ?int
     {
         return $this->id;

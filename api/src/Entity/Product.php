@@ -44,6 +44,11 @@ class Product
      */
     private $brand;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $salesType;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +110,18 @@ class Product
     public function setBrand(string $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getSalesType(): ?bool
+    {
+        return $this->salesType;
+    }
+
+    public function setSalesType(bool $salesType): self
+    {
+        $this->salesType = $salesType;
 
         return $this;
     }

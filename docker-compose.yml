@@ -53,6 +53,15 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    
+  node:
+    build:
+      context: ./front-vue
+    volumes:
+      - '.:/front-vue'
+      - './front-vue/node_modules'
+    ports:
+      - '8082:8080'
 
 volumes:
   db-data: {}

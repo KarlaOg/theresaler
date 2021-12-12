@@ -59,7 +59,7 @@ services:
       context: ./front-vue
     volumes:
       - '.:/front-vue'
-      - './front-vue/node_modules'
+      - '.:/front-vue/node_modules'
     ports:
       - '8082:8080'
 

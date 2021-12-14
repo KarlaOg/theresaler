@@ -23,7 +23,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8081:8080"
+      - '8081:8080'
 
   php:
     image: php:8.0-fpm
@@ -51,15 +51,14 @@ services:
     depends_on:
       - php
     ports:
-      - "80:80"
-      - "443:443"
-    
+      - '80:80'
+      - '443:443'
+
   node:
     build:
       context: ./front-vue
     volumes:
-      - '.:/front-vue'
-      - '.:/front-vue/node_modules'
+      - './front-vue:/app'
     ports:
       - '8082:8080'
 

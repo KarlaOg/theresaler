@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-    <p>tata</p>
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <Inscriptions />
+    <div id="nav">
+      <router-link to="/">Page d'Accueil</router-link>
+      <router-link to="/inscription">Inscription</router-link> 
+      <router-link to="/produit">Tout les produits</router-link>
+    
+      
+
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue';
-import Inscriptions from './components/Inscriptions.vue';
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-    Inscriptions,
-  },
-};
-</script>
 
 <style>
 #app {
@@ -26,6 +19,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

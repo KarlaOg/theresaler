@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: "Inscriptions",
+  name: "Register",
   data: function () {
     return {
       errors: [],

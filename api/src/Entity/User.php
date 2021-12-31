@@ -9,12 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @UniqueEntity("email", message="Un utilisateur ayant cette adresse email existe deja")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -27,6 +30,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="L'email doit etre renseigné")
+     * @Assert\Email(message="L'email doit avoir un format valide")
      */
     private $email;
 
@@ -38,17 +43,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Le mot de passe doit etre renseigné")
      */
     private $password;
 
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom de famille doit etre renseigné")
+     * @Assert\Length(min=2, minMessage="Le nom de famille doit faire minimum 2 caracteres")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prenom doit etre renseigné")
+     * @Assert\Length(min=2, minMessage="Le prenom doit faire minimum 2 caracteres")
      */
     private $firstname;
 

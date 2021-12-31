@@ -1,28 +1,31 @@
 <template>
   <div id="app">
-    <p>tata</p>
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Header />
+    <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld,
+    Header,
+    Footer,
   },
 };
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Exo+2');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  background-color: #f8f8f8 !important;
+  font-family: 'Exo 2', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

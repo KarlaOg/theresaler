@@ -604,3 +604,6 @@
 172.24.0.1 - - [31/Dec/2021:21:24:25 +0000] "GET /api/users HTTP/1.1" 200 6567 "http://localhost:8083/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
 172.24.0.1 - - [31/Dec/2021:21:24:25 +0000] "GET /api/users HTTP/1.1" 200 6567 "http://localhost:8083/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
 172.24.0.1 - - [31/Dec/2021:21:24:46 +0000] "GET /api/users HTTP/1.1" 200 6567 "http://localhost:8083/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+172.18.0.1 - - [02/Jan/2022:11:15:37 +0000] "GET / HTTP/1.1" 404 9363 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+172.18.0.1 - - [02/Jan/2022:11:15:37 +0000] "GET /favicon.ico HTTP/1.1" 404 27496 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+172.18.0.1 - - [02/Jan/2022:11:39:37 +0000] "GET /api/users HTTP/1.1" 200 12 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"

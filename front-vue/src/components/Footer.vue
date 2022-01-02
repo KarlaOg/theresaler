@@ -6,7 +6,7 @@
           <div class="footer-widget">
             <div class="footer-title">Navigate</div>
             <ul class="list-unstyled">
-              <router-link to="/"><li>About Us</li></router-link>
+              <router-link to="/"><li>About Usssssssssss</li></router-link>
               <router-link to="/"><li>Blog</li></router-link>
               <router-link to="/"><li>Sitemap</li></router-link>
             </ul>

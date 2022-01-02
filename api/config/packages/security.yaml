@@ -15,12 +15,16 @@ security:
                 property: email
         jwt:
             lexik_jwt: ~
-            
+
     firewalls:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
-            
+        registration:
+            pattern: ^/api/users
+            #anonymous: true
+            stateless: true
+            methods: [POST]
         login:
             pattern: ^/api/login_check
             stateless: true
@@ -50,5 +54,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - {
+            path: ^/api/users,
+            roles: IS_AUTHENTICATED_FULLY,
+            methods: [GET, PUT, DELETE],
+          }
         # - { path: ^/profile, roles: ROLE_USER }

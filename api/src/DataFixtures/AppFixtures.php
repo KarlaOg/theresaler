@@ -3,19 +3,51 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Product;
 use App\Entity\User;
+use App\Entity\Product;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture  
+class AppFixtures extends Fixture
 {
+    protected $encoder;
+
+    public function __construct(UserPasswordHasherInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
 
     public function load(ObjectManager $manager): void
     {
-        
-        
+        $faker = Factory::create('fr_FR');
+        //ADMIN
+        $admin = new User;
+        $hash = $this->encoder->hashPassword($admin, "password");
+        $admin->setEmail("admin@admin.com")
+            ->setFirstname("admin")
+            ->setLastname("admin")
+            ->setPassword($hash)
+            ->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
+
+
+        //USERS
+        for ($u = 0; $u < 20; $u++) {
+            $user = new User();
+            $hash = $this->encoder->hashPassword($user, "password");
+            $user->setEmail("user$u@gmail.com")
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPassword($hash)
+                ->setRoles(['ROLE_USER']);
+            $users[] = $user;
+
+            $manager->persist($user);
+
+        }
+
+         
         $faker = Factory::create();
         for ($i = 0; $i < 20; $i++) {
             $product = new Product();
@@ -31,9 +63,7 @@ class AppFixtures extends Fixture
 
       
         $manager->flush();
+
+        $manager->flush();
     }
-
-
-
-  
 }

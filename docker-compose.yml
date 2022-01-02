@@ -54,14 +54,6 @@ services:
       - '80:80'
       - '443:443'
 
-  node:
-    build:
-      context: ./front-vue
-    volumes:
-      - './front-vue:/app'
-    ports:
-      - '8082:8080'
-
 volumes:
   db-data: {}
   app-cache: {}

@@ -1,13 +1,32 @@
-# front-vue
+# docker-vuejs
 
 ## Project setup
 
 ```
-cd front-vue && yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-yarn serve
+npm run serve
 ```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Lints and fixes files
+
+```
+npm run lint
+```
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# docker compose exec node npm install vue
+# docker run --install node

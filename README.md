@@ -58,3 +58,7 @@ A la racine le `docker-compose.yml`
 Dans le dossier `docker/` toutes config
 Ensuite dans le dossier `api/` ils y a toutes de la business logique
 `front-vue` le front en VueJS
+
+## See api
+
+http://localhost/api

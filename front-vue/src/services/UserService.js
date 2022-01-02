@@ -13,4 +13,7 @@ export default {
   getUsers() {
     return apiClient.get();
   },
+  //   registerUser() {
+  //     return apiClient.post(baseURL);
+  //   },
 };

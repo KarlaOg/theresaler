@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 // import createPersistedState from 'vuex-persistedstate';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -130,6 +131,7 @@ export default new Vuex.Store({
         type: 'table',
       },
     ],
+
   },
   // plugins: [createPersistedState()],
   getters: {
@@ -165,6 +167,16 @@ export default new Vuex.Store({
     addtoInfo(state, n) {
       // Info Component
       return state.infoPage.push(n);
+    },
+  },
+  actions: {
+    register(credentials) {
+      return axios
+        .post('localhost/api/users', credentials)
+        .then(({ data }) => {
+          console.log('user data is :', data);
+        })
+        .catch((error) => console.log(error));
     },
   },
 });

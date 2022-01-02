@@ -20,4 +20,7 @@ export default {
   logUser(credentials) {
     return apiClient.post('/login_check', credentials);
   },
+  //   registerUser() {
+  //     return apiClient.post(baseURL);
+  //   },
 };

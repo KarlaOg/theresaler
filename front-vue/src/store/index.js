@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 // import createPersistedState from 'vuex-persistedstate';
-import axios from 'axios';
+// import axios from 'axios';
+import UserService from '@/services/UserService.js';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -169,12 +171,18 @@ export default new Vuex.Store({
   },
   actions: {
     register(credentials) {
-      return axios
-        .post('localhost/api/users', credentials)
+      return UserService.createUser(credentials)
         .then(({ data }) => {
           console.log('user data is :', data);
         })
         .catch((error) => console.log(error));
+    },
+    login(credentials) {
+      return UserService.logUser(credentials)
+        .then(({ data }) => {
+          console.log('user data is :', data);
+        })
+        .catch((error) => console.log(error.response));
     },
   },
 });

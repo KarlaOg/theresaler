@@ -6,7 +6,7 @@
       <input v-model="email" type="email" name="email" value />
 
       <label for="firstname">firstname: </label>
-      <input v-model="fisrtname" type="text" name="firstname" value />
+      <input v-model="firstname" type="text" name="firstname" value />
 
       <label for="lastname">Lastname: </label>
       <input v-model="lastname" type="text" name="lastname" value />
@@ -14,7 +14,7 @@
       <label for="password"> Password: </label>
       <input v-model="password" type="password" name value />
 
-      <button type="submit" name="button" class="registerbtn">Register</button>
+      <button type="submit" name="button" class="btn">Register</button>
     </form>
   </div>
 </template>
@@ -66,7 +66,7 @@ input[type='password']:focus {
 }
 
 /* Set a style for the submit/register button */
-.registerbtn {
+.btn {
   background-color: #04aa6d;
   color: white;
   padding: 16px 20px;
@@ -77,7 +77,7 @@ input[type='password']:focus {
   opacity: 0.9;
 }
 
-.registerbtn:hover {
+.btn:hover {
   opacity: 1;
 }
 

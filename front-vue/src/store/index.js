@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import createPersistedState from 'vuex-persistedstate';
-// import axios from 'axios';
 import UserService from '@/services/UserService.js';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    user: null,
     infoPage: [],
     cartItems: [],
     items: [
@@ -168,15 +167,23 @@ export default new Vuex.Store({
       // Info Component
       return state.infoPage.push(n);
     },
+    SET_USER_DATA(state, userData) {
+      state.user = userData;
+      localStorage.setItem('user', JSON.stringify(userData));
+    },
   },
   actions: {
-    register(credentials) {
-      return UserService.createUser(credentials)
-        .then(({ data }) => {
+    register({ commit }, credentials) {
+      console.log(credentials);
+      return UserService.registerUser(credentials)
+        .then((data) => {
+          commit('SET_USER_DATA', data);
+
           console.log('user data is :', data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error.response));
     },
+
     login(credentials) {
       return UserService.logUser(credentials)
         .then(({ data }) => {

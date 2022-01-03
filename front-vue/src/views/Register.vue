@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Register</h1>
-    <form @submit.prevent="register" method="post">
+    <form @submit.prevent="register">
       <label for="email"> Email: </label>
       <input v-model="email" type="email" name="email" value />
 

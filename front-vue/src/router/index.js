@@ -41,8 +41,6 @@ const routes = [
     component: Dashboard,
     meta: { requiresAuth: true },
   },
-
-  { path: '*', redirect: '/error' },
 ];
 
 const router = new VueRouter({

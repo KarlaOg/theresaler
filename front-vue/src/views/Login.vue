@@ -8,7 +8,7 @@
       <label for="password"> Password: </label>
       <input v-model="password" type="password" name="password" value />
 
-      <button type="submit" name="button" v-on:click="alert">Login</button>
+      <button type="submit" name="button" x class="btn">Login</button>
 
       <router-link to="/register">
         Don't have an account? Register.
@@ -25,18 +25,15 @@ export default {
     };
   },
   methods: {
-    alert(event) {
-      console.log(event.target.username);
-    },
     login() {
       this.$store
         .dispatch('login', {
           username: this.username,
           password: this.password,
         })
-        // .then(() => {
-        //   this.$router.push({ name: 'dashboard' });
-        // })
+        .then(() => {
+          this.$router.push({ name: 'Dashboard' });
+        })
         .catch((err) => {
           this.error = err.response.data.error;
         });

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import UserService from '@/services/UserService.js';
-
+import axios from 'axios';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -152,6 +152,9 @@ export default new Vuex.Store({
         return state.infoPage.splice(0, 1);
       }
     },
+    loggedIn(state) {
+      return !!state.user;
+    },
   },
   mutations: {
     inCart(state, n) {
@@ -170,26 +173,29 @@ export default new Vuex.Store({
     SET_USER_DATA(state, userData) {
       state.user = userData;
       localStorage.setItem('user', JSON.stringify(userData));
+      axios.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${userData.token}`;
+    },
+    CLEAR_USER_DATA() {
+      localStorage.removeItem('user');
+      location.reload();
     },
   },
   actions: {
-    register({ commit }, credentials) {
-      console.log(credentials);
-      return UserService.registerUser(credentials)
-        .then((data) => {
-          commit('SET_USER_DATA', data);
-
-          console.log('user data is :', data);
-        })
-        .catch((error) => console.log(error.response));
+    login({ commit }, credentials) {
+      return UserService.logUser(credentials).then((data) => {
+        commit('SET_USER_DATA', data);
+      });
     },
-
-    login(credentials) {
-      return UserService.logUser(credentials)
-        .then(({ data }) => {
-          console.log('user data is :', data);
-        })
-        .catch((error) => console.log(error.response));
+    register({ commit }, credentials) {
+      return UserService.registerUser(credentials).then((response) => {
+        console.log(response);
+        commit('SET_USER_DATA', response);
+      });
+    },
+    logout({ commit }) {
+      commit('CLEAR_USER_DATA');
     },
   },
 });

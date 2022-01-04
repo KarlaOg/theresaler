@@ -8,7 +8,8 @@
       <label for="password"> Password: </label>
       <input v-model="password" type="password" name="password" value />
 
-      <button type="submit" name="button" x class="btn">Login</button>
+      <button type="submit" name="button" class="btn">Login</button>
+      <p class="text-danger">{{ error }}</p>
 
       <router-link to="/register">
         Don't have an account? Register.
@@ -22,6 +23,7 @@ export default {
     return {
       username: '',
       password: '',
+      error: null,
     };
   },
   methods: {
@@ -35,7 +37,8 @@ export default {
           this.$router.push({ name: 'Dashboard' });
         })
         .catch((err) => {
-          this.error = err.response.data.error;
+          console.log(err);
+          this.error = err.response.data.message;
         });
     },
   },

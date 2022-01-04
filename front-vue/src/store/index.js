@@ -183,22 +183,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    register({ commit }, credentials) {
-      return UserService.registerUser(credentials)
-        .then((data) => {
-          commit('SET_USER_DATA', data);
-          console.log('user data is :', data);
-        })
-        .catch((error) => console.log(error.data.violations[1].message));
-    },
-
     login({ commit }, credentials) {
-      return UserService.logUser(credentials)
-        .then((data) => {
-          console.log('user data is :', data);
-          commit('SET_USER_DATA', data);
-        })
-        .catch((error) => console.log(error.response));
+      return UserService.logUser(credentials).then((data) => {
+        commit('SET_USER_DATA', data);
+      });
+    },
+    register({ commit }, credentials) {
+      return UserService.registerUser(credentials).then((response) => {
+        console.log(response);
+        commit('SET_USER_DATA', response);
+      });
     },
     logout({ commit }) {
       commit('CLEAR_USER_DATA');

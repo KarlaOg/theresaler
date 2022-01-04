@@ -14,7 +14,11 @@
 
         <label for="password"> Password: </label>
         <input v-model="password" type="password" name value />
-
+        <ul class="text-danger">
+          <li v-for="err in errors" :key="err.message">
+            {{ err.message }}
+          </li>
+        </ul>
         <button type="submit" name="button" class="btn">Register</button>
       </form>
     </div>
@@ -28,6 +32,7 @@ export default {
       lastname: '',
       email: '',
       password: '',
+      errors: null,
     };
   },
   methods: {
@@ -43,7 +48,8 @@ export default {
           this.$router.push({ name: 'Dashboard' });
         })
         .catch((err) => {
-          this.errors = console.log(err.response.data.errors);
+          this.errors = err.response.data.violations;
+          console.log('ERR', err.response.data.violations);
         });
     },
   },

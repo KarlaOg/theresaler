@@ -17,30 +17,11 @@ export default {
   createUser(credentials) {
     return apiClient.post('/users', credentials);
   },
-  async logUser(data) {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-    const res = await fetch('http://localhost/api/login_check', requestOptions);
-    return res.json();
+
+  logUser(credentials) {
+    return apiClient.post('/login_check', credentials);
   },
-
-  async registerUser(data) {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-
-    const res = await fetch('http://localhost/api/users', requestOptions);
-    return res.json();
+  registerUser(credentials) {
+    return apiClient.post('/users', credentials);
   },
 };

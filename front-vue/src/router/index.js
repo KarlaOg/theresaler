@@ -36,13 +36,13 @@ const routes = [
     component: Error,
   },
   {
-    path: '/admin/dashboard',
+    path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true },
   },
 
-  //   { path: '*', redirect: '/error' },
+  { path: '*', redirect: '/error' },
 ];
 
 const router = new VueRouter({

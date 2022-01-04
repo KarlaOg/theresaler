@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0dbb30e4bf08791194a30d7daae6968",
+    "content-hash": "a0df7e7b8ff9d6c9067878865effef81",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2468,6 +2468,104 @@
                 }
             ],
             "time": "2021-11-02T00:05:11+00:00"
+        },
+        {
+            "name": "liorchamla/faker-prices",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liorchamla/faker-prices.git",
+                "reference": "01f44c6aad653bf72f90c1345d48a798ec3f9d19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liorchamla/faker-prices/zipball/01f44c6aad653bf72f90c1345d48a798ec3f9d19",
+                "reference": "01f44c6aad653bf72f90c1345d48a798ec3f9d19",
+                "shasum": ""
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.13",
+                "pestphp/pest": "^0.3.19",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Liior\\Faker\\": "src/Faker"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lior Chamla",
+                    "email": "contact@web-develop.me"
+                }
+            ],
+            "description": "Provides typical and credible prices for Faker (fzaninotto/faker or fakerphp/faker) library",
+            "keywords": [
+                "faker",
+                "fixtures",
+                "prices"
+            ],
+            "support": {
+                "issues": "https://github.com/liorchamla/faker-prices/issues",
+                "source": "https://github.com/liorchamla/faker-prices/tree/2.0.0"
+            },
+            "time": "2020-12-29T08:40:08+00:00"
+        },
+        {
+            "name": "mbezhanov/faker-provider-collection",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mbezhanov/faker-provider-collection.git",
+                "reference": "ae3a9ba9421c3a593836689f08da1443b4065bc0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mbezhanov/faker-provider-collection/zipball/ae3a9ba9421c3a593836689f08da1443b4065bc0",
+                "reference": "ae3a9ba9421c3a593836689f08da1443b4065bc0",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.13",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "php-mock/php-mock": "^2.3",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bezhanov\\Faker\\": "src/Faker"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marin Bezhanov",
+                    "email": "marin.bezhanov@gmail.com",
+                    "homepage": "http://marinbezhanov.com"
+                }
+            ],
+            "description": "A collection of custom providers for the Faker library",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/mbezhanov/faker-provider-collection/issues",
+                "source": "https://github.com/mbezhanov/faker-provider-collection/tree/2.0.1"
+            },
+            "time": "2021-03-12T06:57:05+00:00"
         },
         {
             "name": "namshi/jose",
@@ -7404,50 +7502,6 @@
                 "source": "https://github.com/willdurand/Negotiation/tree/3.0.0"
             },
             "time": "2020-09-25T08:01:41+00:00"
-        },
-        {
-            "name": "woodsandwalker/faker-picture",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/woodsandwalker/Faker-Picture.git",
-                "reference": "ae9d4afae4ac27ffccfcfe2fda11b84f3ddb56dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/woodsandwalker/Faker-Picture/zipball/ae9d4afae4ac27ffccfcfe2fda11b84f3ddb56dd",
-                "reference": "ae9d4afae4ac27ffccfcfe2fda11b84f3ddb56dd",
-                "shasum": ""
-            },
-            "require": {
-                "fakerphp/faker": "^1.12"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "WW\\Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "James Walker",
-                    "homepage": "https://woodsandwalker.co.uk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A provider for FakerPHP to generate images from https://picsum.photos.",
-            "keywords": [
-                "faker"
-            ],
-            "support": {
-                "issues": "https://github.com/woodsandwalker/Faker-Picture/issues",
-                "source": "https://github.com/woodsandwalker/Faker-Picture/tree/v1.0.0"
-            },
-            "time": "2020-12-03T15:58:48+00:00"
         }
     ],
     "packages-dev": [
@@ -7594,6 +7648,50 @@
                 }
             ],
             "time": "2021-12-01T00:27:38+00:00"
+        },
+        {
+            "name": "woodsandwalker/faker-picture",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/woodsandwalker/Faker-Picture.git",
+                "reference": "ae9d4afae4ac27ffccfcfe2fda11b84f3ddb56dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/woodsandwalker/Faker-Picture/zipball/ae9d4afae4ac27ffccfcfe2fda11b84f3ddb56dd",
+                "reference": "ae9d4afae4ac27ffccfcfe2fda11b84f3ddb56dd",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.12"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WW\\Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Walker",
+                    "homepage": "https://woodsandwalker.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A provider for FakerPHP to generate images from https://picsum.photos.",
+            "keywords": [
+                "faker"
+            ],
+            "support": {
+                "issues": "https://github.com/woodsandwalker/Faker-Picture/issues",
+                "source": "https://github.com/woodsandwalker/Faker-Picture/tree/v1.0.0"
+            },
+            "time": "2020-12-03T15:58:48+00:00"
         }
     ],
     "aliases": [],

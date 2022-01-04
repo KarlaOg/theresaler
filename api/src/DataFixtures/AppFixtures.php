@@ -21,7 +21,9 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $faker->addProvider(new \WW\Faker\Provider\Picture($faker));
+        $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
+        // $faker->addProvider(new Liior\Faker\Prices($faker));
+        $faker->addProvider(new \Bezhanov\Faker\Provider\Avatar($faker));
 
         //ADMIN
         $admin = new User;
@@ -54,13 +56,13 @@ class AppFixtures extends Fixture
         for ($p = 0; $p < mt_rand(15, 20); $p++) {
             $product = new Product;
             $product
-                ->setName($faker->name())
-                ->setName($faker->name())
+                ->setName($faker->productName())
+                ->setBrand($faker->productName())
                 ->setDescription($faker->paragraph())
-                ->setPrice($faker->price(4000, 20000))
-                ->setStock($faker->price(4, 200))
-                ->setMainPicture($faker->pictureUrl(250, 200, true));
-            // ->setSalesType(True);
+                ->setPrice($faker->randomNumber(2))
+                ->setStock($faker->randomNumber(2))
+                ->setMainPicture($faker->avatar('foo', '300x300', 'jpg', 'set2', 'bg2'))
+                ->setSalesType($faker->boolean());
 
 
             $products[] = $product;

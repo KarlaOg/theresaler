@@ -28,7 +28,7 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      *  @Assert\NotBlank(message="La description courte est obligatoire")
      *  @Assert\Length(min=20, minMessage="La description courte doit quand même faire au moins 20 caractères")
      */

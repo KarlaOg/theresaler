@@ -33,7 +33,8 @@
         "symfony/serializer": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
-        "symfony/yaml": "5.4.*"
+        "symfony/yaml": "5.4.*",
+        "woodsandwalker/faker-picture": "^1.0"
     },
     "config": {
         "optimize-autoloader": true,

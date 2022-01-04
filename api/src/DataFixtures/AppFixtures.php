@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\User;
+use App\Entity\Product;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -20,6 +21,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
+        $faker->addProvider(new \WW\Faker\Provider\Picture($faker));
+
         //ADMIN
         $admin = new User;
         $hash = $this->encoder->hashPassword($admin, "password");
@@ -42,6 +45,27 @@ class AppFixtures extends Fixture
             $users[] = $user;
 
             $manager->persist($user);
+        }
+
+
+        $products = [];
+
+
+        for ($p = 0; $p < mt_rand(15, 20); $p++) {
+            $product = new Product;
+            $product
+                ->setName($faker->name())
+                ->setName($faker->name())
+                ->setDescription($faker->paragraph())
+                ->setPrice($faker->price(4000, 20000))
+                ->setStock($faker->price(4, 200))
+                ->setMainPicture($faker->pictureUrl(250, 200, true));
+            // ->setSalesType(True);
+
+
+            $products[] = $product;
+
+            $manager->persist($product);
         }
 
         $manager->flush();

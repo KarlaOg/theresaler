@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
@@ -21,26 +22,34 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom du produit est obligatoire !")
+     * @Assert\Length(min=3, max=255, minMessage="Le nom du produit doit avoir au moins 3 caractères !")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\NotBlank(message="La description courte est obligatoire")
+     *  @Assert\Length(min=20, minMessage="La description courte doit quand même faire au moins 20 caractères")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prix du produit est obligatoire !")
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le stock du produit est obligatoire !")
      */
     private $stock;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom de la marque est obligatoire !")
+     * @Assert\Length(min=3, max=255, minMessage="Le nom de la marque doit avoir au moins 3 caractères !")
      */
     private $brand;
 
@@ -48,6 +57,13 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $salesType;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Url(message="La photo principale doit être une URL valide")
+     * @Assert\NotBlank(message="La photo principale est obligatoire")
+     */
+    private $mainPicture;
 
     public function getId(): ?int
     {
@@ -122,6 +138,18 @@ class Product
     public function setSalesType(bool $salesType): self
     {
         $this->salesType = $salesType;
+
+        return $this;
+    }
+
+    public function getMainPicture(): ?string
+    {
+        return $this->mainPicture;
+    }
+
+    public function setMainPicture(string $mainPicture): self
+    {
+        $this->mainPicture = $mainPicture;
 
         return $this;
     }

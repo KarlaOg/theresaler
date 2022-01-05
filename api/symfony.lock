@@ -150,9 +150,6 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
-    "liorchamla/faker-prices": {
-        "version": "2.0.0"
-    },
     "mbezhanov/faker-provider-collection": {
         "version": "2.0.1"
     },
@@ -441,8 +438,5 @@
     },
     "willdurand/negotiation": {
         "version": "3.0.0"
-    },
-    "woodsandwalker/faker-picture": {
-        "version": "v1.0.0"
     }
 }

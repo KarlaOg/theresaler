@@ -22,7 +22,6 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
-        // $faker->addProvider(new Liior\Faker\Prices($faker));
         $faker->addProvider(new \Bezhanov\Faker\Provider\Avatar($faker));
 
         //ADMIN
@@ -53,7 +52,7 @@ class AppFixtures extends Fixture
         $products = [];
 
 
-        for ($p = 0; $p < mt_rand(15, 20); $p++) {
+        for ($p = 0; $p < 20; $p++) {
             $product = new Product;
             $product
                 ->setName($faker->productName())
@@ -61,7 +60,7 @@ class AppFixtures extends Fixture
                 ->setDescription($faker->paragraph())
                 ->setPrice($faker->randomNumber(2))
                 ->setStock($faker->randomNumber(2))
-                ->setMainPicture($faker->avatar('foo', '300x300', 'jpg', 'set2', 'bg2'))
+                ->setMainPicture($faker->avatar('foo', '300x300', 'jpg', "set$p", 'bg2'))
                 ->setSalesType($faker->boolean());
 
 

@@ -16,7 +16,6 @@
         "doctrine/orm": "^2.10",
         "elasticsearch/elasticsearch": "^7.16",
         "lexik/jwt-authentication-bundle": "^2.14",
-        "liorchamla/faker-prices": "^2.0",
         "mbezhanov/faker-provider-collection": "^2.0",
         "nelmio/cors-bundle": "^2.2",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -82,7 +81,6 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.17",
-        "symfony/maker-bundle": "^1.36",
-        "woodsandwalker/faker-picture": "^1.0"
+        "symfony/maker-bundle": "^1.36"
     }
 }

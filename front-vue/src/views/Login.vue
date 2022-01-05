@@ -9,7 +9,6 @@
       <input v-model="password" type="password" name="password" value />
 
       <button type="submit" name="button" class="btn">Login</button>
-      <p class="text-danger">{{ error }}</p>
 
       <router-link to="/register">
         Don't have an account? Register.
@@ -23,7 +22,6 @@ export default {
     return {
       username: '',
       password: '',
-      error: null,
     };
   },
   methods: {
@@ -34,25 +32,23 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push({ name: 'Dashboard' });
+          this.$router.push({ name: 'dashboard' });
         })
         .catch((err) => {
-          console.log(err);
-          this.error = err.response.data.message;
+          this.error = err.response.data.error;
         });
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 /* Add padding to containers */
 .container {
   padding: 16px;
 }
 
 /* Full-width input fields */
-input[type='text'],
 input[type='email'],
 input[type='password'] {
   width: 100%;
@@ -63,7 +59,6 @@ input[type='password'] {
   background: #f1f1f1;
 }
 
-input[type='text']:focus,
 input[type='password']:focus {
   background-color: #ddd;
   outline: none;
@@ -71,7 +66,7 @@ input[type='password']:focus {
 
 /* Set a style for the submit/register button */
 .btn {
-  background-color: #04aa6d;
+  background-color: black;
   color: white;
   padding: 16px 20px;
   margin: 8px 0;
@@ -87,6 +82,6 @@ input[type='password']:focus {
 
 /* Add a blue text color to links */
 a {
-  color: dodgerblue;
+  color: black;
 }
 </style>

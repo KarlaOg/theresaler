@@ -2,14 +2,15 @@
   <div>
     <div class="row mb-5" v-for="it in information" :key="it.id">
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
-        <img class="img-fluid" :src="it.img" />
+        <img class="img-fluid" :src="it.mainPicture" />
       </div>
 
       <div
         class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start"
       >
         <div class="info pt-xl-0 pt-lg-0 pt-5">
-          <h1 class="font-weight-bold text-uppercase pt-3">{{ it.title }}</h1>
+          <h1 class="font-weight-bold text-uppercase pt-3">{{ it.name }}</h1>
+          <h5 class="text-uppercase pt-3">{{ it.brand }}</h5>
           <h4>${{ it.price }}</h4>
           <br /><br /><br />
           <div class="control number text-center">
@@ -39,6 +40,16 @@
           </button>
         </div>
       </div>
+      <div class="more info d-flex justify-content-between text-center mt-5">
+        <div class="col4 flex-fill">
+          <h6 class="font-weight-bold">DESCRIPTION</h6>
+        </div>
+      </div>
+      <div class="container pt-3">
+        <div class="row">
+          <p>{{ it.description }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +57,7 @@
 <script>
 export default {
   props: ['information'],
-  name: 'ProductBox',
+  name: 'ProductCard',
   data() {
     return {
       quan: 1,
@@ -118,5 +129,9 @@ export default {
 .add-to-cart-button:focus {
   background-color: inherit;
   color: black;
+}
+hr {
+  width: 50px;
+  border-bottom: 1px solid black;
 }
 </style>

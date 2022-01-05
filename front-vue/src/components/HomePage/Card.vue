@@ -7,7 +7,11 @@
         :key="item.id"
       >
         <div class="card">
-          <img class="card-img-top" :src="item.img" alt="Card image cap" />
+          <img
+            class="card-img-top"
+            :src="item.mainPicture"
+            alt="Card image cap"
+          />
           <div class="overlay">
             <button
               type="button"
@@ -27,7 +31,10 @@
             >
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{ item.title }}</h5>
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-title">
+              <b>{{ item.brand }}</b>
+            </p>
             <p class="card-text">${{ item.price }}</p>
           </div>
         </div>

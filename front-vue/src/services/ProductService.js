@@ -13,15 +13,4 @@ export default {
   getProducts() {
     return apiClient.get('/products');
   },
-
-  //   createUser(credentials) {
-  //     return apiClient.post('/users', credentials);
-  //   },
-
-  //   logUser(credentials) {
-  //     return apiClient.post('/login_check', credentials);
-  //   },
-  //   registerUser(credentials) {
-  //     return apiClient.post('/users', credentials);
-  //   },
 };

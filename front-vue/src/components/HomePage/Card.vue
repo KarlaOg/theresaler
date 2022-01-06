@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* transition Group style */
 .fade-move {
   transition: transform 1s;

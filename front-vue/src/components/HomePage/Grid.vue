@@ -52,13 +52,7 @@ export default {
       sortButton: 'DEFAULT',
     };
   },
-  created() {
-    this.items = this.it;
-  },
   computed: {
-    it() {
-      return this.$store.state.items;
-    },
     slicedCards() {
       return this.items.slice(0, this.showCards);
     },
@@ -72,7 +66,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container.grid {
   min-height: 60rem;
 }

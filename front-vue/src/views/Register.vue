@@ -48,11 +48,10 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push({ name: 'Dashboard' });
+          this.$router.push({ name: 'Login' });
         })
         .catch((err) => {
           this.errors = err.response.data.violations;
-          console.log('ERR', err.response.data.violations);
         });
     },
   },

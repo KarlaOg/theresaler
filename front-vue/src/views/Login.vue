@@ -8,6 +8,7 @@
       <label for="password"> Password: </label>
       <input v-model="password" type="password" name="password" value />
 
+      <p class="text-danger">{{ error }}</p>
       <button type="submit" name="button" class="btn">Login</button>
 
       <router-link to="/register">
@@ -22,6 +23,7 @@ export default {
     return {
       username: '',
       password: '',
+      error: null,
     };
   },
   methods: {
@@ -30,12 +32,13 @@ export default {
         .dispatch('login', {
           username: this.username,
           password: this.password,
+          errors: null,
         })
         .then(() => {
-          this.$router.push({ name: 'dashboard' });
+          this.$router.push({ name: 'Home' });
         })
         .catch((err) => {
-          this.error = err.response.data.error;
+          this.error = err.response.data.message;
         });
     },
   },

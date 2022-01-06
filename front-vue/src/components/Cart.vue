@@ -32,17 +32,21 @@
         </transition-group>
 
         <hr v-if="this.cartContent.length !== 0" />
-        <div
-          class="row justify-content-between"
-          style="background: #7dcf85; padding: 10px 10px 10px 10px"
-          v-if="this.cartPrice != undefined"
-        >
-          <div class="flex-column pl-3">
-            <h4>Total</h4>
+        <div v-if="this.cartPrice != undefined">
+          <div
+            class="row justify-content-between"
+            style="background: #7dcf85; padding: 10px 10px 10px 10px"
+          >
+            <div class="flex-column pl-3">
+              <h4>Total</h4>
+            </div>
+            <div class="flex-column pr-3">
+              <h4>${{ cartPrice }}</h4>
+            </div>
           </div>
-          <div class="flex-column pr-3">
-            <h4>${{ cartPrice }}</h4>
-          </div>
+          <router-link to="/purchase">
+            <button class="pay">PAY</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -156,5 +160,22 @@ hr {
 
 .remove-btn:hover {
   background-color: grey;
+}
+
+.pay {
+  margin-top: 20px;
+  width: 200px;
+  font-weight: bold;
+  height: 70px;
+  background-color: red;
+  color: #fff;
+  font-size: 15px;
+  padding: 0px 30px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  z-index: 10;
+  border: none;
+  box-shadow: 0 26px 38px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 }
 </style>

@@ -11,9 +11,7 @@
       <p class="text-danger">{{ error }}</p>
       <button type="submit" name="button" class="btn">Login</button>
 
-      <router-link to="/register">
-        Don't have an account? Register.
-      </router-link>
+  ggpush>
     </form>
   </div>
 </template>

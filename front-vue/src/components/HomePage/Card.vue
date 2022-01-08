@@ -20,7 +20,7 @@
             >
               Add +
             </button>
-            <router-link to="/product"
+            <router-link :to="{ name: 'Product', params: { id: item.id } }"
               ><button
                 type="button"
                 class="btn btn-outline-secondary btn-lg"

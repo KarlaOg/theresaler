@@ -10,8 +10,6 @@
 
       <p class="text-danger">{{ error }}</p>
       <button type="submit" name="button" class="btn">Login</button>
-
-  ggpush>
     </form>
   </div>
 </template>

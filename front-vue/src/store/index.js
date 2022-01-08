@@ -10,10 +10,14 @@ export default new Vuex.Store({
     infoPage: [],
     cartItems: [],
     items: [],
+    item: {},
     loading: true,
   },
   // plugins: [createPersistedState()],
   getters: {
+    getProductById: (state) => (id) => {
+      return state.items.find((item) => item.id === id);
+    },
     items: (state) => {
       return state.items;
     },
@@ -43,6 +47,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SET_PRODUCT(state, event) {
+      state.event = event;
+    },
     inCart(state, n) {
       // Cart Component
       return state.cartItems.push(n);
@@ -103,6 +110,21 @@ export default new Vuex.Store({
           commit('SET_LOADING', false);
         })
         .catch((err) => console.log(err.message));
+    },
+    fetchProduct({ commit, getters }, id) {
+      var product = getters.getProductById(id);
+
+      if (product) {
+        commit('SET_PRODUCT', product);
+      } else {
+        ProductService.getProduct(id)
+          .then((response) => {
+            commit('SET_PRODUCT', response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
 });

@@ -55,14 +55,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  props: ['information'],
+  props: ['information', 'id'],
   name: 'ProductCard',
   data() {
     return {
       quan: 1,
     };
   },
+  created() {
+    this.fetchProduct(this.id);
+  },
+  computed: mapState({
+    //   console.log(item)
+    item: (state) => state.item,
+  }),
   methods: {
     inc() {
       // Info box Incrememnt button
@@ -78,6 +87,7 @@ export default {
         this.$store.commit('inCart', it, id);
       }
     },
+    ...mapActions('item', ['fetchProduct']),
   },
 };
 </script>

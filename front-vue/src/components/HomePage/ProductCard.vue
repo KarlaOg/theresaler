@@ -20,12 +20,8 @@
             >
               Add +
             </button>
-            <router-link :to="{ name: 'Product', params: { id: item.id } }"
-              ><button
-                type="button"
-                class="btn btn-outline-secondary btn-lg"
-                @click="sendInfo(item)"
-              >
+            <router-link :to="{ name: 'ProductShow', params: { id: item.id } }"
+              ><button type="button" class="btn btn-outline-secondary btn-lg">
                 Info
               </button></router-link
             >
@@ -46,14 +42,15 @@
 <script>
 export default {
   props: ['CardArray'],
+  item: Object,
   name: 'Card',
   methods: {
     addtoCart(it) {
       this.$store.commit('inCart', it);
     },
-    sendInfo(it) {
-      this.$store.commit('addtoInfo', it);
-    },
+    // sendInfo(it) {
+    //   this.$store.commit('addtoInfo', it);
+    // },
   },
 };
 </script>

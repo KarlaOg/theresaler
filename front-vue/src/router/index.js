@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Product from '../views/ProductList.vue';
+import ProductShow from '../views/ProductShow.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
@@ -18,8 +18,8 @@ const routes = [
   },
   {
     path: '/product/:id',
-    name: 'Product',
-    component: Product,
+    name: 'ProductShow',
+    component: ProductShow,
     props: true,
   },
   {

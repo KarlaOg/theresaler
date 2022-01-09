@@ -1,18 +1,15 @@
 <template>
   <div>
-    <Breadc />
-    <Grid />
+    <ProductList />
   </div>
 </template>
 
 <script>
-import Breadc from '@/components/HomePage/Breadc.vue';
-import Grid from '@/components/HomePage/Grid.vue';
+import ProductList from '@/components/HomePage/ProductList.vue';
 
 export default {
   components: {
-    Breadc,
-    Grid,
+    ProductList,
   },
 };
 </script>

@@ -12,7 +12,7 @@
         <div class="d-flex flex-wrap">
           <div class="card mt-2 mb-3">
             <div class="card-body">
-              <h5 class="card-title">email : {{ user.email }}</h5>
+              <p class="card-text">email : {{ user.email }}</p>
               <p class="card-text">firstname : {{ user.firstname }}</p>
               <p class="card-text">lastname : {{ user.lastname }}</p>
             </div>

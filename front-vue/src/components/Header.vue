@@ -17,7 +17,7 @@
       <button v-else type="button" class="logoutButton" @click="logout">
         Logout
       </button>
-      <div class="bag" @click="openCart">
+      <div class="ml-5 bag" @click="openCart">
         <img class="pb-1" src="@/assets/cart.svg" />
         <span class="mb-3" v-if="this.bagItemscount > 0">{{
           bagItemscount

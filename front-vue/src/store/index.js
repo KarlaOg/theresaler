@@ -14,7 +14,6 @@ export default new Vuex.Store({
     loading: true,
     admin: false,
   },
-  // plugins: [createPersistedState()],
   getters: {
     products: (state) => {
       return state.products;
@@ -40,17 +39,17 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_CART(state, n) {
-      // Cart Component
       return state.cartProducts.push(n);
     },
     REMOVE_CART(state, n) {
-      // Cart Component
       let index = state.cartProducts.findIndex((x) => x.id === n);
       return state.cartProducts.splice(index, 1);
     },
-    DELETE_PRODUCT(state, n) {
-      // Cart Component
-      let index = state.products.findIndex((x) => x.id === n);
+    DELETE_PRODUCT(state, product) {
+      //   state.products = state.products.filter((p) => {
+      //     return p.product.id !== product.id;
+      //   });
+      let index = state.products.findIndex((x) => x.id === product);
       return state.products.splice(index, 1);
     },
     SET_USER_DATA(state, userData) {
@@ -81,15 +80,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    deleteProduct({ commit }, id) {
-      return ProductService.deleteProduct(id)
-
-        .then(({ data }) => {
-          console.log(data);
-          commit('SET_PRODUCTS', data);
-        })
-        .catch((err) => console.log(err.message));
-    },
     createProduct({ commit }, product) {
       return axios
         .post('//localhost/api/products', product)
@@ -122,6 +112,10 @@ export default new Vuex.Store({
           commit('SET_LOADING', false);
         })
         .catch((err) => console.log(err.message));
+    },
+    deleteProduct({ commit }, product) {
+      commit('DELETE_PRODUCT', product);
+      axios.delete(`//localhost/api/products/${product}`);
     },
   },
 });

@@ -51,9 +51,13 @@ export default {
 
   methods: {
     deleteProduct(id) {
-      console.log(id);
-      this.$store.commit('DELETE_PRODUCT', id);
+      //   console.log(id);
+      this.$store.dispatch('deleteProduct', id);
     },
+    //   deleteProduct(id) {
+    //   console.log(id);
+    //   this.$store.commit('DELETE_PRODUCT', id);
+    // },
   },
 };
 </script>

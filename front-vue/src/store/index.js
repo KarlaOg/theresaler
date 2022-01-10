@@ -4,7 +4,7 @@ import axios from 'axios';
 import ProductService from '../services/ProductService';
 import UserService from '../services/UserService';
 import jwt_decode from 'jwt-decode';
-
+// import { userRegistrationEmail } from '../../../micro-services/register-email/index.js';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -109,12 +109,14 @@ export default new Vuex.Store({
       return axios
         .post('//localhost/api/users', credentials)
         .then(({ data }) => {
+          console.log(data);
           commit('SET_REGISTRATION_DATA', data);
           const notification = {
             type: 'success',
             message: 'Your account have been created. Login !',
           };
           dispatch('addNotification', notification, { root: true });
+          //   userRegistrationEmail(data.email, data.firtsname);
         });
     },
     logout({ commit }) {

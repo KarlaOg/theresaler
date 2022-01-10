@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import ProductService from '../services/ProductService';
-// import { getAdminRole } from '@/services/auth';
 import jwt_decode from 'jwt-decode';
 
 Vue.use(Vuex);
@@ -40,14 +39,19 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    inCart(state, n) {
+    ADD_CART(state, n) {
       // Cart Component
       return state.cartProducts.push(n);
     },
-    outCart(state, n) {
+    REMOVE_CART(state, n) {
       // Cart Component
       let index = state.cartProducts.findIndex((x) => x.id === n);
       return state.cartProducts.splice(index, 1);
+    },
+    DELETE_PRODUCT(state, n) {
+      // Cart Component
+      let index = state.products.findIndex((x) => x.id === n);
+      return state.products.splice(index, 1);
     },
     SET_USER_DATA(state, userData) {
       state.user = userData;
@@ -69,7 +73,7 @@ export default new Vuex.Store({
       localStorage.removeItem('user');
       location.reload();
     },
-    SET_PRODUCT(state, product) {
+    SET_PRODUCTS(state, product) {
       state.products = product;
     },
     SET_LOADING(state, loading) {
@@ -77,11 +81,20 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    deleteProduct({ commit }, id) {
+      return ProductService.deleteProduct(id)
+
+        .then(({ data }) => {
+          console.log(data);
+          commit('SET_PRODUCTS', data);
+        })
+        .catch((err) => console.log(err.message));
+    },
     createProduct({ commit }, product) {
       return axios
         .post('//localhost/api/products', product)
         .then(({ data }) => {
-          commit('SET_PRODUCT', data);
+          commit('SET_PRODUCTS', data);
         });
     },
     login({ commit }, credentials) {
@@ -101,11 +114,11 @@ export default new Vuex.Store({
     logout({ commit }) {
       commit('CLEAR_USER_DATA');
     },
-    loadProducts({ commit }) {
+    fetchProducts({ commit }) {
       return ProductService.getProducts()
         .then((response) => response.data)
         .then((products) => {
-          commit('SET_PRODUCT', products);
+          commit('SET_PRODUCTS', products);
           commit('SET_LOADING', false);
         })
         .catch((err) => console.log(err.message));

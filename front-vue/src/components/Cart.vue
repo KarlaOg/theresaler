@@ -87,7 +87,7 @@ export default {
       }
     },
     removeProduct(id) {
-      this.$store.commit('outCart', id);
+      this.$store.commit('REMOVE_CART', id);
     },
   },
 };

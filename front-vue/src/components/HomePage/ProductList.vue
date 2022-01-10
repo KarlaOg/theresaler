@@ -26,27 +26,17 @@
 
 <script>
 import ProductCard from './ProductCard.vue';
-import ProductService from '@/services/ProductService';
-
+import { mapState } from 'vuex';
 export default {
   name: 'ProductList',
   components: {
     ProductCard,
   },
-  data() {
-    return {
-      products: [],
-    };
-  },
+
   created() {
-    ProductService.getProducts()
-      .then((response) => {
-        this.products = response.data;
-      })
-      .catch((err) => console.log(err.message));
+    this.$store.dispatch('fetchProducts');
   },
-  computed: {},
-  methods: {},
+  computed: mapState(['products', 'loading']),
 };
 </script>
 

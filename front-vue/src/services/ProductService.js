@@ -19,4 +19,7 @@ export default {
   postProduct(product) {
     return apiClient.post('/products/', product);
   },
+  deleteProduct(id) {
+    return apiClient.delete('/products/', id);
+  },
 };

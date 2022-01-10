@@ -9,6 +9,10 @@
       </div>
       <div class="d-flex flex-wrap">
         <div class="m-3" v-for="product in products" :key="product.id">
+          <button @click="deleteProduct(product.id)" class="btn btn-danger">
+            Delete
+          </button>
+
           <div class="card mt-2 mb-3">
             <img
               class="card-img-top"
@@ -32,7 +36,7 @@
 
 <script>
 import Sidebar from '@/components/Admin/Sidebar.vue';
-import ProductService from '@/services/ProductService';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -40,20 +44,17 @@ export default {
   },
   name: 'ProductList',
 
-  data() {
-    return {
-      products: [],
-    };
-  },
   created() {
-    ProductService.getProducts()
-      .then((response) => {
-        this.products = response.data;
-      })
-      .catch((err) => console.log(err.message));
+    this.$store.dispatch('fetchProducts');
   },
-  computed: {},
-  methods: {},
+  computed: mapState(['products', 'loading']),
+
+  methods: {
+    deleteProduct(id) {
+      console.log(id);
+      this.$store.commit('DELETE_PRODUCT', id);
+    },
+  },
 };
 </script>
 <style scoped>

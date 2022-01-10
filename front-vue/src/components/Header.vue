@@ -5,6 +5,9 @@
         <img src="@/assets/fi-logo.svg" width="50" height="50" />
         <span style="text-align: center">The Resealer</span>
       </router-link>
+      <router-link v-if="loggedInAdmin" to="/admin/list-products">
+        Dashboard <mark>ADMIN</mark>
+      </router-link>
       <router-link v-if="loggedIn" to="/dashboard"> Dashboard </router-link>
       <router-link v-if="!loggedIn" to="/login" class="button">
         Login
@@ -35,7 +38,7 @@ export default {
   computed: {
     ...authComputed,
     bagItemscount() {
-      return this.$store.getters.itemsNumber;
+      return this.$store.getters.productsNumber;
     },
   },
   methods: {

@@ -5,6 +5,7 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import store from './store';
 import axios from 'axios';
+// import { getAdminRole } from '@/services/auth';
 
 Vue.config.productionTip = false;
 
@@ -14,11 +15,18 @@ new Vue({
   vuetify,
 
   created() {
+    // const admin = getAdminRole();
+    // if (admin) {
+    //   console.log('cest ADMIN !!!');
+    // }
     const userString = localStorage.getItem('user');
+    // const adminString = localStorage.getItem('admin');
     if (userString) {
       const userData = JSON.parse(userString);
+      //   const adminData = JSON.parse(userString);
       this.$store.commit('SET_USER_DATA', userData);
     }
+
     axios.interceptors.response.use(
       (response) => response,
       (error) => {

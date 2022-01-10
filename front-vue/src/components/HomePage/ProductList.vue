@@ -7,40 +7,18 @@
       </ol>
     </nav>
     <div class="container grid">
-      <div class="row justify-content-around">
-        <div class="row justify-content-center">
-          <div
-            class="row col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 text-center"
-          >
-            <!-- <div
-              v-if="loading"
-              class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            >
-              <h4 style="margin-left: 9rem; margin-right: 9rem">
-                Loading data ...
-              </h4>
-            </div> -->
-            <!-- <div v-else> -->
-            <div>
-              <ProductCard
-                :CardArray="slicedCards"
-                v-for="item in items"
-                :key="item.id"
-              />
-              <div
-                class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 py-5"
-              >
-                <button
-                  type="button"
-                  @click="incCardNumber"
-                  class="btn btn-outline-secondary btn-lg btn-block"
-                >
-                  More +
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div
+        v-if="loading"
+        class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+      >
+        <h4 style="margin-left: 9rem; margin-right: 9rem">Loading data ...</h4>
+      </div>
+      <div v-else class="d-flex flex-wrap justify-content-around">
+        <ProductCard
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
       </div>
     </div>
   </div>
@@ -48,7 +26,6 @@
 
 <script>
 import ProductCard from './ProductCard.vue';
-// import { mapState } from 'vuex';
 import ProductService from '@/services/ProductService';
 
 export default {
@@ -56,33 +33,20 @@ export default {
   components: {
     ProductCard,
   },
-  //   mounted() {
-  //     this.$store.dispatch('loadItems');
-  //   },
   data() {
     return {
-      items: [],
-      showCards: 6,
+      products: [],
     };
   },
   created() {
     ProductService.getProducts()
       .then((response) => {
-        this.items = response.data;
+        this.products = response.data;
       })
       .catch((err) => console.log(err.message));
   },
-  computed: {
-    slicedCards() {
-      return this.items.slice(0, this.showCards);
-    },
-    // ...mapState(['items', 'loading']),
-  },
-  methods: {
-    incCardNumber() {
-      return (this.showCards += 6);
-    },
-  },
+  computed: {},
+  methods: {},
 };
 </script>
 

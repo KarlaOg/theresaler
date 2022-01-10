@@ -3,7 +3,7 @@
     <div>
       <div>
         <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          <img class="img-fluid" :src="item.mainPicture" />
+          <img class="img-fluid" :src="product.mainPicture" />
         </div>
 
         <div
@@ -11,10 +11,10 @@
         >
           <div class="info pt-xl-0 pt-lg-0 pt-5">
             <h1 class="font-weight-bold text-uppercase pt-3">
-              {{ item.name }}
+              {{ product.name }}
             </h1>
-            <h5 class="text-uppercase pt-3">{{ item.brand }}</h5>
-            <h4>${{ item.price }}</h4>
+            <h5 class="text-uppercase pt-3">{{ product.brand }}</h5>
+            <h4>${{ product.price }}</h4>
             <br /><br /><br />
             <div class="control number text-center">
               <button
@@ -40,7 +40,7 @@
             </div>
             <button
               class="add-to-cart-button"
-              @click="addtoCart(item, item.id)"
+              @click="addtoCart(product, product.id)"
             >
               ADD TO CART
             </button>
@@ -53,7 +53,7 @@
         </div>
         <div class="container pt-3">
           <div class="row">
-            <p>{{ item.description }}</p>
+            <p>{{ product.description }}</p>
           </div>
         </div>
       </div>
@@ -62,25 +62,17 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex';
 import ProductService from '@/services/ProductService';
 
 export default {
-  props: ['information', 'id'],
+  props: ['id'],
   name: 'ProductShow',
   data() {
     return {
-      item: {},
       quan: 1,
+      product: {},
     };
   },
-  //   created() {
-  //     this.fetchProduct(this.id);
-  //   },
-  //   computed: mapState({
-  //     //   console.log(item)
-  //     item: (state) => state.item,
-  //   }),
   methods: {
     inc() {
       // Info box Incrememnt button
@@ -90,19 +82,17 @@ export default {
       // Info box Decrememnt button
       if (this.quan >= 2) return this.quan--;
     },
-    addtoCart(item, id) {
+    addtoCart(product, id) {
       // Info box Add to cart button
       for (var i = 0; i < this.quan; i++) {
-        this.$store.commit('inCart', item, id);
+        this.$store.commit('inCart', product, id);
       }
     },
-    // ...mapActions('item', ['fetchProduct']),
   },
   created() {
     ProductService.getProduct(this.id)
       .then((response) => {
-        console.log(response);
-        this.item = response.data;
+        this.product = response.data;
       })
       .catch((err) => console.log(err.message));
   },

@@ -15,16 +15,20 @@
         </transition>
 
         <transition-group name="fade">
-          <div class="row" v-for="item in cartContent" v-bind:key="item.id">
+          <div
+            class="row"
+            v-for="product in cartContent"
+            v-bind:key="product.id"
+          >
             <div class="col4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
-              <img :src="item.mainPicture" style="width: 90px" />
+              <img :src="product.mainPicture" style="width: 90px" />
             </div>
             <div class="col6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-              <h4>{{ item.name }}</h4>
-              <h6>${{ item.price }}</h6>
+              <h4>{{ product.name }}</h4>
+              <h6>${{ product.price }}</h6>
             </div>
             <div class="col2 col-xl-2 col-lg-2 col-md-2 col-sm-2 pt-4">
-              <span class="remove-btn" @click="removeItem(item.id)"
+              <span class="remove-btn" @click="removeProduct(product.id)"
                 >remove</span
               >
             </div>
@@ -66,7 +70,7 @@ export default {
   },
   computed: {
     cartContent() {
-      return this.$store.state.cartItems;
+      return this.$store.state.cartProducts;
     },
     cartPrice() {
       return this.$store.getters.totalPrice;
@@ -82,7 +86,7 @@ export default {
         this.modalClass = 'modal';
       }
     },
-    removeItem(id) {
+    removeProduct(id) {
       this.$store.commit('outCart', id);
     },
   },

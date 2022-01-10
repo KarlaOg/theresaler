@@ -1,62 +1,52 @@
 <template>
-  <div>
-    <transition-group name="fade" class="row" tag="div">
-      <div
-        v-for="item in CardArray"
-        class="col-6 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-4 pb-3"
-        :key="item.id"
-      >
-        <div class="card">
-          <img
-            class="card-img-top"
-            :src="item.mainPicture"
-            alt="Card image cap"
-          />
-          <div class="overlay">
-            <button
-              type="button"
-              class="btn btn-outline-secondary btn-lg"
-              @click="addtoCart(item)"
-            >
-              Add +
-            </button>
-            <router-link :to="{ name: 'ProductShow', params: { id: item.id } }"
-              ><button type="button" class="btn btn-outline-secondary btn-lg">
-                Info
-              </button></router-link
-            >
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-title">
-              <b>{{ item.brand }}</b>
-            </p>
-            <p class="card-text">${{ item.price }}</p>
-          </div>
-        </div>
+  <div class="d-flex flex-row" :key="product.id">
+    <div class="card mt-2 mb-3">
+      <img
+        class="card-img-top"
+        :src="product.mainPicture"
+        alt="Card image cap"
+      />
+      <div class="overlay">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-lg"
+          @click="addtoCart(product)"
+        >
+          Add +
+        </button>
+        <router-link :to="{ name: 'ProductShow', params: { id: product.id } }"
+          ><button type="button" class="btn btn-outline-secondary btn-lg">
+            Info
+          </button></router-link
+        >
       </div>
-    </transition-group>
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-title">
+          <b>{{ product.brand }}</b>
+        </p>
+        <p class="card-text">${{ product.price }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['CardArray'],
-  item: Object,
-  name: 'Card',
+  props: {
+    product: Object,
+  },
+  name: 'ProductCard',
   methods: {
-    addtoCart(it) {
-      this.$store.commit('inCart', it);
+    addtoCart(product) {
+      this.$store.commit('inCart', product);
     },
-    // sendInfo(it) {
-    //   this.$store.commit('addtoInfo', it);
-    // },
   },
 };
 </script>
 
 <style scoped>
-/* transition Group style */
+/* & Group style */
 .fade-move {
   transition: transform 1s;
 }
@@ -98,9 +88,8 @@ export default {
   transition: all 0.3s ease-in;
 }
 
-.card:hover,
-.card:active {
-  transform: scaleY(1.1) scaleX(1.06);
-  box-shadow: 0 14px 98px rgba(0, 0, 0, 0.25), 0 0px 60px rgba(0, 0, 0, 0.22);
+img {
+  width: 300px;
+  height: 300px;
 }
 </style>

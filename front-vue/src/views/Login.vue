@@ -10,6 +10,7 @@
 
       <p class="text-danger">{{ error }}</p>
       <button type="submit" name="button" class="btn">Login</button>
+      <router-link to="/register"> Need an account? Register. </router-link>
     </form>
   </div>
 </template>

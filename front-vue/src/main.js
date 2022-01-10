@@ -5,6 +5,7 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import store from './store';
 import axios from 'axios';
+// import { getAdminRole } from '@/services/auth';
 
 Vue.config.productionTip = false;
 
@@ -19,6 +20,7 @@ new Vue({
       const userData = JSON.parse(userString);
       this.$store.commit('SET_USER_DATA', userData);
     }
+
     axios.interceptors.response.use(
       (response) => response,
       (error) => {

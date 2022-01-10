@@ -1,9 +1,15 @@
 <template>
-  <div>DASHBOARD</div>
+  <div>
+    <Sidebar />
+  </div>
 </template>
 
 <script>
-export default {};
-</script>
+import Sidebar from '@/components/Sidebar.vue';
 
-<style></style>
+export default {
+  components: {
+    Sidebar,
+  },
+};
+</script>

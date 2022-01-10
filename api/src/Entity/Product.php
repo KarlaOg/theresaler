@@ -67,8 +67,7 @@ class Product
     private $salesType;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url(message="La photo principale doit être une URL valide")
+     * @ORM\Column(type="string", length=100000)
      * @Assert\NotBlank(message="La photo principale est obligatoire")
      * @Groups("products_read")
      */

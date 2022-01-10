@@ -10,13 +10,7 @@ const apiClient = axios.create({
 });
 
 export default {
-  getProducts() {
-    return apiClient.get('/products');
-  },
-  getProduct(id) {
-    return apiClient.get('/products/' + id);
-  },
-  postProduct(product) {
-    return apiClient.post('/products/', product);
+  getUsers() {
+    return apiClient.get('/users');
   },
 };

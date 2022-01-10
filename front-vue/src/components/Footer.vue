@@ -25,5 +25,6 @@ export default {
   z-index: 1;
   color: #2c3539;
   background-color: #fefefe;
+  border-top: rgb(209, 209, 209) 1px solid;
 }
 </style>

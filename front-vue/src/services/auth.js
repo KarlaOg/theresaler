@@ -1,7 +1,6 @@
 import jwt_decode from 'jwt-decode';
 
-// export let counter = 3;
-export async function getAdminRole() {
+export function getAdminRole() {
   const token = localStorage.getItem('user');
   if (token) {
     const decoded = jwt_decode(token);

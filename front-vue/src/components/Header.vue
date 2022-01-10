@@ -5,10 +5,12 @@
         <img src="@/assets/fi-logo.svg" width="50" height="50" />
         <span style="text-align: center">The Resealer</span>
       </router-link>
-      <router-link v-if="loggedInAdmin" to="/admin/list-products">
+      <router-link v-if="admin && loggedIn" to="/admin/list-products">
         Dashboard <mark>ADMIN</mark>
       </router-link>
-      <router-link v-if="loggedIn" to="/dashboard"> Dashboard </router-link>
+      <router-link v-if="!admin && loggedIn" to="/dashboard">
+        Dashboard
+      </router-link>
       <router-link v-if="!loggedIn" to="/login" class="button">
         Login
       </router-link>
@@ -21,6 +23,7 @@
           bagItemscount
         }}</span>
       </div>
+
       <!--Cart Component-->
       <Cart ref="cartMove" />
     </nav>
@@ -30,13 +33,14 @@
 <script>
 import Cart from '@/components/Cart.vue';
 
-import { authComputed } from '../store/helpers.js';
+import { mapState, mapGetters } from 'vuex';
 export default {
   components: {
     Cart,
   },
   computed: {
-    ...authComputed,
+    ...mapGetters(['loggedIn']),
+    ...mapState(['admin']),
     bagItemscount() {
       return this.$store.getters.productsNumber;
     },

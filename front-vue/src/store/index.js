@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import ProductService from '../services/ProductService';
-import { getAdminRole } from '@/services/auth';
-// import jwt_decode from 'jwt-decode';
+// import { getAdminRole } from '@/services/auth';
+import jwt_decode from 'jwt-decode';
 
 Vue.use(Vuex);
 
@@ -13,6 +13,7 @@ export default new Vuex.Store({
     cartProducts: [],
     products: [],
     loading: true,
+    admin: false,
   },
   // plugins: [createPersistedState()],
   getters: {
@@ -37,9 +38,6 @@ export default new Vuex.Store({
     loggedIn(state) {
       return !!state.user && localStorage.getItem('user') !== null;
     },
-    loggedInAdmin(state) {
-      return localStorage.getItem('admin') !== null && !!state.user;
-    },
   },
   mutations: {
     inCart(state, n) {
@@ -53,29 +51,21 @@ export default new Vuex.Store({
     },
     SET_USER_DATA(state, userData) {
       state.user = userData;
+      const token = userData.token;
+      const decoded = jwt_decode(token);
+      const roles = decoded.roles;
+      const admin = roles.find((role) => role === 'ROLE_ADMIN');
+      if (admin) state.admin = true;
       localStorage.setItem('user', JSON.stringify(userData));
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${userData.token}`;
-      //   const decoded = jwt_decode(userData);
-      //   const roles = decoded.roles;
-      //   const admin = roles.find((role) => role === 'ROLE_ADMIN');
-      //   if (admin) {
-      //     console.log('ADMIIIIIIN love');
-      //   }
-
-      localStorage.setItem('admin', true);
     },
 
     SET_REGISTRATION_DATA(state, userData) {
       state.user = userData;
     },
     CLEAR_USER_DATA() {
-      const admin = getAdminRole();
-
-      if (admin) {
-        localStorage.removeItem('admin');
-      }
       localStorage.removeItem('user');
       location.reload();
     },

@@ -1,7 +1,13 @@
 <template>
   <div class="d-flex flex-row">
     <Sidebar />
-    <div>
+    <div
+      v-if="loading"
+      class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+    >
+      <h4 style="margin-left: 9rem; margin-right: 9rem">Loading data ...</h4>
+    </div>
+    <div v-else>
       <div class="ml-3 mt-3">
         <router-link to="/admin/create-product">
           <button class="btn btn-warning">CREATE NEW PRODUCT</button>
@@ -42,7 +48,7 @@ export default {
   components: {
     Sidebar,
   },
-  name: 'ProductList',
+  name: 'ProductsList',
 
   created() {
     this.$store.dispatch('fetchProducts');
@@ -51,13 +57,8 @@ export default {
 
   methods: {
     deleteProduct(id) {
-      //   console.log(id);
       this.$store.dispatch('deleteProduct', id);
     },
-    //   deleteProduct(id) {
-    //   console.log(id);
-    //   this.$store.commit('DELETE_PRODUCT', id);
-    // },
   },
 };
 </script>

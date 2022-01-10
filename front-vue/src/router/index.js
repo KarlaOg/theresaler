@@ -8,7 +8,8 @@ import Dashboard from '../views/Dashboard.vue';
 import Purchase from '../views/Purchase.vue';
 import Error from '../views/Error.vue';
 import ProductCreate from '../views/Admin/ProductCreate.vue';
-import ProductList from '../views/Admin/ProductList.vue';
+import UsersList from '../views/Admin/UsersList.vue';
+import ProductsList from '../views/Admin/ProductsList.vue';
 import { getAdminRole } from '@/services/auth';
 
 Vue.use(VueRouter);
@@ -60,8 +61,14 @@ const routes = [
   },
   {
     path: '/admin/list-products',
-    name: 'ProductList',
-    component: ProductList,
+    name: 'ProductsList',
+    component: ProductsList,
+    meta: { requiresAdmin: true, requiresAuth: true },
+  },
+  {
+    path: '/admin/list-users',
+    name: 'UsersList',
+    component: UsersList,
     meta: { requiresAdmin: true, requiresAuth: true },
   },
   {

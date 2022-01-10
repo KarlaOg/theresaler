@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import ProductService from '../services/ProductService';
+import UserService from '../services/UserService';
 import jwt_decode from 'jwt-decode';
 
 Vue.use(Vuex);
@@ -11,12 +12,19 @@ export default new Vuex.Store({
     user: null,
     cartProducts: [],
     products: [],
+    users: [],
     loading: true,
     admin: false,
   },
   getters: {
+    allUser: (state) => {
+      return state.users;
+    },
     products: (state) => {
       return state.products;
+    },
+    users: (state) => {
+      return state.users;
     },
     productsNumber(state) {
       // Cart Component
@@ -46,12 +54,10 @@ export default new Vuex.Store({
       return state.cartProducts.splice(index, 1);
     },
     DELETE_PRODUCT(state, product) {
-      //   state.products = state.products.filter((p) => {
-      //     return p.product.id !== product.id;
-      //   });
       let index = state.products.findIndex((x) => x.id === product);
       return state.products.splice(index, 1);
     },
+
     SET_USER_DATA(state, userData) {
       state.user = userData;
       const token = userData.token;
@@ -74,6 +80,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS(state, product) {
       state.products = product;
+    },
+    SET_USERS(state, user) {
+      state.users = user;
     },
     SET_LOADING(state, loading) {
       state.loading = loading;
@@ -112,6 +121,12 @@ export default new Vuex.Store({
           commit('SET_LOADING', false);
         })
         .catch((err) => console.log(err.message));
+    },
+    fetchUsers({ commit }) {
+      return UserService.getUsers().then(({ data }) => {
+        commit('SET_USERS', data);
+        commit('SET_LOADING', false);
+      });
     },
     deleteProduct({ commit }, product) {
       commit('DELETE_PRODUCT', product);

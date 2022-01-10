@@ -61,7 +61,7 @@
               Remove image
             </button>
           </div>
-
+          <br />
           <ul class="text-danger">
             <li v-for="err in errors" :key="err.message">
               {{ err.message }}

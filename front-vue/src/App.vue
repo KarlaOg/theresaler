@@ -2,6 +2,7 @@
   <div id="app">
     <Header />
     <router-view />
+    <NotificationContainer />
     <Footer />
   </div>
 </template>
@@ -9,12 +10,14 @@
 <script>
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
+import NotificationContainer from '@/components/NotificationContainer.vue';
 
 export default {
   name: 'app',
   components: {
     Header,
     Footer,
+    NotificationContainer,
   },
 };
 </script>

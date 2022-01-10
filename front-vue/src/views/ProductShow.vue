@@ -1,7 +1,7 @@
 <template>
   <div class="container py-5" style="padding-top: 70px">
     <div>
-      <div>
+      <div class="d-flex">
         <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <img class="img-fluid" :src="product.mainPicture" />
         </div>
@@ -46,15 +46,15 @@
             </button>
           </div>
         </div>
-        <div class="more info d-flex justify-content-between text-center mt-5">
-          <div class="col4 flex-fill">
-            <h6 class="font-weight-bold">DESCRIPTION</h6>
-          </div>
+      </div>
+      <div class="more info d-flex justify-content-between text-center mt-5">
+        <div class="col4 flex-fill">
+          <h3 class="font-weight-bold text-left">DESCRIPTION</h3>
         </div>
-        <div class="container pt-3">
-          <div class="row">
-            <p>{{ product.description }}</p>
-          </div>
+      </div>
+      <div class="container pt-3">
+        <div class="row">
+          <p>{{ product.description }}</p>
         </div>
       </div>
     </div>

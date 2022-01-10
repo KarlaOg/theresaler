@@ -13,7 +13,7 @@
           <button class="btn btn-warning">CREATE NEW PRODUCT</button>
         </router-link>
       </div>
-      <div class="d-flex flex-wrap">
+      <div class="d-flex flex-wrap mt-5">
         <div class="m-3" v-for="product in products" :key="product.id">
           <button @click="deleteProduct(product.id)" class="btn btn-danger">
             Delete

@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-row" :key="product.id">
-    <div class="card mt-2 mb-3">
+    <div class="card mt-2 mb-3" style="width: 300px">
       <img
         class="card-img-top"
         :src="product.mainPicture"
@@ -81,7 +81,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 70%;
+  height: 100%;
   background-color: #232b34;
   opacity: 0;
   z-index: 100;

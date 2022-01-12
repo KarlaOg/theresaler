@@ -10,17 +10,17 @@
       <v-divider></v-divider>
 
       <v-list dense nav>
-        <router-link to="/admin/list-products">
-          <v-list-item dense nav>
-            <v-list-item-content link>
-              <v-list-item-title>Purchase</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </router-link>
-        <router-link to="/admin/list-users">
+        <router-link to="/">
           <v-list-item dense nav>
             <v-list-item-content link>
               <v-list-item-title>My info</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link to="/">
+          <v-list-item dense nav>
+            <v-list-item-content link>
+              <v-list-item-title>Purchase</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>

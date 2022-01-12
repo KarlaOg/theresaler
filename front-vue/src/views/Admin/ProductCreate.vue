@@ -92,6 +92,7 @@ export default {
       stock: 0,
       mainPicture: '',
       salesType: true,
+      date: new Date().toLocaleString(),
       errors: null,
     };
   },
@@ -105,6 +106,7 @@ export default {
           price: this.price,
           mainPicture: this.mainPicture,
           salesType: this.salesType,
+          date: this.date,
           stock: parseInt(this.stock),
         })
         .then(() => {

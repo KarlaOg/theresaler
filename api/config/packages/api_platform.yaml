@@ -2,8 +2,11 @@ parameters:
     # ...
     env(ELASTICSEARCH_HOST): 'http://localhost:9200'
 api_platform:
+    title: The Resealer API
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
+    defaults:
+        pagination_enabled: false
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:

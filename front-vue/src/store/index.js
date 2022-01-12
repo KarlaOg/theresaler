@@ -155,6 +155,18 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+    editProduct({ commit, dispatch }, product) {
+      return axios
+        .patch('//localhost/api/products', product)
+        .then(({ data }) => {
+          commit('SET_PRODUCTS', data);
+          const notification = {
+            type: 'success',
+            message: 'You product has been edit',
+          };
+          dispatch('addNotification', notification, { root: true });
+        });
+    },
     deleteProduct({ commit, dispatch }, product) {
       commit('DELETE_PRODUCT', product);
       const notification = {

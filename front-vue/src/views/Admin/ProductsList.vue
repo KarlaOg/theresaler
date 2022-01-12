@@ -15,22 +15,30 @@
       </div>
       <div class="d-flex flex-wrap mt-5">
         <div class="m-3" v-for="product in products" :key="product.id">
-          <button @click="deleteProduct(product.id)" class="btn btn-danger">
-            Delete
-          </button>
-
+          <div class="d-flex justify-content-between">
+            <button @click="deleteProduct(product.id)" class="btn btn-danger">
+              Delete
+            </button>
+            <button class="btn btn-info">Edit</button>
+          </div>
+          <router-link :to="{ name: 'ProductEdit', params: { id: product.id } }"
+            ><button type="button" class="btn btn-outline-secondary btn-lg">
+              KIKOOOOO
+            </button></router-link
+          >
           <div class="card mt-2 mb-3">
             <img
               class="card-img-top"
               :src="product.mainPicture"
               alt="Card image cap"
             />
-
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-title">
                 <b>{{ product.brand }}</b>
               </p>
+              <p>{{ product.id }}</p>
+
               <p class="card-text">${{ product.price }}</p>
             </div>
           </div>
@@ -61,6 +69,9 @@ import { mapState } from 'vuex';
 export default {
   components: {
     Sidebar,
+  },
+  props: {
+    product: [String, Object, Number],
   },
   name: 'ProductsList',
 
@@ -95,10 +106,12 @@ export default {
   border-radius: 0 !important;
 }
 .card {
-  width: 200px;
+  width: 250px;
+  height: 250px;
 }
 
 img {
-  width: 200px;
+  object-fit: contain;
+  height: 100px;
 }
 </style>

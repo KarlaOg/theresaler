@@ -8,6 +8,7 @@ import Dashboard from '../views/Dashboard.vue';
 import Purchase from '../views/Purchase.vue';
 import Error from '../views/Error.vue';
 import ProductCreate from '../views/Admin/ProductCreate.vue';
+import ProductEdit from '../views/Admin/ProductEdit.vue';
 import UsersList from '../views/Admin/UsersList.vue';
 import ProductsList from '../views/Admin/ProductsList.vue';
 import { getAdminRole } from '@/services/auth';
@@ -57,6 +58,13 @@ const routes = [
     path: '/admin/create-product',
     name: 'ProductCreate',
     component: ProductCreate,
+    meta: { requiresAdmin: true, requiresAuth: true },
+  },
+  {
+    path: '/admin/edit-product/:id',
+    name: 'ProductEdit',
+    component: ProductEdit,
+    props: true,
     meta: { requiresAdmin: true, requiresAuth: true },
   },
   {

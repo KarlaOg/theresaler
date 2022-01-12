@@ -4,7 +4,7 @@
 
     <div class="container m-3">
       <h1>Create product</h1>
-      <form class="form-group" @submit.prevent="editProduct">
+      <form class="form-group" @submit.prevent="createProduct">
         <div class="field">
           <label>Name</label>
           <input
@@ -78,13 +78,16 @@
 
 <script>
 import Sidebar from '@/components/Admin/Sidebar.vue';
+import ProductService from '@/services/ProductService';
 
 export default {
+  props: ['id'],
   components: {
     Sidebar,
   },
-  data: function () {
+  data() {
     return {
+      product: {},
       name: '',
       description: '',
       brand: '',
@@ -97,9 +100,9 @@ export default {
     };
   },
   methods: {
-    editProduct() {
+    createProduct() {
       this.$store
-        .dispatch('editProduct', {
+        .dispatch('createProduct', {
           name: this.name,
           description: this.description,
           brand: this.brand,
@@ -141,6 +144,14 @@ export default {
     removeImage: function () {
       this.mainPicture = '';
     },
+  },
+  created() {
+    ProductService.getProduct(this.id)
+      .then((response) => {
+        console.log('hey', this.id);
+        this.product = response.data;
+      })
+      .catch((err) => console.log(err.message));
   },
 };
 </script>

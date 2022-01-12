@@ -19,4 +19,7 @@ export default {
   postProduct(product) {
     return apiClient.post('/products/', product);
   },
+  editProduct(id) {
+    return apiClient.patch('/products/', id);
+  },
 };

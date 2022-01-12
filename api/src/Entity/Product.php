@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *  normalizationContext={"groups": "products_read"}
+ *  normalizationContext={"groups": "products_read"},
+ *  attributes={"order": { "date" : "desc" }}
+ *
  * )
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
@@ -72,6 +74,11 @@ class Product
      * @Groups("products_read")
      */
     private $mainPicture;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
 
     public function getId(): ?int
     {
@@ -158,6 +165,18 @@ class Product
     public function setMainPicture(string $mainPicture): self
     {
         $this->mainPicture = $mainPicture;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

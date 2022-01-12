@@ -52,7 +52,7 @@ class AppFixtures extends Fixture
         $products = [];
 
 
-        for ($p = 0; $p < 20; $p++) {
+        for ($p = 0; $p < 40; $p++) {
             $product = new Product;
             $product
                 ->setName($faker->productName())
@@ -60,6 +60,7 @@ class AppFixtures extends Fixture
                 ->setDescription($faker->paragraph())
                 ->setPrice($faker->randomNumber(2))
                 ->setStock($faker->randomNumber(2))
+                ->setDate($faker->dateTime())
                 ->setMainPicture($faker->avatar('foo', '300x300', 'jpg', "set$p", 'bg2'))
                 ->setSalesType($faker->boolean());
 

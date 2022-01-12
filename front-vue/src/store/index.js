@@ -16,6 +16,7 @@ export default new Vuex.Store({
     cartProducts: [],
     products: [],
     notifications: [],
+    userInfo: null,
   },
 
   getters: {
@@ -48,6 +49,7 @@ export default new Vuex.Store({
       state.user = userData;
       const token = userData.token;
       const decoded = jwt_decode(token);
+      state.userInfo = decoded;
       const roles = decoded.roles;
       const admin = roles.find((role) => role === 'ROLE_ADMIN');
       if (admin) state.admin = true;

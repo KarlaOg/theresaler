@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <router-view :key="$route.fullPath" />
+    <!-- :key="$route.fullPath" : reaload components when the url changes, including query parameters -->
     <NotificationContainer />
     <Footer />
   </div>

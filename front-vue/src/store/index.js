@@ -128,8 +128,8 @@ export default new Vuex.Store({
         commit('SET_LOADING', false);
       });
     },
-    fetchProducts({ commit, dispatch }) {
-      return ProductService.getProducts()
+    fetchProducts({ commit, dispatch }, { page }) {
+      return ProductService.getProducts(page)
         .then((response) => response.data)
         .then((products) => {
           commit('SET_PRODUCTS', products);

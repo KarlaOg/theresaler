@@ -19,6 +19,20 @@
           </div>
         </div>
       </div>
+      <div class="d-flex align-items-center">
+        <template v-if="page != 1">
+          <router-link
+            :to="{ name: 'UsersList', query: { page: page - 1 } }"
+            rel="prev"
+            ><b class="breadcrumb">Prev Page</b></router-link
+          >
+        </template>
+        <template v-if="users.length >= 30">
+          <router-link :to="{ name: 'UsersList', query: { page: page + 1 } }"
+            ><b class="breadcrumb">Next Page</b></router-link
+          >
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -34,9 +48,16 @@ export default {
   name: 'UsersList',
 
   created() {
-    this.$store.dispatch('fetchUsers');
+    this.$store.dispatch('fetchUsers', {
+      page: this.page,
+    });
   },
-  computed: mapState(['users', 'loading']),
+  computed: {
+    page() {
+      return parseInt(this.$route.query.page) || 1;
+    },
+    ...mapState(['users', 'loading']),
+  },
 };
 </script>
 <style scoped>

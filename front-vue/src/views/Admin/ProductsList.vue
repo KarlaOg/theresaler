@@ -36,6 +36,20 @@
           </div>
         </div>
       </div>
+      <div class="d-flex align-items-center">
+        <template v-if="page != 1">
+          <router-link
+            :to="{ name: 'ProductsList', query: { page: page - 1 } }"
+            rel="prev"
+            ><b class="breadcrumb">Prev Page</b></router-link
+          >
+        </template>
+        <template v-if="products.length >= 30">
+          <router-link :to="{ name: 'ProductsList', query: { page: page + 1 } }"
+            ><b class="breadcrumb">Next Page</b></router-link
+          >
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -51,10 +65,16 @@ export default {
   name: 'ProductsList',
 
   created() {
-    this.$store.dispatch('fetchProducts');
+    this.$store.dispatch('fetchProducts', {
+      page: this.page,
+    });
   },
-  computed: mapState(['products', 'loading']),
-
+  computed: {
+    page() {
+      return parseInt(this.$route.query.page) || 1;
+    },
+    ...mapState(['products', 'loading']),
+  },
   methods: {
     deleteProduct(id) {
       this.$store.dispatch('deleteProduct', id);

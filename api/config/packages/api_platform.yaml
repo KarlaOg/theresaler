@@ -5,6 +5,8 @@ api_platform:
     title: The Resealer API
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
+    defaults:
+        pagination_enabled: true
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:

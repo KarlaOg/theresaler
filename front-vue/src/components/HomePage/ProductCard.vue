@@ -84,7 +84,7 @@ export default {
   height: 100%;
   background-color: #232b34;
   opacity: 0;
-  z-index: 100;
+  z-index: 30;
   transition: all 0.3s ease-in;
 }
 

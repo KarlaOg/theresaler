@@ -3,12 +3,12 @@
     <Sidebar />
 
     <div class="container m-3">
-      <h1>Create product</h1>
-      <form class="form-group" @submit.prevent="createProduct">
+      <h1>Edit product {{ product.name }}</h1>
+      <form class="form-group" @submit.prevent="editProduct">
         <div class="field">
           <label>Name</label>
           <input
-            v-model="name"
+            v-model="product.name"
             type="text"
             placeholder="Add an product name"
             class="form-control"
@@ -16,34 +16,34 @@
 
           <label>Description</label>
           <textarea
-            v-model="description"
+            v-model="product.description"
             type="text"
             placeholder="Add a description"
             class="form-control"
           />
           <label>Brand</label>
           <input
-            v-model="brand"
+            v-model="product.brand"
             type="text"
             placeholder="Add a brand"
             class="form-control"
           />
 
           <label>Sales Type ?</label>
-          <select v-model="salesType" class="form-control">
+          <select v-model="product.salesType" class="form-control">
             <option value="true">True</option>
             <option value="false">False</option>
           </select>
           <label>stock</label>
           <input
-            v-model="stock"
+            v-model="product.stock"
             type="number"
             placeholder="Add a stock"
             class="form-control"
           />
           <label>price</label>
           <input
-            v-model="price"
+            v-model="product.price"
             type="number"
             placeholder="Add a price"
             class="form-control"
@@ -78,55 +78,50 @@
 
 <script>
 import Sidebar from '@/components/Admin/Sidebar.vue';
-import ProductService from '@/services/ProductService';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: ['id'],
   components: {
     Sidebar,
   },
+  computed: mapState({
+    product: (state) => state.product,
+  }),
   data() {
     return {
-      product: {},
-      name: '',
-      description: '',
-      brand: '',
-      price: '0',
-      stock: 0,
-      mainPicture: '',
-      salesType: true,
-      date: new Date().toLocaleString(),
       errors: null,
+      mainPicture: '',
     };
   },
   methods: {
-    createProduct() {
-      this.$store
-        .dispatch('createProduct', {
-          name: this.name,
-          description: this.description,
-          brand: this.brand,
-          price: this.price,
-          mainPicture: this.mainPicture,
-          salesType: this.salesType,
-          date: this.date,
-          stock: parseInt(this.stock),
-        })
-        .then(() => {
-          this.name = '';
-          this.description = '';
-          this.brand = '';
-          this.price = '0';
-          this.stock = 0;
-          this.price = '0';
-          this.mainPicture = '0';
-          this.salesType = true;
-        })
+    editProduct() {
+      this.$store.dispatch('editProduct', {
+        name: this.name,
+        description: this.description,
+        brand: this.brand,
+        price: this.price,
+        mainPicture: this.mainPicture,
+        salesType: this.salesType,
+        date: this.date,
+        stock: parseInt(this.stock),
+      });
+      // .then(() => {
+      //   this.name = '';
+      //   this.description = '';
+      //   this.brand = '';
+      //   this.price = '0';
+      //   this.stock = 0;
+      //   this.price = '0';
+      //   this.mainPicture = '0';
+      //   this.salesType = true;
+      // })
 
-        .catch((err) => {
-          this.errors = err.response.data.violations;
-        });
+      // .catch((err) => {
+      //   this.errors = err.response.data.violations;
+      // });
     },
+    ...mapActions(['fetchProduct']),
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
@@ -146,12 +141,7 @@ export default {
     },
   },
   created() {
-    ProductService.getProduct(this.id)
-      .then((response) => {
-        console.log('hey', this.id);
-        this.product = response.data;
-      })
-      .catch((err) => console.log(err.message));
+    this.fetchProduct(this.id);
   },
 };
 </script>

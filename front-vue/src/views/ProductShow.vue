@@ -2,8 +2,8 @@
   <div class="container py-5" style="padding-top: 70px">
     <div>
       <div class="d-flex">
-        <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          <img class="img-fluid" :src="product.mainPicture" />
+        <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 mr-5">
+          <img class="img-fluid trimmed-cover" :src="product.mainPicture" />
         </div>
 
         <div
@@ -150,5 +150,10 @@ export default {
 hr {
   width: 50px;
   border-bottom: 1px solid black;
+}
+
+.trimmed-cover {
+  object-fit: contain;
+  height: 500px;
 }
 </style>

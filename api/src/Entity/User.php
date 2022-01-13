@@ -70,14 +70,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $firstname;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity=DeliveryInformation::class, inversedBy="users")
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="userPurchase")
      */
-    private $UserDeliveryInformation;
+    private $purchases;
 
     public function __construct()
     {
-        $this->UserDeliveryInformation = new ArrayCollection();
+        $this->purchases = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,26 +194,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     /**
-     * @return Collection|DeliveryInformation[]
+     * @return Collection|Purchase[]
      */
-    public function getUserDeliveryInformation(): Collection
+    public function getPurchases(): Collection
     {
-        return $this->UserDeliveryInformation;
+        return $this->purchases;
     }
 
-    public function addUserDeliveryInformation(DeliveryInformation $userDeliveryInformation): self
+    public function addPurchase(Purchase $purchase): self
     {
-        if (!$this->UserDeliveryInformation->contains($userDeliveryInformation)) {
-            $this->UserDeliveryInformation[] = $userDeliveryInformation;
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setUserPurchase($this);
         }
 
         return $this;
     }
 
-    public function removeUserDeliveryInformation(DeliveryInformation $userDeliveryInformation): self
+    public function removePurchase(Purchase $purchase): self
     {
-        $this->UserDeliveryInformation->removeElement($userDeliveryInformation);
+        if ($this->purchases->removeElement($purchase)) {
+            // set the owning side to null (unless already changed)
+            if ($purchase->getUserPurchase() === $this) {
+                $purchase->setUserPurchase(null);
+            }
+        }
 
         return $this;
     }

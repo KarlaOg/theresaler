@@ -48,18 +48,19 @@
             placeholder="Add a price"
             class="form-control"
           />
-          <div v-if="!mainPicture">
+          <div v-if="!product.mainPicture">
             <label>Upload image</label><br />
             <input type="file" @change="onFileChange" />
           </div>
           <div v-else>
             <br />
-            <img :src="mainPicture" />
+            <img :src="product.mainPicture" />
             <br />
             <br />
             <button @click="removeImage" class="btn btn-danger">
               Remove image
             </button>
+            {{ product.mainPicture }}
           </div>
           <br />
           <ul class="text-danger">
@@ -71,6 +72,7 @@
         <button type="submit" name="button" class="btn btn-success">
           Submit
         </button>
+        {{ product }}
       </form>
     </div>
   </div>
@@ -91,27 +93,45 @@ export default {
   data() {
     return {
       errors: null,
-      mainPicture: '',
-      date: new Date().toLocaleString(),
+      //   date: new Date().toLocaleString(),
     };
   },
   methods: {
     ...mapActions(['fetchProduct']),
     editProduct() {
       this.$store
-        .dispatch('editProduct', this.id, {
+        .dispatch('editProduct', {
           name: this.product.name,
           description: this.product.description,
           brand: this.product.brand,
           price: this.product.price,
-          mainPicture: this.mainPicture,
+          mainPicture: this.product.mainPicture,
           salesType: this.product.salesType,
-          date: this.date,
-          stock: this.product.stock,
+          stock: parseInt(this.product.stock),
+          date: this.product.date,
+          id: this.id,
         })
         .then((response) => console.log('heyllo', response.data))
         .catch((err) => {
-          console.log(err.message);
+          console.log(
+            err.message,
+            'name:',
+            this.product.name,
+            'description:',
+            this.product.description,
+            'brand:',
+            this.product.brand,
+            'price:',
+            this.product.price,
+            'mainPicture:',
+            this.product.mainPicture,
+            'salesType:',
+            this.product.salesType,
+            'date:',
+            this.date,
+            'stock:',
+            this.product.stock
+          );
         });
     },
     onFileChange(e) {
@@ -124,12 +144,12 @@ export default {
       const vm = this;
 
       reader.onload = (e) => {
-        vm.mainPicture = e.target.result;
+        vm.product.mainPicture = e.target.result;
       };
       reader.readAsDataURL(file);
     },
     removeImage: function () {
-      this.mainPicture = '';
+      this.product.mainPicture = '';
     },
   },
   created() {

@@ -4,7 +4,7 @@
 
     <div class="container m-3">
       <h1>Create product</h1>
-      <form class="form-group" @submit.prevent="editProduct">
+      <form class="form-group" @submit.prevent="createProduct">
         <div class="field">
           <label>Name</label>
           <input
@@ -78,7 +78,6 @@
 
 <script>
 import Sidebar from '@/components/Admin/Sidebar.vue';
-
 export default {
   components: {
     Sidebar,
@@ -97,9 +96,9 @@ export default {
     };
   },
   methods: {
-    editProduct() {
+    createProduct() {
       this.$store
-        .dispatch('editProduct', {
+        .dispatch('createProduct', {
           name: this.name,
           description: this.description,
           brand: this.brand,
@@ -119,7 +118,6 @@ export default {
           this.mainPicture = '0';
           this.salesType = true;
         })
-
         .catch((err) => {
           this.errors = err.response.data.violations;
         });
@@ -132,7 +130,6 @@ export default {
     createImage(file) {
       const reader = new FileReader();
       const vm = this;
-
       reader.onload = (e) => {
         vm.mainPicture = e.target.result;
       };

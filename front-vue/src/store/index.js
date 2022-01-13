@@ -184,27 +184,29 @@ export default new Vuex.Store({
         });
     },
     editProduct({ commit, dispatch }, product) {
+      console.log(product);
       return axios
-        .put(`//localhost/api/products/${product}`, product, {
+        .put(`//localhost/api/products/${product.id}`, product, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
         })
         .then(({ data }) => {
-          console.log('coucou');
+          //   console.log('coucou');
           commit('SET_PRODUCT', data);
           const notification = {
             type: 'success',
             message: 'You product has been edit',
           };
           dispatch('addNotification', notification, { root: true });
-        });
+        })
+        .catch((err) => console.log(err.message));
     },
     deleteProduct({ commit, dispatch }, product) {
       commit('DELETE_PRODUCT', product);
       const notification = {
-        type: 'error',
+        type: 'success',
         message: 'You product has been delete',
       };
       dispatch('addNotification', notification, { root: true });

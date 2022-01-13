@@ -52,6 +52,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Le stock du produit est obligatoire !")
+     * @Groups("products_read")
      */
     private $stock;
 
@@ -65,6 +66,7 @@ class Product
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("products_read")
      */
     private $salesType;
 
@@ -77,6 +79,7 @@ class Product
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("products_read")
      */
     private $date;
 

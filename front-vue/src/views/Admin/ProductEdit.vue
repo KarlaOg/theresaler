@@ -3,7 +3,7 @@
     <Sidebar />
 
     <div class="container m-3">
-      <h1>Edit product {{ product.name }}</h1>
+      <h1>Edit product {{ product.id }}</h1>
       <form class="form-group" @submit.prevent="editProduct">
         <div class="field">
           <label>Name</label>
@@ -60,19 +60,17 @@
             <button @click="removeImage" class="btn btn-danger">
               Remove image
             </button>
-            {{ product.mainPicture }}
           </div>
           <br />
           <ul class="text-danger">
-            <li v-for="err in errors" :key="err.message">
-              {{ err.message }}
-            </li>
+            {{
+              error
+            }}
           </ul>
         </div>
         <button type="submit" name="button" class="btn btn-success">
           Submit
         </button>
-        {{ product }}
       </form>
     </div>
   </div>
@@ -92,8 +90,7 @@ export default {
   }),
   data() {
     return {
-      errors: null,
-      //   date: new Date().toLocaleString(),
+      error: null,
     };
   },
   methods: {
@@ -106,32 +103,13 @@ export default {
           brand: this.product.brand,
           price: this.product.price,
           mainPicture: this.product.mainPicture,
-          salesType: this.product.salesType,
+          salesType: Boolean(this.product.salesType),
           stock: parseInt(this.product.stock),
-          date: this.product.date,
+          date: new Date().toISOString(),
           id: this.id,
         })
-        .then((response) => console.log('heyllo', response.data))
         .catch((err) => {
-          console.log(
-            err.message,
-            'name:',
-            this.product.name,
-            'description:',
-            this.product.description,
-            'brand:',
-            this.product.brand,
-            'price:',
-            this.product.price,
-            'mainPicture:',
-            this.product.mainPicture,
-            'salesType:',
-            this.product.salesType,
-            'date:',
-            this.date,
-            'stock:',
-            this.product.stock
-          );
+          this.error = err.response.data.detail;
         });
     },
     onFileChange(e) {

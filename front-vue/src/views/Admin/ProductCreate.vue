@@ -91,7 +91,7 @@ export default {
       stock: 0,
       mainPicture: '',
       salesType: true,
-      date: new Date().toLocaleString(),
+      date: new Date().toISOString(),
       errors: null,
     };
   },

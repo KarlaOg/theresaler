@@ -19,9 +19,4 @@ export default {
   postProduct(product) {
     return apiClient.post('/products/', product);
   },
-  editProduct(id) {
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*',
-
-    return apiClient.patch('/products/', id);
-  },
 };

@@ -186,9 +186,10 @@ export default new Vuex.Store({
     },
     editProduct({ commit, dispatch }, product) {
       return axios
-        .patch('//localhost/api/products', product)
+        .put(`//localhost/api/products/${product}`, product)
         .then(({ data }) => {
-          commit('SET_PRODUCTS', data);
+          console.log(data);
+          commit('SET_PRODUCT', data);
           const notification = {
             type: 'success',
             message: 'You product has been edit',

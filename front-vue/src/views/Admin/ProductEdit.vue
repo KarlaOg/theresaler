@@ -57,6 +57,7 @@
             <img :src="mainPicture" />
             <br />
             <br />
+            {{ mainPicture }}
             <button @click="removeImage" class="btn btn-danger">
               Remove image
             </button>
@@ -96,30 +97,21 @@ export default {
   },
   methods: {
     editProduct() {
-      this.$store.dispatch('editProduct', {
-        name: this.name,
-        description: this.description,
-        brand: this.brand,
-        price: this.price,
-        mainPicture: this.mainPicture,
-        salesType: this.salesType,
-        date: this.date,
-        stock: parseInt(this.stock),
-      });
-      // .then(() => {
-      //   this.name = '';
-      //   this.description = '';
-      //   this.brand = '';
-      //   this.price = '0';
-      //   this.stock = 0;
-      //   this.price = '0';
-      //   this.mainPicture = '0';
-      //   this.salesType = true;
-      // })
-
-      // .catch((err) => {
-      //   this.errors = err.response.data.violations;
-      // });
+      this.$store
+        .dispatch('editProduct', this.id, {
+          name: this.product.name,
+          description: this.product.description,
+          brand: this.product.brand,
+          price: this.product.price,
+          mainPicture: this.mainPicture,
+          salesType: this.product.salesType,
+          date: this.date,
+          stock: parseInt(this.product.stock),
+        })
+        .then((response) => console.log(response.data))
+        .catch((err) => {
+          this.errors = err.response.data.violations;
+        });
     },
     ...mapActions(['fetchProduct']),
     onFileChange(e) {

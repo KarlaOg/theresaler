@@ -17,27 +17,22 @@
       <button v-else type="button" class="logoutButton" @click="logout">
         Logout
       </button>
-      <div class="ml-5 bag" @click="openCart">
-        <img class="pb-1" src="@/assets/cart.svg" />
-        <span class="mb-3" v-if="this.bagItemscount > 0">{{
-          bagItemscount
-        }}</span>
+      <div class="ml-5 bag">
+        <router-link to="/purchase-item">
+          <img class="pb-1" src="@/assets/cart.svg" />
+          <span class="mb-3" v-if="this.bagItemscount > 0">{{
+            bagItemscount
+          }}</span>
+        </router-link>
       </div>
-
-      <!--Cart Component-->
-      <Cart ref="cartMove" />
     </nav>
   </div>
 </template>
 
 <script>
-import Cart from '@/components/Cart.vue';
-
 import { mapState, mapGetters } from 'vuex';
 export default {
-  components: {
-    Cart,
-  },
+  components: {},
   computed: {
     ...mapGetters(['loggedIn']),
     ...mapState(['admin']),
@@ -46,9 +41,6 @@ export default {
     },
   },
   methods: {
-    openCart() {
-      this.$refs.cartMove.cartON();
-    },
     logout() {
       this.$store.dispatch('logout');
     },

@@ -39,7 +39,6 @@ export default new Vuex.Store({
     totalPrice(state) {
       if (state.cartProducts.length != 0) {
         return state.cartProducts.reduce((a, b) => {
-          console.log(state.cartProducts);
           return parseInt(b.price) == null
             ? parseInt(a)
             : parseInt(a) + parseInt(b.price);

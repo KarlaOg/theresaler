@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Purchase from '../views/Purchase.vue';
+import PurchaseItem from '../views/PurchaseItem.vue';
 import Error from '../views/Error.vue';
 import ProductCreate from '../views/Admin/ProductCreate.vue';
 import ProductEdit from '../views/Admin/ProductEdit.vue';
@@ -47,6 +48,11 @@ const routes = [
     name: 'Purchase',
     component: Purchase,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/purchase-item',
+    name: 'PurchaseItem',
+    component: PurchaseItem,
   },
   {
     path: '/dashboard',

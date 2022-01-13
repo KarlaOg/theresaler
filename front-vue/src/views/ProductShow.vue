@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import ProductService from '@/services/ProductService';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: ['id'],
@@ -70,10 +70,11 @@ export default {
   data() {
     return {
       quan: 1,
-      product: {},
     };
   },
   methods: {
+    ...mapActions(['fetchProduct']),
+
     inc() {
       // Info box Incrememnt button
       if (this.quan <= 8) return this.quan++;
@@ -89,12 +90,11 @@ export default {
       }
     },
   },
+  computed: mapState({
+    product: (state) => state.product,
+  }),
   created() {
-    ProductService.getProduct(this.id)
-      .then((response) => {
-        this.product = response.data;
-      })
-      .catch((err) => console.log(err.message));
+    this.fetchProduct(this.id);
   },
 };
 </script>

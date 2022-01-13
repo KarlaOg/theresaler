@@ -17,6 +17,7 @@ export default new Vuex.Store({
     products: [],
     notifications: [],
     userInfo: null,
+    product: {},
   },
 
   getters: {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     productsNumber(state) {
       return state.cartProducts.length;
+    },
+    getProductById: (state) => (id) => {
+      return state.products.find((product) => product.id === id);
     },
     totalPrice(state) {
       if (state.cartProducts.length != 0) {
@@ -73,6 +77,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS(state, product) {
       state.products = product;
+    },
+    SET_PRODUCT(state, product) {
+      state.product = product;
     },
     DELETE_PRODUCT(state, product) {
       let index = state.products.findIndex((x) => x.id === product);
@@ -143,6 +150,27 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+
+    fetchProduct({ commit, getters, dispatch }, id) {
+      var product = getters.getProductById(id);
+      if (product) {
+        commit('SET_PRODUCT', product);
+      } else {
+        ProductService.getProduct(id)
+          .then((response) => {
+            commit('SET_PRODUCT', response.data);
+          })
+          .catch((error) => {
+            const notification = {
+              type: 'error',
+              message:
+                'There was a problem fetching products: ' + error.message,
+            };
+            dispatch('addNotification', notification, { root: true });
+          });
+      }
+    },
+
     createProduct({ commit, dispatch }, product) {
       return axios
         .post('//localhost/api/products', product)
@@ -155,10 +183,27 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+    editProduct({ commit, dispatch }, product) {
+      return axios
+        .put(`//localhost/api/products/${product.id}`, product, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(({ data }) => {
+          commit('SET_PRODUCT', data);
+          const notification = {
+            type: 'success',
+            message: 'You product has been edit',
+          };
+          dispatch('addNotification', notification, { root: true });
+        });
+    },
     deleteProduct({ commit, dispatch }, product) {
       commit('DELETE_PRODUCT', product);
       const notification = {
-        type: 'error',
+        type: 'success',
         message: 'You product has been delete',
       };
       dispatch('addNotification', notification, { root: true });

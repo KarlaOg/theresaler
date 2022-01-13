@@ -3,12 +3,12 @@
     <Sidebar />
 
     <div class="container m-3">
-      <h1>Create product</h1>
-      <form class="form-group" @submit.prevent="createProduct">
+      <h1>Edit product {{ product.id }}</h1>
+      <form class="form-group" @submit.prevent="editProduct">
         <div class="field">
           <label>Name</label>
           <input
-            v-model="name"
+            v-model="product.name"
             type="text"
             placeholder="Add an product name"
             class="form-control"
@@ -16,45 +16,45 @@
 
           <label>Description</label>
           <textarea
-            v-model="description"
+            v-model="product.description"
             type="text"
             placeholder="Add a description"
             class="form-control"
           />
           <label>Brand</label>
           <input
-            v-model="brand"
+            v-model="product.brand"
             type="text"
             placeholder="Add a brand"
             class="form-control"
           />
 
           <label>Sales Type ?</label>
-          <select v-model="salesType" class="form-control">
+          <select v-model="product.salesType" class="form-control">
             <option value="true">True</option>
             <option value="false">False</option>
           </select>
           <label>stock</label>
           <input
-            v-model="stock"
+            v-model="product.stock"
             type="number"
             placeholder="Add a stock"
             class="form-control"
           />
           <label>price</label>
           <input
-            v-model="price"
+            v-model="product.price"
             type="number"
             placeholder="Add a price"
             class="form-control"
           />
-          <div v-if="!mainPicture">
+          <div v-if="!product.mainPicture">
             <label>Upload image</label><br />
             <input type="file" @change="onFileChange" />
           </div>
           <div v-else>
             <br />
-            <img :src="mainPicture" />
+            <img :src="product.mainPicture" />
             <br />
             <br />
             <button @click="removeImage" class="btn btn-danger">
@@ -63,9 +63,9 @@
           </div>
           <br />
           <ul class="text-danger">
-            <li v-for="err in errors" :key="err.message">
-              {{ err.message }}
-            </li>
+            {{
+              error
+            }}
           </ul>
         </div>
         <button type="submit" name="button" class="btn btn-success">
@@ -78,48 +78,38 @@
 
 <script>
 import Sidebar from '@/components/Admin/Sidebar.vue';
+import { mapState, mapActions } from 'vuex';
+
 export default {
+  props: ['id'],
   components: {
     Sidebar,
   },
-  data: function () {
+  computed: mapState({
+    product: (state) => state.product,
+  }),
+  data() {
     return {
-      name: '',
-      description: '',
-      brand: '',
-      price: '0',
-      stock: 0,
-      mainPicture: '',
-      salesType: true,
-      date: new Date().toISOString(),
-      errors: null,
+      error: null,
     };
   },
   methods: {
-    createProduct() {
+    ...mapActions(['fetchProduct']),
+    editProduct() {
       this.$store
-        .dispatch('createProduct', {
-          name: this.name,
-          description: this.description,
-          brand: this.brand,
-          price: this.price,
-          mainPicture: this.mainPicture,
-          salesType: this.salesType,
-          date: this.date,
-          stock: parseInt(this.stock),
-        })
-        .then(() => {
-          this.name = '';
-          this.description = '';
-          this.brand = '';
-          this.price = '0';
-          this.stock = 0;
-          this.price = '0';
-          this.mainPicture = '0';
-          this.salesType = true;
+        .dispatch('editProduct', {
+          name: this.product.name,
+          description: this.product.description,
+          brand: this.product.brand,
+          price: this.product.price,
+          mainPicture: this.product.mainPicture,
+          salesType: Boolean(this.product.salesType),
+          stock: parseInt(this.product.stock),
+          date: new Date().toISOString(),
+          id: this.id,
         })
         .catch((err) => {
-          this.errors = err.response.data.violations;
+          this.error = err.response.data.detail;
         });
     },
     onFileChange(e) {
@@ -130,14 +120,18 @@ export default {
     createImage(file) {
       const reader = new FileReader();
       const vm = this;
+
       reader.onload = (e) => {
-        vm.mainPicture = e.target.result;
+        vm.product.mainPicture = e.target.result;
       };
       reader.readAsDataURL(file);
     },
     removeImage: function () {
-      this.mainPicture = '';
+      this.product.mainPicture = '';
     },
+  },
+  created() {
+    this.fetchProduct(this.id);
   },
 };
 </script>

@@ -19,13 +19,12 @@
             <button @click="deleteProduct(product.id)" class="btn btn-danger">
               Delete
             </button>
-            <button class="btn btn-info">Edit</button>
+            <router-link
+              :to="{ name: 'ProductEdit', params: { id: product.id } }"
+            >
+              <button class="btn btn-info">Edit</button>
+            </router-link>
           </div>
-          <router-link :to="{ name: 'ProductEdit', params: { id: product.id } }"
-            ><button type="button" class="btn btn-outline-secondary btn-lg">
-              KIKOOOOO
-            </button></router-link
-          >
           <div class="card mt-2 mb-3">
             <img
               class="card-img-top"
@@ -37,7 +36,6 @@
               <p class="card-title">
                 <b>{{ product.brand }}</b>
               </p>
-              <p>{{ product.id }}</p>
 
               <p class="card-text">${{ product.price }}</p>
             </div>

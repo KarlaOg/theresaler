@@ -153,9 +153,8 @@ export default new Vuex.Store({
 
     fetchProduct({ commit, getters, dispatch }, id) {
       var product = getters.getProductById(id);
-
       if (product) {
-        commit('SET_PRODUCT', event);
+        commit('SET_PRODUCT', product);
       } else {
         ProductService.getProduct(id)
           .then((response) => {
@@ -186,9 +185,14 @@ export default new Vuex.Store({
     },
     editProduct({ commit, dispatch }, product) {
       return axios
-        .put(`//localhost/api/products/${product}`, product)
+        .put(`//localhost/api/products/${product}`, product, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
         .then(({ data }) => {
-          console.log(data);
+          console.log('coucou');
           commit('SET_PRODUCT', data);
           const notification = {
             type: 'success',

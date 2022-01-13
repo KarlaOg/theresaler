@@ -57,7 +57,6 @@
             <img :src="mainPicture" />
             <br />
             <br />
-            {{ mainPicture }}
             <button @click="removeImage" class="btn btn-danger">
               Remove image
             </button>
@@ -93,9 +92,11 @@ export default {
     return {
       errors: null,
       mainPicture: '',
+      date: new Date().toLocaleString(),
     };
   },
   methods: {
+    ...mapActions(['fetchProduct']),
     editProduct() {
       this.$store
         .dispatch('editProduct', this.id, {
@@ -106,14 +107,13 @@ export default {
           mainPicture: this.mainPicture,
           salesType: this.product.salesType,
           date: this.date,
-          stock: parseInt(this.product.stock),
+          stock: this.product.stock,
         })
-        .then((response) => console.log(response.data))
+        .then((response) => console.log('heyllo', response.data))
         .catch((err) => {
-          this.errors = err.response.data.violations;
+          console.log(err.message);
         });
     },
-    ...mapActions(['fetchProduct']),
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;

@@ -13,8 +13,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *  normalizationContext={"groups": "products_read"},
- *  attributes={"order": { "date" : "desc" }}
- *
+ *  attributes={"order": { "date" : "desc" }},
+ *  collectionOperations={
+ *     "post"={
+ *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          },
+ *     "get",
+ * },
+ *  itemOperations={
+ *     "get",
+ *     "put"={
+ *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          },
+ *     "delete"={
+ *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          },
+ *  },
  * )
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */

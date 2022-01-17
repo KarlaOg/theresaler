@@ -6,7 +6,7 @@
         <span style="text-align: center">The Resealer</span>
       </router-link>
       <router-link v-if="admin && loggedIn" to="/admin/list-products">
-        Dashboard <mark>ADMIN</mark>
+        <mark> Dashboard ADMIN</mark>
       </router-link>
       <router-link v-if="!admin && loggedIn" to="/dashboard">
         Dashboard

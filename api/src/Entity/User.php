@@ -38,7 +38,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @UniqueEntity("email", message="Un utilisateur ayant cette adresse email existe deja")
+ * @UniqueEntity("email", message="A user with this email address already exists")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -52,8 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="L'email doit etre renseigné")
-     * @Assert\Email(message="L'email doit avoir un format valide")
+     * @Assert\NotBlank(message="The email must be filled in")
+     * @Assert\Email(message="The email must have a valid format")
      * @Groups("users_read")
      */
     private $email;
@@ -66,23 +66,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Le mot de passe doit etre renseigné")
+     * @Assert\NotBlank(message="The password must be filled in")
      */
     private $password;
 
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le nom de famille doit etre renseigné")
-     * @Assert\Length(min=2, minMessage="Le nom de famille doit faire minimum 2 caracteres")
+     * @Assert\NotBlank(message="Last name must be provided")
+     * @Assert\Length(min=2, minMessage="Last name must be at least 2 characters")
      * @Groups("users_read")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le prenom doit etre renseigné")
-     * @Assert\Length(min=2, minMessage="Le prenom doit faire minimum 2 caracteres")
+     * @Assert\NotBlank(message="The name must be entered")
+     * @Assert\Length(min=2, minMessage="First name must be at least 2 characters")
      * @Groups("users_read")
      */
     private $firstname;

@@ -17,6 +17,6 @@ export default {
     return apiClient.get('/products/' + id);
   },
   postProduct(product) {
-    return apiClient.post('/products/', product);
+    return apiClient.post('/products', product);
   },
 };

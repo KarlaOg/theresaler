@@ -28,6 +28,8 @@
             ><b class="breadcrumb">Prev Page</b></router-link
           >
         </template>
+        <!-- disabled  true ou false-->
+        <!-- tout mettre en griser -->
         <template v-if="products.length >= 30">
           <router-link :to="{ name: 'Home', query: { page: page + 1 } }"
             ><b class="breadcrumb">Next Page</b></router-link

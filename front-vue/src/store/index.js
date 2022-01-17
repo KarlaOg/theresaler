@@ -171,19 +171,19 @@ export default new Vuex.Store({
     },
 
     createProduct({ commit, dispatch }, product) {
-      //   return (
-      // ProductService.postProduct(product)
-      return axios
-        .post('//localhost/api/products', product)
-        .then(({ data }) => {
-          commit('SET_PRODUCTS', data);
-          const notification = {
-            type: 'success',
-            message: 'You product has been created',
-          };
-          dispatch('addNotification', notification, { root: true });
-        });
-      //   );
+      return (
+        ProductService.postProduct(product)
+          //   return axios
+          //     .post('//localhost/api/products', product)
+          .then(({ data }) => {
+            commit('SET_PRODUCTS', data);
+            const notification = {
+              type: 'success',
+              message: 'You product has been created',
+            };
+            dispatch('addNotification', notification, { root: true });
+          })
+      );
     },
     editProduct({ commit, dispatch }, product) {
       return axios

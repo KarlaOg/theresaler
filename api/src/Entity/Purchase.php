@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PurchaseRepository;
 use Doctrine\Common\Collections\Collection;
@@ -38,21 +39,28 @@ class Purchase
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Full name must be provided")
+     * @Assert\Length(min=2, minMessage="Full name must be at least 2 characters")
      */
     private $fullName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Adress must be provided")
+     * @Assert\Length(min=2, minMessage="Adress must be at least 2 characters")
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Postal code must be provided")
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="city must be provided")
+     * @Assert\Length(min=2, minMessage="city must be at least 2 characters")
      */
     private $city;
 

@@ -19,7 +19,7 @@ export default new Vuex.Store({
     userInfo: null,
     product: {},
   },
-
+  //intercepteur axios
   getters: {
     users: (state) => {
       return state.users;
@@ -171,6 +171,8 @@ export default new Vuex.Store({
     },
 
     createProduct({ commit, dispatch }, product) {
+      //   return (
+      // ProductService.postProduct(product)
       return axios
         .post('//localhost/api/products', product)
         .then(({ data }) => {
@@ -181,6 +183,7 @@ export default new Vuex.Store({
           };
           dispatch('addNotification', notification, { root: true });
         });
+      //   );
     },
     editProduct({ commit, dispatch }, product) {
       return axios

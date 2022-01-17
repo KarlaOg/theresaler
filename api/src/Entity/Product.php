@@ -44,38 +44,38 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le nom du produit est obligatoire !")
-     * @Assert\Length(min=3, max=255, minMessage="Le nom du produit doit avoir au moins 3 caractères !")
+     * @Assert\NotBlank(message="Product name is required")
+     * @Assert\Length(min=3, max=255, minMessage="The product name must have at least 3 characters!")
      * @Groups("products_read")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     *  @Assert\NotBlank(message="La description courte est obligatoire")
-     *  @Assert\Length(min=20, minMessage="La description courte doit quand même faire au moins 20 caractères")
+     *  @Assert\NotBlank(message="The short description is mandatory")
+     *  @Assert\Length(min=20, minMessage="The short description must still be at least 20 characters")
      * @Groups("products_read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le prix du produit est obligatoire !")
+     * @Assert\NotBlank(message="The price of the product is binding")
      * @Groups("products_read")
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Le stock du produit est obligatoire !")
+     * @Assert\NotBlank(message="The stock of the product is mandatory")
      * @Groups("products_read")
      */
     private $stock;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le nom de la marque est obligatoire !")
-     * @Assert\Length(min=3, max=255, minMessage="Le nom de la marque doit avoir au moins 3 caractères !")
+     * @Assert\NotBlank(message="The brand name is mandatory")
+     * @Assert\Length(min=3, max=255, minMessage="The brand name must have at least 3 characters")
      * @Groups("products_read")
      */
     private $brand;
@@ -88,7 +88,7 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=100000)
-     * @Assert\NotBlank(message="La photo principale est obligatoire")
+     * @Assert\NotBlank(message="Main photo is required")
      * @Groups("products_read")
      */
     private $mainPicture;

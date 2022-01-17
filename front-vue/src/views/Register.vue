@@ -2,42 +2,45 @@
   <div class="container">
     <h1>Register</h1>
     <div class="d-flex">
-      <form @submit.prevent="register">
-        <label for="email"> Email: </label>
-        <input v-model="email" type="email" name="email" value />
-
-        <label for="firstname">firstname: </label>
-        <input v-model="firstname" type="text" name="firstname" value />
-
-        <label for="lastname">Lastname: </label>
-        <input v-model="lastname" type="text" name="lastname" value />
-
-        <label for="password"> Password: </label>
-        <input v-model="password" type="password" name value />
-        <ul class="text-danger">
-          <li v-for="err in errors" :key="err.message">
-            {{ err.message }}
-          </li>
-        </ul>
-        <button type="submit" name="button" class="btn">Register</button>
-
-        <router-link to="/login"> Have an account? Login. </router-link>
-      </form>
+      <Vuemik
+      :initialValues="{initialValues}"
+      :onSubmit="register"
+      v-slot="{ handleSubmit, errors }"
+      :validationSchema="ValidationSchema"
+    >
+      <Field name="email" component="input" type="email" />
+      <p v-if="errors.email" class="alert-error">{{errors.email[0]}}</p>
+      <Field name="firstname" component="input" type="text" />
+      <p v-if="errors.firstname" class="alert-error">{{errors.firstname[0]}}</p>
+      <Field name="lastname" component="input" type="text" />
+      <p v-if="errors.lastname" class="alert-error">{{errors.lastname[0]}}</p>
+      <Field name="password" component="input" type="password" />
+      <p v-if="errors.password" class="alert-error">{{errors.password[0]}}</p>
+      <Field name="submit" class="btn" component="input" type="submit" @click="handleSubmit" />
+      </Vuemik>
     </div>
   </div>
 </template>
+
 <script>
+import { Vuemik, Field } from '@/components/Vuemik';
+import * as Yup from "yup";
+
 export default {
   name: 'Register',
-  data: function () {
-    return {
-      firstname: '',
-      lastname: '',
-      email: '',
-      password: '',
-      errors: null,
-    };
-  },
+   components: {
+      Vuemik,
+      Field,
+    },
+    data: () => ({
+       initialValues: {},
+        ValidationSchema: Yup.object().shape({
+            email: Yup.string().email("Invalid email").required("Required"),
+            password: Yup.string().required("Password is required"),
+            firstname: Yup.string().required("Firstname is required"),
+            lastname: Yup.string().required("Lastname is required"),
+        }),
+      }),
   methods: {
     register() {
       this.$store
@@ -101,5 +104,10 @@ input[type='password']:focus {
 /* Add a blue text color to links */
 a {
   color: black;
+}
+
+.alert-error {
+  margin-top: 10px;
+  color: red;
 }
 </style>

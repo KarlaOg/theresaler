@@ -39,7 +39,7 @@ export default {
   name: 'ProductCard',
   methods: {
     addtoCart(product) {
-      this.$store.commit('ADD_CART', product);
+      this.$store.dispatch('addCart', product);
     },
   },
 };

@@ -33,6 +33,7 @@ export default new Vuex.Store({
     productsNumber(state) {
       return state.cartProducts.length;
     },
+
     getProductById: (state) => (id) => {
       return state.products.find((product) => product.id === id);
     },
@@ -84,9 +85,12 @@ export default new Vuex.Store({
       let index = state.products.findIndex((x) => x.id === product);
       return state.products.splice(index, 1);
     },
-    ADD_CART(state, n) {
-      return state.cartProducts.push(n);
+    ADD_CART(state, product) {
+      return state.cartProducts.push(product);
     },
+    // SET_CART(state, cart) {
+    //   state.cartProducts = cart;
+    // },
     REMOVE_CART(state, n) {
       let index = state.cartProducts.findIndex((x) => x.id === n);
       return state.cartProducts.splice(index, 1);
@@ -214,6 +218,12 @@ export default new Vuex.Store({
     },
     removeNotification({ commit }, notificationToRemove) {
       commit('DELETE_NOTIFICATION', notificationToRemove);
+    },
+
+    addCart({ commit }, product) {
+      commit('ADD_CART', product);
+      const { ...val } = product;
+      console.log('prev:', val);
     },
   },
 });

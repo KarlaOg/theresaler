@@ -26,10 +26,15 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Exo+2');
 #app {
-  background-color: #f8f8f8 !important;
-  font-family: 'Exo 2', sans-serif !important;
+  background-color: #ffffff !important;
+  font-family: 'Circular Book', 'Exo 2', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #000000;
+}
+
+a,
+a:hover {
+  color: #000000;
 }
 </style>

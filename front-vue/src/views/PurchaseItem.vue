@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container min-heigh">
     <h1 class="text-center mb-5">Cart</h1>
 
     <div v-if="this.cartContent.length === 0" class="text-center font-italic">

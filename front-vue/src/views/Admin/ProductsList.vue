@@ -37,7 +37,8 @@
                 <b>{{ product.brand }}</b>
               </p>
 
-              <p class="card-text">${{ product.price }}</p>
+              <p>${{ product.price }}</p>
+              <p>stock : {{ product.stock }}</p>
             </div>
           </div>
         </div>
@@ -86,7 +87,9 @@ export default {
   },
   methods: {
     deleteProduct(id) {
-      this.$store.dispatch('deleteProduct', id);
+      if (confirm('Are you sur to delete ?')) {
+        this.$store.dispatch('deleteProduct', id);
+      }
     },
   },
 };
@@ -105,7 +108,7 @@ export default {
 }
 .card {
   width: 250px;
-  height: 250px;
+  height: 300px;
 }
 
 img {

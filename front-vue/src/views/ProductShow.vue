@@ -2,16 +2,16 @@
   <div class="container py-5" style="padding-top: 70px">
     <div>
       <div class="d-flex">
-        <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 mr-5">
+        <div class="col6 col-xl-6 col-lg-6 mr-5">
           <img class="img-fluid trimmed-cover" :src="product.mainPicture" />
         </div>
 
         <div
-          class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start"
+          class="col6 col-xl-6 col-lg-6 d-flex align-items-center justify-content-start"
         >
           <div class="info pt-xl-0 pt-lg-0 pt-5">
-            <p v-if="product.stock <= 0" class="text-danger">
-              ⚠️OUT OF STOCK⚠️
+            <p v-if="product.stock <= 0" class="text-danger font-weight-bold">
+              OUT OF STOCK 😱
             </p>
 
             <h1 class="font-weight-bold text-uppercase pt-3">
@@ -29,13 +29,20 @@
                   float: left;
                   margin-right: 11px;
                 "
-                :disabled="product.stock <= 0"
+                :disabled="
+                  product.stock <= 0 ||
+                  product.stock - this.$store.getters.productsNumber === 0
+                "
               >
                 −
               </button>
               <span>{{ quan }}</span>
               <button
-                :disabled="product.stock <= 0"
+                :disabled="
+                  product.stock <= 0 ||
+                  product.stock - this.$store.getters.productsNumber === 0 ||
+                  this.$store.getters.productsNumber + quan === product.stock
+                "
                 class="increment-button"
                 @click="inc"
                 style="border-left: 0.2px solid lightgrey; margin-left: 16px"
@@ -50,7 +57,10 @@
                 'add-to-cart-button',
               ]"
               @click="addtoCart(product, product.id)"
-              :disabled="product.stock <= 0"
+              :disabled="
+                product.stock < 0 ||
+                product.stock === this.$store.getters.productsNumber
+              "
             >
               ADD TO CART
             </button>
@@ -87,11 +97,11 @@ export default {
 
     inc() {
       // Info box Incrememnt button
-      if (this.quan <= 8) return this.quan++;
+      if (this.quan < this.product.stock) return this.quan++;
     },
     dec() {
       // Info box Decrememnt button
-      if (this.quan >= 2) return this.quan--;
+      if (this.quan > 1) return this.quan--;
     },
     addtoCart(product, id) {
       // Info box Add to cart button

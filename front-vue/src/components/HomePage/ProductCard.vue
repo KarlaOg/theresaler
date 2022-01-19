@@ -6,26 +6,34 @@
         :src="product.mainPicture"
         alt="Card image cap"
       />
-      <div class="overlay">
-        <button
-          type="button"
-          class="btn btn-outline-secondary btn-lg"
-          @click="addtoCart(product)"
-        >
-          Add +
-        </button>
-        <router-link :to="{ name: 'ProductShow', params: { id: product.id } }"
-          ><button type="button" class="btn btn-outline-secondary btn-lg">
-            Info
-          </button></router-link
-        >
-      </div>
       <div class="card-body">
+        <p v-if="product.stock <= 0" class="text-danger">⚠️OUT OF STOCK⚠️</p>
         <h5 class="card-title">{{ product.name }}</h5>
         <p class="card-title">
           <b>{{ product.brand }}</b>
         </p>
         <p class="card-text">${{ product.price }}</p>
+      </div>
+      <div class="d-flex justify-content-around">
+        <button
+          type="button"
+          :class="[
+            product.stock <= 0 ? 'btn btn-secondary disable' : 'btn-success',
+            'btn  btn-sm text-decoration-none text-white',
+          ]"
+          @click="addtoCart(product)"
+          :disabled="product.stock <= 0"
+        >
+          Add +
+        </button>
+        <router-link :to="{ name: 'ProductShow', params: { id: product.id } }"
+          ><button
+            type="button"
+            class="btn btn-info btn-sm text-decoration-none text-white"
+          >
+            Info
+          </button></router-link
+        >
       </div>
     </div>
   </div>
@@ -66,30 +74,12 @@ export default {
   margin-bottom: 10px;
 }
 
-.card:hover img {
-  filter: blur(4px);
-}
-
-.card:hover .overlay {
-  opacity: 0.8;
-}
-
-.card .overlay {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: #232b34;
-  opacity: 0;
-  z-index: 30;
-  transition: all 0.3s ease-in;
-}
-
 img {
   width: 300px;
   height: 300px;
+}
+
+.disable {
+  cursor: not-allowed;
 }
 </style>

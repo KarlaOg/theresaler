@@ -10,6 +10,10 @@
           class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start"
         >
           <div class="info pt-xl-0 pt-lg-0 pt-5">
+            <p v-if="product.stock <= 0" class="text-danger">
+              ⚠️OUT OF STOCK⚠️
+            </p>
+
             <h1 class="font-weight-bold text-uppercase pt-3">
               {{ product.name }}
             </h1>
@@ -25,11 +29,13 @@
                   float: left;
                   margin-right: 11px;
                 "
+                :disabled="product.stock <= 0"
               >
                 −
               </button>
               <span>{{ quan }}</span>
               <button
+                :disabled="product.stock <= 0"
                 class="increment-button"
                 @click="inc"
                 style="border-left: 0.2px solid lightgrey; margin-left: 16px"
@@ -39,8 +45,12 @@
               <br /><br />
             </div>
             <button
-              class="add-to-cart-button"
+              :class="[
+                product.stock <= 0 ? 'button-disable' : 'button-dark',
+                'add-to-cart-button',
+              ]"
               @click="addtoCart(product, product.id)"
+              :disabled="product.stock <= 0"
             >
               ADD TO CART
             </button>
@@ -131,7 +141,6 @@ export default {
   transition-duration: 500ms;
   width: 155px;
   height: 70px;
-  background-color: #2c3539;
   color: #fff;
   font-size: 15px;
   padding: 0px 30px;
@@ -142,8 +151,16 @@ export default {
   border: none;
   box-shadow: 0 26px 38px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.add-to-cart-button:hover,
-.add-to-cart-button:focus {
+.button-dark {
+  background-color: #2c3539;
+}
+.button-disable {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.button-dark:hover,
+.button-dark:focus {
   background-color: inherit;
   color: black;
 }

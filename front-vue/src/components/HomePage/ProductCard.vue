@@ -18,7 +18,7 @@
         <button
           type="button"
           :class="[
-            product.stock <= 0 ? 'btn btn-secondary' : 'btn-success',
+            product.stock <= 0 ? 'btn btn-secondary disable' : 'btn-success',
             'btn  btn-sm text-decoration-none text-white',
           ]"
           @click="addtoCart(product)"
@@ -77,5 +77,9 @@ export default {
 img {
   width: 300px;
   height: 300px;
+}
+
+.disable {
+  cursor: not-allowed;
 }
 </style>

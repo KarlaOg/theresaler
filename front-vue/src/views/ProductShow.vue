@@ -46,7 +46,7 @@
             </div>
             <button
               :class="[
-                product.stock <= 0 ? 'btn btn-secondary' : 'btn-success',
+                product.stock <= 0 ? 'button-disable' : 'button-dark',
                 'add-to-cart-button',
               ]"
               @click="addtoCart(product, product.id)"
@@ -141,7 +141,6 @@ export default {
   transition-duration: 500ms;
   width: 155px;
   height: 70px;
-  background-color: #2c3539;
   color: #fff;
   font-size: 15px;
   padding: 0px 30px;
@@ -152,8 +151,16 @@ export default {
   border: none;
   box-shadow: 0 26px 38px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.add-to-cart-button:hover,
-.add-to-cart-button:focus {
+.button-dark {
+  background-color: #2c3539;
+}
+.button-disable {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.button-dark:hover,
+.button-dark:focus {
   background-color: inherit;
   color: black;
 }

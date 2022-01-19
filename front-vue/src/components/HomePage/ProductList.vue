@@ -14,6 +14,7 @@
         <h4 style="margin-left: 9rem; margin-right: 9rem">Loading data ...</h4>
       </div>
       <div v-else class="d-flex flex-wrap justify-content-around">
+         
         <ProductCard
           v-for="product in products"
           :key="product.id"

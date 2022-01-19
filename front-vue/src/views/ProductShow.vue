@@ -10,6 +10,10 @@
           class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start"
         >
           <div class="info pt-xl-0 pt-lg-0 pt-5">
+            <p v-if="product.stock <= 0" class="text-danger">
+              ⚠️OUT OF STOCK⚠️
+            </p>
+
             <h1 class="font-weight-bold text-uppercase pt-3">
               {{ product.name }}
             </h1>
@@ -25,11 +29,13 @@
                   float: left;
                   margin-right: 11px;
                 "
+                :disabled="product.stock <= 0"
               >
                 −
               </button>
               <span>{{ quan }}</span>
               <button
+                :disabled="product.stock <= 0"
                 class="increment-button"
                 @click="inc"
                 style="border-left: 0.2px solid lightgrey; margin-left: 16px"
@@ -39,8 +45,12 @@
               <br /><br />
             </div>
             <button
-              class="add-to-cart-button"
+              :class="[
+                product.stock <= 0 ? 'btn btn-secondary' : 'btn-success',
+                'add-to-cart-button',
+              ]"
               @click="addtoCart(product, product.id)"
+              :disabled="product.stock <= 0"
             >
               ADD TO CART
             </button>

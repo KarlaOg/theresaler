@@ -40,7 +40,19 @@ export default {
   },
   methods: {
     delivery() {
-      //TODO
+      this.$store
+        .dispatch('delivery', {
+          fullName: this.fullName,
+          address: this.address,
+          postalCode: this.postalCode,
+          city: this.city,
+        })
+        .then(() => {
+          this.$router.push({ name: '/' });
+        })
+        .catch((err) => {
+          this.errors = err.response.data.violations;
+        });
     },
   },
 };

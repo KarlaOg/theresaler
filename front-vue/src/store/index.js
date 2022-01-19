@@ -13,7 +13,7 @@ export default new Vuex.Store({
     users: [],
     admin: false,
     loading: true,
-    cartProducts: [],
+    cartProducts: JSON.parse(localStorage.getItem('cart')) || [],
     products: [],
     notifications: [],
     userInfo: null,
@@ -33,6 +33,7 @@ export default new Vuex.Store({
     productsNumber(state) {
       return state.cartProducts.length;
     },
+
     getProductById: (state) => (id) => {
       return state.products.find((product) => product.id === id);
     },
@@ -84,8 +85,8 @@ export default new Vuex.Store({
       let index = state.products.findIndex((x) => x.id === product);
       return state.products.splice(index, 1);
     },
-    ADD_CART(state, n) {
-      return state.cartProducts.push(n);
+    ADD_CART(state, product) {
+      return state.cartProducts.push(product);
     },
     REMOVE_CART(state, n) {
       let index = state.cartProducts.findIndex((x) => x.id === n);
@@ -151,7 +152,7 @@ export default new Vuex.Store({
     },
 
     fetchProduct({ commit, getters, dispatch }, id) {
-      var product = getters.getProductById(id);
+      const product = getters.getProductById(id);
       if (product) {
         commit('SET_PRODUCT', product);
       } else {
@@ -214,6 +215,15 @@ export default new Vuex.Store({
     },
     removeNotification({ commit }, notificationToRemove) {
       commit('DELETE_NOTIFICATION', notificationToRemove);
+    },
+
+    addCart({ commit }, product) {
+      commit('ADD_CART', product);
+      localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
+    },
+    removeCart({ commit }, product) {
+      commit('REMOVE_CART', product);
+      localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
     },
   },
 });

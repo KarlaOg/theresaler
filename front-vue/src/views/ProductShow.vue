@@ -86,7 +86,7 @@ export default {
     addtoCart(product, id) {
       // Info box Add to cart button
       for (var i = 0; i < this.quan; i++) {
-        this.$store.commit('ADD_CART', product, id);
+        this.$store.dispatch('addCart', product, id);
       }
     },
   },

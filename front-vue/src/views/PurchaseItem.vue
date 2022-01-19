@@ -69,7 +69,7 @@ export default {
   methods: {
     ...mapState(['cartProducts']),
     removeProduct(id) {
-      this.$store.commit('REMOVE_CART', id);
+      this.$store.dispatch('removeCart', id);
     },
   },
 };

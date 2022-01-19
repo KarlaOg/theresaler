@@ -30,6 +30,7 @@ export default new Vuex.Store({
     products: (state) => {
       return state.products;
     },
+
     productsNumber(state) {
       return state.cartProducts.length;
     },

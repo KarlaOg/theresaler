@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-heigh">
     <ProductList />
   </div>
 </template>
@@ -13,3 +13,8 @@ export default {
   },
 };
 </script>
+<style>
+.min-heigh {
+  min-height: 75vh;
+}
+</style>

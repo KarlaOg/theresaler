@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container min-heigh">
     <h1>Register</h1>
     <div class="d-flex">
       <form @submit.prevent="register">

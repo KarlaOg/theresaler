@@ -1,37 +1,28 @@
 <template>
-  <div>
-    <h1 class="pt-3 text-center">New arrivals</h1>
-    <nav class="row justify-content-center" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Products</li>
-      </ol>
-    </nav>
-    <div class="container grid">
-      <div
-        v-if="loading"
-        class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"
-      >
+  <div class="padd">
+    <h1 class="news">View all news</h1>
+    <div class="mt-4">
+      <div v-if="loading" class="container text-center min-heigh">
         <h4 style="margin-left: 9rem; margin-right: 9rem">Loading data ...</h4>
       </div>
       <div v-else class="d-flex flex-wrap justify-content-around">
-         
         <ProductCard
           v-for="product in products"
           :key="product.id"
           :product="product"
         />
       </div>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center mb-4">
         <template v-if="page != 1">
           <router-link
             :to="{ name: 'Home', query: { page: page - 1 } }"
             rel="prev"
-            ><b class="breadcrumb">Prev Page</b></router-link
+            ><b>Prev Page</b></router-link
           >
         </template>
         <template v-if="products.length >= 30">
           <router-link :to="{ name: 'Home', query: { page: page + 1 } }"
-            ><b class="breadcrumb">Next Page</b></router-link
+            ><b>Next Page</b></router-link
           >
         </template>
       </div>
@@ -63,14 +54,6 @@ export default {
 </script>
 
 <style scoped>
-.container.grid {
-  min-height: 60rem;
-}
-
-.container.grid a {
-  cursor: pointer !important;
-}
-
 .btn-outline-secondary {
   border-radius: 0 !important;
 }
@@ -88,13 +71,18 @@ export default {
   font-size: 20px;
 }
 
-.breadcrumb > li > a {
-  text-decoration: none !important;
-  color: #2c3539 !important;
+.news {
+  height: 60px;
+  font-size: 20px;
+  background: linear-gradient(45deg, #e8d9c2 0%, 50%, #e8d9c2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
 }
 
-.breadcrumb > li {
-  text-decoration: none !important;
-  color: #f2be00 !important;
+.padd {
+  padding-left: 5%;
+  padding-right: 5%;
 }
 </style>

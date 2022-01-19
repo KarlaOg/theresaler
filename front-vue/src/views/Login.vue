@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container min-heigh">
     <h1>Login</h1>
     <form @submit.prevent="login">
       <label for="username"> Email: </label>

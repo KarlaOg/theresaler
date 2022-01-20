@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *  normalizationContext={"groups": "products_read"},
+ *  normalizationContext={"groups"={"product_read"}},
+ *  denormalizationContext={"groups"={"product_write"}},
  *  attributes={"order": { "date" : "desc" }},
  *  collectionOperations={
  *     "post"={
@@ -38,7 +39,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("products_read")
+     * @Groups({"admin:product_read""product_write"})
      */
     private $id;
 
@@ -46,7 +47,7 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Product name is required")
      * @Assert\Length(min=3, max=255, minMessage="The product name must have at least 3 characters!")
-     * @Groups("products_read")
+     * @Groups({"product_read","product_write"})
      */
     private $name;
 
@@ -54,21 +55,21 @@ class Product
      * @ORM\Column(type="text")
      *  @Assert\NotBlank(message="The short description is mandatory")
      *  @Assert\Length(min=20, minMessage="The short description must still be at least 20 characters")
-     * @Groups("products_read")
+     * @Groups({"product_read","product_write"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The price of the product is binding")
-     * @Groups("products_read")
+     * @Groups({"product_read","product_write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The stock of the product is mandatory")
-     * @Groups("products_read")
+     * @Groups({"product_write", "admin:product_read"})
      */
     private $stock;
 
@@ -76,31 +77,32 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The brand name is mandatory")
      * @Assert\Length(min=3, max=255, minMessage="The brand name must have at least 3 characters")
-     * @Groups("products_read")
+     * @Groups({"product_read","product_write"})
      */
     private $brand;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("products_read")
+     * @Groups({"product_write", "admin:product_read"})
      */
     private $salesType;
 
     /**
      * @ORM\Column(type="string", length=100000)
      * @Assert\NotBlank(message="Main photo is required")
-     * @Groups("products_read")
+     * @Groups({"product_read","product_write"})
      */
     private $mainPicture;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("products_read")
+     * @Groups({"product_write", "admin:product_read"})
      */
     private $date;
 
     /**
      * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="product")
+     * @Groups({"product_write", "admin:product_read"})
      */
     private $purchaseItems;
 

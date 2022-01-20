@@ -8,19 +8,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=PurchaseItemRepository::class)
- * @ApiResource(
- *  collectionOperations={
- *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- *     "post",
- * },
- *  itemOperations={
- *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- * },
- * )
+ * @ApiResource()
  */
 class PurchaseItem
 {

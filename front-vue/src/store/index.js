@@ -18,6 +18,7 @@ export default new Vuex.Store({
     notifications: [],
     userInfo: null,
     product: {},
+    delivery: [],
   },
 
   getters: {
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     },
     SET_REGISTRATION_DATA(state, userData) {
       state.user = userData;
+    },
+    SET_DELIVERY_DATA(state, del) {
+      state.delivery = del;
     },
     CLEAR_USER_DATA() {
       localStorage.removeItem('user');
@@ -225,6 +229,17 @@ export default new Vuex.Store({
     removeCart({ commit }, product) {
       commit('REMOVE_CART', product);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
+    },
+
+    delivery({ commit, dispatch }, data) {
+      return axios.post('//localhost/api/purchases', data).then(({ pdt }) => {
+        commit('SET_DELIVERY_DATA', pdt);
+        const notification = {
+          type: 'success',
+          message: 'Your account have been created. Login !',
+        };
+        dispatch('addNotification', notification, { root: true });
+      });
     },
   },
 });

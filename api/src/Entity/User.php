@@ -16,26 +16,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 /**
- * @ApiResource(
- *  normalizationContext={"groups": "users_read"},
- *  collectionOperations={
- *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- *     "post",
- * },
- *  itemOperations={
- *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- *     "put"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- *     "delete"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- *  },
- * )
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity("email", message="A user with this email address already exists")
@@ -46,7 +27,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("users_read")
      */
     private $id;
 
@@ -54,7 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="The email must be filled in")
      * @Assert\Email(message="The email must have a valid format")
-     * @Groups("users_read")
      */
     private $email;
 
@@ -75,7 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Last name must be provided")
      * @Assert\Length(min=2, minMessage="Last name must be at least 2 characters")
-     * @Groups("users_read")
      */
     private $lastname;
 
@@ -83,7 +61,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The name must be entered")
      * @Assert\Length(min=2, minMessage="First name must be at least 2 characters")
-     * @Groups("users_read")
      */
     private $firstname;
 

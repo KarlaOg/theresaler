@@ -27,14 +27,22 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Delivery',
+  computed: {
+    ...mapState(['userInfo']),
+  },
   data: function () {
     return {
       fullName: '',
       address: '',
       postalCode: '',
       city: '',
+      purchasedAt: new Date().toISOString(),
+      userPurchase: userInfo.id,
+      total: this.$store.getters.totalPrice,
       errors: null,
     };
   },
@@ -46,6 +54,9 @@ export default {
           address: this.address,
           postalCode: this.postalCode,
           city: this.city,
+          purchasedAt: this.purchasedAt,
+          userPurchase: this.userPurchase,
+          total: this.total,
         })
         .then(() => {
           this.$router.push({ name: '/' });

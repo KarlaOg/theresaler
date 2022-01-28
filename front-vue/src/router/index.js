@@ -50,7 +50,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/purchase-item',
+    path: '/cart',
     name: 'PurchaseItem',
     component: PurchaseItem,
   },

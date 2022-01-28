@@ -21,7 +21,7 @@
           Logout
         </button>
         <div class="ml-4 bag">
-          <router-link to="/purchase-item">
+          <router-link to="/cart">
             <img class="pb-1" src="@/assets/cart.svg" />
             <span class="mb-3" v-if="this.bagItemscount > 0">{{
               bagItemscount

@@ -34,40 +34,40 @@ class PurchaseItem
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="purchaseItems")
-     * @Groups("purchaseItem:read")
+     * @Groups({"purchaseItem:read","purchase:item:get", "purchaseItem:write"})
 
      */
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
-     * @Groups("purchaseItem:read")
-     */
-    private $purchase;
-
-    /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:read"})
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $productName;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:read"})
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $productPrice;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:read"})
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:read"})
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $total;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
+     * @Groups({"purchaseItem:read", "purchase:item:get"})
+     */
+    private $purchase;
 
     public function getId(): ?int
     {

@@ -44,7 +44,7 @@ class Purchase
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Full name must be provided")
      * @Assert\Length(min=2, minMessage="Full name must be at least 2 characters")
-     * @Groups({"purchase:read","purchase:write", "user:item:get", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $fullName;
 
@@ -52,14 +52,14 @@ class Purchase
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Adress must be provided")
      * @Assert\Length(min=2, minMessage="Adress must be at least 2 characters")
-     * @Groups({"purchase:read","purchase:write", "user:item:get", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Postal code must be provided")
-     * @Groups({"purchase:read","purchase:write", "user:item:get", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $postalCode;
 
@@ -67,20 +67,20 @@ class Purchase
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="city must be provided")
      * @Assert\Length(min=2, minMessage="city must be at least 2 characters")
-     * @Groups({"purchase:read","purchase:write", "user:item:get", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="total must be provided")
-     * @Groups({"purchase:read","purchase:write","user:item:get", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write","user:item:get"})
      */
     private $total;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"purchase:read","purchase:write","user:item:get", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write","user:item:get"})
      */
     private $status = 'PENDING';
 
@@ -92,15 +92,17 @@ class Purchase
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"purchase:read","purchase:write", "purchaseItem:read"})
+     * @Groups({"purchase:read","purchase:write"})
      */
     private $purchasedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="purchase")
-     * @Groups("purchase:read")
+     * @Groups({"purchaseItem:item:get", "purchase:read"})
      */
     private $purchaseItems;
+
+
 
     public function __construct()
     {

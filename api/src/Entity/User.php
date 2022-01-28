@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="The email must be filled in")
      * @Assert\Email(message="The email must have a valid format")
-     * @Groups({"user:read","user:write", "purchase:item:get"})
+     * @Groups({"user:read","user:write", "purchase:item:get", "purchase:write"})
      */
     private $email;
 
@@ -89,8 +89,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="userPurchase")
-     * @Groups("user:read")
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="userPurchase", cascade={"persist"})
+     * @Groups({"user:read", "user:write"})
      */
     private $purchases;
 

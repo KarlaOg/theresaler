@@ -15,9 +15,11 @@ export default new Vuex.Store({
     loading: true,
     cartProducts: JSON.parse(localStorage.getItem('cart')) || [],
     products: [],
+    productItems: [],
     notifications: [],
     userInfo: null,
     product: {},
+    delivery: [],
   },
 
   getters: {
@@ -69,6 +71,9 @@ export default new Vuex.Store({
     SET_REGISTRATION_DATA(state, userData) {
       state.user = userData;
     },
+    SET_DELIVERY_DATA(state, del) {
+      state.delivery = del;
+    },
     CLEAR_USER_DATA() {
       localStorage.removeItem('user');
       location.reload();
@@ -78,6 +83,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS(state, product) {
       state.products = product;
+    },
+    SET_PRODUCT_ITEMS(state, productItem) {
+      state.productItems = productItem;
     },
     SET_PRODUCT(state, product) {
       state.product = product;
@@ -220,11 +228,36 @@ export default new Vuex.Store({
 
     addCart({ commit }, product) {
       commit('ADD_CART', product);
+      //   let pdtId = this.state.cartProducts.map((pdt) => pdt.id);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
+      //   return axios.post('//localhost/api/purchase_items', data).then(({ pdt }) => {
+      //     commit('ADD_CART', product);
+
+      //   });
     },
     removeCart({ commit }, product) {
       commit('REMOVE_CART', product);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
+    },
+
+    delivery({ commit, dispatch }, data) {
+      return axios.post('//localhost/api/purchases', data).then(({ pdt }) => {
+        commit('SET_DELIVERY_DATA', pdt);
+        const notification = {
+          type: 'success',
+          message: 'Your account have been created. Login !',
+        };
+        dispatch('addNotification', notification, { root: true });
+      });
+    },
+
+    confirmCart({ commit }, product) {
+      return axios
+        .post('//localhost/api/purchase_items', product)
+        .then(({ data }) => {
+          console.log(data);
+          commit('SET_PRODUCT_ITEMS', data);
+        });
     },
   },
 });

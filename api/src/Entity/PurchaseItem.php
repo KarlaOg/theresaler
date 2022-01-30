@@ -20,9 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "get"={
  *          "normalization_context"={"groups"={"purchaseItem:read","purchaseItem:item:get"}},
  *          },
- *     "delete"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
+ *     "delete"
  *
  * }
  * )

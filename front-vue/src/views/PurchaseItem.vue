@@ -22,6 +22,7 @@
         <span class="btn btn-danger" @click="removeProduct(product.id)"
           >remove</span
         >
+        {{ product.id }}
       </div>
     </div>
     <div v-if="this.cartContent.length !== 0" class="flex-column pl-3">

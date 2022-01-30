@@ -97,7 +97,7 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="product", orphanRemoval=true)
-     * @Groups({"admin:product_read"})
+     * @Groups({"admin:product_read","purchaseItem:read"})
      */
     private $purchaseItems;
 

@@ -228,24 +228,50 @@ export default new Vuex.Store({
 
     addCart({ commit }, product) {
       commit('ADD_CART', product);
-      const pdtId = this.state.cartProducts.map((e) => e.id).toString();
-      const price = this.state.cartProducts.map((e) => e.price).toString();
-      const pdtName = this.state.cartProducts.map((e) => e.name).toString();
-      const pdtPrice = parseInt(price);
+
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
-      console.log(pdtId, pdtPrice, pdtName);
       return axios.post('//localhost/api/purchase_items', {
-        product: `/api/products/${pdtId}`,
-        productName: pdtName,
-        productPrice: pdtPrice,
+        product: `/api/products/${product.id}`,
+        productName: product.name,
+        productPrice: product.price,
       });
     },
 
     removeCart({ commit }, product) {
-      commit('REMOVE_CART', product);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
-      const pdtId = this.state.cartProducts.map((e) => e.id).toString();
-      axios.delete(`//localhost/api/purchase_items${pdtId}`);
+
+      axios.get('http://localhost/api/purchase_items/').then((response) => {
+        // const purchaseItemId = response.data['hydra:member']
+        //   .flatMap((e) => Object.values(e.product))
+        //   .toString()
+        //   .split('/')
+        //   .pop();
+        const purchaseItemId = response.data['hydra:member'].flatMap((e) =>
+          Object.values(e.product)[0].toString().split('/').pop()
+        );
+
+        const productId = response.data['hydra:member']
+          .map((e) => e.product)
+          .flatMap((e) => e.purchaseItems)
+          .toString()
+          .split('/')
+          .pop();
+        const productId2 = response.data['hydra:member'];
+        console.log(productId2);
+        console.log(productId);
+        // console.log(test);
+        // console.log(product);
+        //const searchId = purchaseItemId.find(product.id);
+        // console.log(purchaseItemId, product);
+        const searchId = purchaseItemId.find(
+          (element) => element === product.toString()
+        );
+        console.log(searchId, product.toString());
+        if (product.toString() === searchId) {
+          commit('REMOVE_CART', product);
+          axios.delete(`//localhost/api/purchase_items/${productId}`);
+        }
+      });
     },
 
     delivery({ commit, dispatch }, data) {

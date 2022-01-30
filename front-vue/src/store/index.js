@@ -233,20 +233,19 @@ export default new Vuex.Store({
       const pdtName = this.state.cartProducts.map((e) => e.name).toString();
       const pdtPrice = parseInt(price);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
-      return axios
-        .post('//localhost/api/purchase_items', {
-          product: `/api/products/${pdtId}`,
-          productName: pdtName,
-          productPrice: pdtPrice,
-        })
-        .then(({ data }) => {
-          console.log(product, data);
-          commit('ADD_CART', product);
-        });
+      console.log(pdtId, pdtPrice, pdtName);
+      return axios.post('//localhost/api/purchase_items', {
+        product: `/api/products/${pdtId}`,
+        productName: pdtName,
+        productPrice: pdtPrice,
+      });
     },
+
     removeCart({ commit }, product) {
       commit('REMOVE_CART', product);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
+      const pdtId = this.state.cartProducts.map((e) => e.id).toString();
+      axios.delete(`//localhost/api/purchase_items${pdtId}`);
     },
 
     delivery({ commit, dispatch }, data) {
@@ -259,14 +258,5 @@ export default new Vuex.Store({
         dispatch('addNotification', notification, { root: true });
       });
     },
-
-    // confirmCart({ commit }, product) {
-    //   return axios
-    //     .post('//localhost/api/purchase_items', product)
-    //     .then(({ data }) => {
-    //       console.log(data);
-    //       commit('SET_PRODUCT_ITEMS', data);
-    //     });
-    // },
   },
 });

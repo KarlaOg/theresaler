@@ -14,12 +14,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  denormalizationContext={"groups"={"purchaseItem:write"} },
  *  collectionOperations={
  *     "get",
- *     "post"
+ *     "post",
  * },
  *  itemOperations={
  *     "get"={
  *          "normalization_context"={"groups"={"purchaseItem:read","purchaseItem:item:get"}},
  *          },
+ *     "delete"={
+ *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          },
+ *
  * }
  * )
  */

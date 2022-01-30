@@ -1,6 +1,6 @@
 <template>
   <div class="padd">
-    <h1 class="news">View all news</h1>
+    <h1 class="news">✨ View all news ✨</h1>
     <div class="mt-4">
       <div v-if="loading" class="container text-center min-heigh">
         <h4 style="margin-left: 9rem; margin-right: 9rem">Loading data ...</h4>
@@ -74,11 +74,11 @@ export default {
 .news {
   height: 60px;
   font-size: 20px;
-  background: linear-gradient(45deg, #e8d9c2 0%, 50%, #e8d9c2 100%);
+  background: linear-gradient(220.55deg, #ffed46 0%, #ff7ec7 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #000000;
+  color: white;
 }
 
 .padd {

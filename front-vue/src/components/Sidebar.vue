@@ -10,14 +10,14 @@
       <v-divider></v-divider>
 
       <v-list dense nav>
-        <router-link to="/">
+        <router-link to="/dashboard">
           <v-list-item dense nav>
             <v-list-item-content link>
               <v-list-item-title>My info</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="/">
+        <router-link to="/my-purhcase">
           <v-list-item dense nav>
             <v-list-item-content link>
               <v-list-item-title>Purchase</v-list-item-title>

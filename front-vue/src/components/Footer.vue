@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row justify-content-between p-4">
         <div class="tiny-footer">
-          <p><b>💸 The Resealer</b></p>
+          <p><b>💸 THE RESEALER</b></p>
           <p>Copyright © All Rights Reserved 2021</p>
         </div>
       </div>

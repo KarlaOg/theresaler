@@ -1,9 +1,9 @@
 <template>
   <div class="container py-5" style="padding-top: 70px">
     <div>
-      <div class="d-flex">
+      <div class="d-flex mobil">
         <div class="col6 col-xl-6 col-lg-6 mr-5">
-          <img class="img-fluid trimmed-cover" :src="product.mainPicture" />
+          <img class="img-fluid img-c" :src="product.mainPicture" />
         </div>
 
         <div
@@ -20,47 +20,14 @@
             <h5 class="text-uppercase pt-3">{{ product.brand }}</h5>
             <h4>${{ product.price }}</h4>
             <br /><br /><br />
-            <div class="control number text-center">
-              <button
-                class="decrement-button"
-                @click="dec"
-                style="
-                  border-right: 0.2px solid lightgrey;
-                  float: left;
-                  margin-right: 11px;
-                "
-                :disabled="
-                  product.stock <= 0 ||
-                  product.stock - this.$store.getters.productsNumber === 0
-                "
-              >
-                −
-              </button>
-              <span>{{ quan }}</span>
-              <button
-                :disabled="
-                  product.stock <= 0 ||
-                  product.stock - this.$store.getters.productsNumber === 0 ||
-                  this.$store.getters.productsNumber + quan === product.stock
-                "
-                class="increment-button"
-                @click="inc"
-                style="border-left: 0.2px solid lightgrey; margin-left: 16px"
-              >
-                +
-              </button>
-              <br /><br />
-            </div>
+
             <button
               :class="[
                 product.stock <= 0 ? 'button-disable' : 'button-dark',
                 'add-to-cart-button',
               ]"
               @click="addtoCart(product, product.id)"
-              :disabled="
-                product.stock < 0 ||
-                product.stock === this.$store.getters.productsNumber
-              "
+              :disabled="product.stock <= 0"
             >
               ADD TO CART
             </button>
@@ -89,24 +56,15 @@ export default {
   name: 'ProductShow',
   data() {
     return {
-      quan: 1,
+      quantity: 1,
     };
   },
   methods: {
     ...mapActions(['fetchProduct']),
 
-    inc() {
-      // Info box Incrememnt button
-      if (this.quan < this.product.stock) return this.quan++;
-    },
-    dec() {
-      // Info box Decrememnt button
-      if (this.quan > 1) return this.quan--;
-    },
-    addtoCart(product, id) {
-      // Info box Add to cart button
-      for (var i = 0; i < this.quan; i++) {
-        this.$store.dispatch('addCart', product, id);
+    addtoCart(product) {
+      for (var i = 0; i < this.quantity; i++) {
+        this.$store.dispatch('addCart', product);
       }
     },
   },
@@ -124,28 +82,7 @@ export default {
   min-width: 90% !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.control.number {
-  border: 0.2px solid lightgrey;
-  font-size: 19px;
-  font-weight: bold;
-  height: 35px;
-  width: 155px;
-  margin-bottom: 30px;
-}
-.control.number button {
-  border: none;
-  background: inherit;
-  width: 56px;
-  height: 35px;
-  outline-style: none;
-}
-.control.number button:active {
-  background-color: lightgrey;
-}
-.control.number h5 {
-  margin-left: 13px;
-  margin-right: 13px;
-}
+
 .add-to-cart-button {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
@@ -179,8 +116,14 @@ hr {
   border-bottom: 1px solid black;
 }
 
-.trimmed-cover {
-  object-fit: contain;
-  height: 500px;
+.img-c {
+  padding: 10px;
+  background: linear-gradient(220.55deg, #ffed46 0%, #ff7ec7 100%);
+}
+
+@media screen and (max-width: 575px) {
+  .mobil {
+    flex-wrap: wrap;
+  }
 }
 </style>

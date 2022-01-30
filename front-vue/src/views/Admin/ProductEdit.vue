@@ -101,11 +101,10 @@ export default {
           name: this.product.name,
           description: this.product.description,
           brand: this.product.brand,
-          price: this.product.price,
+          price: parseInt(this.product.price),
           mainPicture: this.product.mainPicture,
           salesType: Boolean(this.product.salesType),
           stock: parseInt(this.product.stock),
-          date: new Date().toISOString(),
           id: this.id,
         })
         .catch((err) => {

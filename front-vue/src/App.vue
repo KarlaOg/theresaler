@@ -24,10 +24,8 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Exo+2');
 #app {
   background-color: #ffffff !important;
-  font-family: 'Circular Book', 'Exo 2', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #000000;

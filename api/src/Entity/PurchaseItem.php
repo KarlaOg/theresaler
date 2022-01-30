@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PurchaseItemRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=PurchaseItemRepository::class)
@@ -14,60 +16,71 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  denormalizationContext={"groups"={"purchaseItem:write"} },
  *  collectionOperations={
  *     "get",
- *     "post"
+ *     "post",
  * },
  *  itemOperations={
+ *     "put",
  *     "get"={
  *          "normalization_context"={"groups"={"purchaseItem:read","purchaseItem:item:get"}},
  *          },
+ *     "delete"
+ *
  * }
  * )
  */
+
 class PurchaseItem
+
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"purchaseItem:read"})
+
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="purchaseItems")
      * @Groups({"purchaseItem:read","purchase:item:get", "purchaseItem:write"})
-
+     * @Assert\NotBlank(message="The product is mandatory")
      */
     private $product;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="The product name is mandatory")
      * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $productName;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="The product price is mandatory")
      * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $productPrice;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
-     */
-    private $quantity;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
-     */
-    private $total;
 
     /**
      * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
      * @Groups({"purchaseItem:read", "purchase:item:get"})
      */
     private $purchase;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"purchaseItem:read", "purchaseItem:write"})
+     * @Assert\NotBlank(message="The product total is mandatory")
+     */
+    private $total;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="The product quantity is mandatory")
+     * @Groups({"purchaseItem:read", "purchaseItem:write"})
+     */
+    private $quantity;
 
     public function getId(): ?int
     {
@@ -122,16 +135,12 @@ class PurchaseItem
         return $this;
     }
 
-    public function getQuantity(): ?int
+    /**
+     * @Groups({"purchaseItem:read"})
+     */
+    public function getProductId()
     {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
+        return $this->getProduct()->getId();
     }
 
     public function getTotal(): ?int
@@ -142,6 +151,18 @@ class PurchaseItem
     public function setTotal(int $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

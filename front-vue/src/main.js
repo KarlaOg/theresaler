@@ -5,7 +5,6 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import store from './store';
 import axios from 'axios';
-// import { getAdminRole } from '@/services/auth';
 
 Vue.config.productionTip = false;
 

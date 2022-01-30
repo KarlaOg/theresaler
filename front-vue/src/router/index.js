@@ -5,6 +5,7 @@ import ProductShow from '../views/ProductShow.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
+import MyPurchase from '../views/MyPurchase.vue';
 import Purchase from '../views/Purchase.vue';
 import PurchaseItem from '../views/PurchaseItem.vue';
 import Error from '../views/Error.vue';
@@ -60,6 +61,12 @@ const routes = [
     component: Dashboard,
     meta: { requiresAuth: true },
   },
+    {
+      path: '/my-purhcase',
+      name: 'MyPurchase',
+      component: MyPurchase,
+      meta: { requiresAuth: true },
+    },
   {
     path: '/admin/create-product',
     name: 'ProductCreate',

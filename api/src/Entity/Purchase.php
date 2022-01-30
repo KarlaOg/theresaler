@@ -98,7 +98,7 @@ class Purchase
 
     /**
      * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="purchase")
-     * @Groups({"purchaseItem:item:get", "purchase:read"})
+     * @Groups({"purchaseItem:item:get", "purchase:read", "purchase:write"})
      */
     private $purchaseItems;
 

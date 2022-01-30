@@ -3,10 +3,10 @@
     <nav class="navbar header">
       <div v-if="!loggedIn" style="width: 110px"></div>
       <router-link v-if="admin && loggedIn" to="/admin/list-products">
-        <mark>Dashboard</mark>
+        <mark>My account</mark>
       </router-link>
       <router-link v-if="!admin && loggedIn" to="/dashboard">
-        Dashboard
+        My account
       </router-link>
       <div class="d-flex">
         <router-link to="/">
@@ -55,7 +55,7 @@ export default {
 
 <style lang="scss" scoped>
 a {
-  color: #2c3e50;
+  //   color: #2c3e50;
   margin: auto 0.8em auto 0.4em;
   text-decoration: none;
   border-top: 2px solid transparent;
@@ -65,11 +65,6 @@ a {
 button,
 .button {
   text-decoration: none;
-  color: #2c3e50;
-
-  &.router-link-active {
-    color: #2c3e50;
-  }
 }
 
 .logoutButton {
@@ -78,6 +73,7 @@ button,
 
 nav {
   z-index: 100;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .bag span {

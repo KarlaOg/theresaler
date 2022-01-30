@@ -43,9 +43,10 @@
     </div>
     <div v-if="this.cartPrice != undefined && loggedIn">
       <div class="d-flex justify-content-end">
-        <router-link to="/">
+        <Delivery />
+        <!-- <router-link to="/">
           <button class="btn btn-warning" @click="confirmCart">Confirm</button>
-        </router-link>
+        </router-link> -->
       </div>
     </div>
   </div>
@@ -53,8 +54,12 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import Delivery from '../components/Delivery.vue';
+
 export default {
-  components: {},
+  components: {
+    Delivery,
+  },
   name: 'PurchaseItem',
   computed: {
     ...mapGetters(['loggedIn']),
@@ -74,23 +79,23 @@ export default {
     removeProduct(id) {
       this.$store.dispatch('removeCart', id);
     },
-    confirmCart() {
-      this.$store
-        .dispatch('confirmCart', {
-          product: ['/api/products/55', '/api/products/70'],
-          productName: 'Emeline test lol',
-          productPrice: 76,
-          quantity: 2,
-          total: 152,
-        })
-        .then(() => {
-          //   this.$router.push({ name: 'Home' });
-          console.log('hello');
-        })
-        .catch((err) => {
-          this.errors = err.response.data.violations;
-        });
-    },
+    // confirmCart() {
+    //   this.$store
+    //     .dispatch('confirmCart', {
+    //       product: ['/api/products/55', '/api/products/70'],
+    //       productName: 'Emeline test lol',
+    //       productPrice: 76,
+    //       quantity: 2,
+    //       total: 152,
+    //     })
+    //     .then(() => {
+    //       //   this.$router.push({ name: 'Home' });
+    //       console.log('hello');
+    //     })
+    //     .catch((err) => {
+    //       this.errors = err.response.data.violations;
+    //     });
+    //},
   },
 };
 </script>

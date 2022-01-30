@@ -64,7 +64,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The stock of the product is mandatory")
-     * @Groups({"product:write","purchaseItem:item:get", "admin:product_read"})
+     * @Groups({"product:write","purchaseItem:item:get","product:read"})
      */
     private $stock;
 

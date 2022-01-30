@@ -228,12 +228,19 @@ export default new Vuex.Store({
 
     addCart({ commit }, product) {
       commit('ADD_CART', product);
-      //   let pdtId = this.state.cartProducts.map((pdt) => pdt.id);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
-      //   return axios.post('//localhost/api/purchase_items', data).then(({ pdt }) => {
-      //     commit('ADD_CART', product);
-
-      //   });
+      return axios
+        .post('//localhost/api/purchase_items', {
+          product: '/api/products/2',
+          productName: 'coucou bb',
+          productPrice: 76,
+          quantity: 2,
+          total: 152,
+        })
+        .then(({ data }) => {
+          console.log(product, data);
+          commit('ADD_CART', product);
+        });
     },
     removeCart({ commit }, product) {
       commit('REMOVE_CART', product);
@@ -251,13 +258,13 @@ export default new Vuex.Store({
       });
     },
 
-    confirmCart({ commit }, product) {
-      return axios
-        .post('//localhost/api/purchase_items', product)
-        .then(({ data }) => {
-          console.log(data);
-          commit('SET_PRODUCT_ITEMS', data);
-        });
-    },
+    // confirmCart({ commit }, product) {
+    //   return axios
+    //     .post('//localhost/api/purchase_items', product)
+    //     .then(({ data }) => {
+    //       console.log(data);
+    //       commit('SET_PRODUCT_ITEMS', data);
+    //     });
+    // },
   },
 });

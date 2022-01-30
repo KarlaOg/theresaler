@@ -87,7 +87,7 @@ export default {
       name: '',
       description: '',
       brand: '',
-      price: '0',
+      price: 0,
       stock: 0,
       mainPicture: '',
       salesType: true,
@@ -112,10 +112,9 @@ export default {
           this.name = '';
           this.description = '';
           this.brand = '';
-          this.price = '0';
+          this.price = 0;
           this.stock = 0;
-          this.price = '0';
-          this.mainPicture = '0';
+          this.mainPicture = '';
           this.salesType = true;
         })
         .catch((err) => {

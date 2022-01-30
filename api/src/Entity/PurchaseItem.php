@@ -5,21 +5,22 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PurchaseItemRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PurchaseItemRepository::class)
  * @ApiResource(
+ *  normalizationContext={"groups"={"purchaseItem:read"} },
+ *  denormalizationContext={"groups"={"purchaseItem:write"} },
  *  collectionOperations={
- *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
- *     "post",
+ *     "get",
+ *     "post"
  * },
  *  itemOperations={
  *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          "normalization_context"={"groups"={"purchaseItem:read","purchaseItem:item:get"}},
  *          },
- * },
+ * }
  * )
  */
 class PurchaseItem
@@ -33,33 +34,40 @@ class PurchaseItem
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="purchaseItems")
+     * @Groups({"purchaseItem:read","purchase:item:get", "purchaseItem:write"})
+
      */
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
-     */
-    private $purchase;
-
-    /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $productName;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $productPrice;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
      */
     private $total;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
+     * @Groups({"purchaseItem:read", "purchase:item:get"})
+     */
+    private $purchase;
 
     public function getId(): ?int
     {

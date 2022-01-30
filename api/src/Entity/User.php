@@ -17,16 +17,16 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ApiResource(
- *  normalizationContext={"groups": "users_read"},
+ *  normalizationContext={"groups"={"user:read"} },
+ *  denormalizationContext={"groups"={"user:write"} },
  *  collectionOperations={
- *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *          },
+ *     "get",
  *     "post",
  * },
  *  itemOperations={
  *     "get"={
  *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          "normalization_context"={"groups"={"user:read","user:item:get"}},
  *          },
  *     "put"={
  *         "access_control"="is_granted('ROLE_ADMIN')",
@@ -46,7 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("users_read")
      */
     private $id;
 
@@ -54,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="The email must be filled in")
      * @Assert\Email(message="The email must have a valid format")
-     * @Groups("users_read")
+     * @Groups({"user:read","user:write", "purchase:item:get", "purchase:write"})
      */
     private $email;
 
@@ -67,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="The password must be filled in")
+     * @Groups({"user:write"})
      */
     private $password;
 
@@ -75,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Last name must be provided")
      * @Assert\Length(min=2, minMessage="Last name must be at least 2 characters")
-     * @Groups("users_read")
+     * @Groups({"user:read","user:write", "purchase:item:get"})
      */
     private $lastname;
 
@@ -83,13 +83,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The name must be entered")
      * @Assert\Length(min=2, minMessage="First name must be at least 2 characters")
-     * @Groups("users_read")
+     * @Groups({"user:read","user:write", "purchase:item:get"})
      */
     private $firstname;
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="userPurchase")
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="userPurchase", cascade={"persist"})
+     * @Groups({"user:read", "user:write"})
      */
     private $purchases;
 

@@ -1,11 +1,12 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex min-heigh">
     <Sidebar />
     <div class="container m-3">
       <h3 class="mb-2">My info</h3>
-      <p>email : {{ userInfo.username }}</p>
-      <p>firstname : {{ userInfo.firstname }}</p>
-      <p>lastname : {{ userInfo.lastname }}</p>
+      <p>Email : {{ userInfo.username }}</p>
+      <p>Firstname : {{ userInfo.firstname }}</p>
+      <p>Lastname : {{ userInfo.lastname }}</p>
+      <p class="mt-5">You want to change something ? contact admin@admin.com</p>
     </div>
   </div>
 </template>

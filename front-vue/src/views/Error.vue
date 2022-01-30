@@ -1,22 +1,51 @@
 <template>
-  <div class="page-wrap d-flex flex-row align-items-center">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-12 text-center">
-          <span class="display-1 d-block">404</span>
-          <div class="mb-4 lead">
-            The page you are looking for was not found.
-          </div>
-
-          <router-link to="/" class="btn btn-link"> Back to Home </router-link>
-        </div>
-      </div>
-    </div>
+  <div>
+    <p class="not-found">PAGE NOT FOUND 👻</p>
+    <video
+      width="600"
+      src="https://img-9gag-fun.9cache.com/photo/aWjPvmx_460svvp9.webm"
+      autoplay
+      ref="videoRef"
+      loop
+      muted="true"
+      class="video"
+    ></video>
+    <router-link to="/" class="ml-3">🔙 Back to Home </router-link>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'Error',
+  mounted() {
+    this.$refs.videoRef.play();
+  },
+};
 </script>
+<style lang="scss" scoped>
+.video {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
-<style></style>
+.not-found {
+  position: absolute;
+  color: aliceblue;
+  top: 120px;
+  text-align: center;
+  animation: clignote 2s linear infinite;
+  text-shadow: chartreuse;
+  text-shadow: #fc0 1px 0 10px;
+  font-weight: bold;
+  font-size: 54px;
+  width: 100%;
+}
+
+@keyframes clignote {
+  50% {
+    opacity: 0;
+  }
+}
+</style>

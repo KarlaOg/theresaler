@@ -2,17 +2,19 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *  normalizationContext={"groups": "products_read"},
+ *  normalizationContext={"groups"={"product:read"} },
+ *  denormalizationContext={"groups"={"product:write"} },
  *  attributes={"order": { "date" : "desc" }},
  *  collectionOperations={
  *     "post"={
@@ -23,7 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  itemOperations={
  *     "get",
  *     "put"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          "access_control"="is_granted('ROLE_ADMIN')",
+
  *          },
  *     "delete"={
  *         "access_control"="is_granted('ROLE_ADMIN')",
@@ -38,7 +41,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("products_read")
+     * @Groups({"product:read"})
      */
     private $id;
 
@@ -46,7 +49,7 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Product name is required")
      * @Assert\Length(min=3, max=255, minMessage="The product name must have at least 3 characters!")
-     * @Groups("products_read")
+     * @Groups({"product:read","product:write","purchaseItem:item:get"})
      */
     private $name;
 
@@ -54,21 +57,14 @@ class Product
      * @ORM\Column(type="text")
      *  @Assert\NotBlank(message="The short description is mandatory")
      *  @Assert\Length(min=20, minMessage="The short description must still be at least 20 characters")
-     * @Groups("products_read")
+     * @Groups({"product:read","product:write","purchaseItem:item:get"})
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="The price of the product is binding")
-     * @Groups("products_read")
-     */
-    private $price;
-
-    /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The stock of the product is mandatory")
-     * @Groups("products_read")
+     * @Groups({"product:write","purchaseItem:item:get", "admin:product_read"})
      */
     private $stock;
 
@@ -76,33 +72,43 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The brand name is mandatory")
      * @Assert\Length(min=3, max=255, minMessage="The brand name must have at least 3 characters")
-     * @Groups("products_read")
+     * @Groups({"product:read","product:write","purchaseItem:item:get"})
      */
     private $brand;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("products_read")
+     * @Groups({"product:write", "admin:product_read", "purchaseItem:item:get"})
      */
     private $salesType;
 
     /**
      * @ORM\Column(type="string", length=100000)
      * @Assert\NotBlank(message="Main photo is required")
-     * @Groups("products_read")
+     * @Groups({"product:read","product:write", "purchaseItem:item:get"})
      */
     private $mainPicture;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("products_read")
+     * @Groups({"product:read","product:write", "purchaseItem:item:get"})
      */
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="product", orphanRemoval=true)
+     * @Groups({"admin:product_read"})
      */
     private $purchaseItems;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="The price of the product is binding")
+     * @Groups({"product:read","product:write", "purchaseItem:item:get"})
+     */
+    private $price;
+
+
 
     public function __construct()
     {
@@ -138,17 +144,6 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
 
     public function getStock(): ?int
     {
@@ -236,6 +231,18 @@ class Product
                 $purchaseItem->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

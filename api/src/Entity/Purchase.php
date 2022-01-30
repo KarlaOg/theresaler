@@ -7,6 +7,7 @@ use App\Repository\PurchaseRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,15 +15,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *  collectionOperations={
  *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
+ *
  *          },
  *     "post",
  * },
  *  itemOperations={
  *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
+ *          "normalization_context"={"groups"={"purchase:read","purchase:item:get"}},
  *          },
  * },
+ *  normalizationContext={"groups"={"purchase:read"} },
+ *  denormalizationContext={"groups"={"purchase:write"} },
  * )
  */
 class Purchase
@@ -41,6 +44,7 @@ class Purchase
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Full name must be provided")
      * @Assert\Length(min=2, minMessage="Full name must be at least 2 characters")
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $fullName;
 
@@ -48,12 +52,14 @@ class Purchase
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Adress must be provided")
      * @Assert\Length(min=2, minMessage="Adress must be at least 2 characters")
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Postal code must be provided")
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $postalCode;
 
@@ -61,33 +67,42 @@ class Purchase
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="city must be provided")
      * @Assert\Length(min=2, minMessage="city must be at least 2 characters")
+     * @Groups({"purchase:read","purchase:write", "user:item:get"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="total must be provided")
+     * @Groups({"purchase:read","purchase:write","user:item:get"})
      */
     private $total;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"purchase:read","purchase:write","user:item:get"})
      */
     private $status = 'PENDING';
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="purchases")
+     * @Groups("purchase:read")
      */
     private $userPurchase;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"purchase:read","purchase:write"})
      */
     private $purchasedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="purchase")
+     * @Groups({"purchaseItem:item:get", "purchase:read"})
      */
     private $purchaseItems;
+
+
 
     public function __construct()
     {

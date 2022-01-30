@@ -26,5 +26,8 @@ export default {
   right: 0;
   padding-right: 40px;
   background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgb(69 67 67 / 32%);
+  z-index: 999;
 }
 </style>

@@ -87,12 +87,8 @@ class AppFixtures extends Fixture
             foreach ($selectedProducts as $product) {
                 $purchaseItem = new PurchaseItem;
                 $purchaseItem->setProduct($product)
-                    ->setQuantity(mt_rand(1, 3))
                     ->setProductName($product->getName())
                     ->setProductPrice($product->getPrice())
-                    ->setTotal(
-                        $purchaseItem->getProductPrice() * $purchaseItem->getQuantity()
-                    )
                     ->setPurchase($purchase);
 
                 $manager->persist($purchaseItem);

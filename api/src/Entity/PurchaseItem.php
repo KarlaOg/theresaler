@@ -52,18 +52,6 @@ class PurchaseItem
     private $productPrice;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
-     */
-    private $quantity;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
-     */
-    private $total;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
      * @Groups({"purchaseItem:read", "purchase:item:get"})
      */
@@ -118,30 +106,6 @@ class PurchaseItem
     public function setProductPrice(int $productPrice): self
     {
         $this->productPrice = $productPrice;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    public function getTotal(): ?int
-    {
-        return $this->total;
-    }
-
-    public function setTotal(int $total): self
-    {
-        $this->total = $total;
 
         return $this;
     }

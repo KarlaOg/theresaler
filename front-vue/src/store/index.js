@@ -228,14 +228,16 @@ export default new Vuex.Store({
 
     addCart({ commit }, product) {
       commit('ADD_CART', product);
+      const pdtId = this.state.cartProducts.map((e) => e.id).toString();
+      const price = this.state.cartProducts.map((e) => e.price).toString();
+      const pdtName = this.state.cartProducts.map((e) => e.name).toString();
+      const pdtPrice = parseInt(price);
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
       return axios
         .post('//localhost/api/purchase_items', {
-          product: '/api/products/2',
-          productName: 'coucou bb',
-          productPrice: 76,
-          quantity: 2,
-          total: 152,
+          product: `/api/products/${pdtId}`,
+          productName: pdtName,
+          productPrice: pdtPrice,
         })
         .then(({ data }) => {
           console.log(product, data);

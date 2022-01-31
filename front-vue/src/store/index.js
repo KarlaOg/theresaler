@@ -95,6 +95,13 @@ export default new Vuex.Store({
       return state.products.splice(index, 1);
     },
     ADD_CART(state, product) {
+      var i;
+
+      for (i = 0; i < state.cartProducts.length; i++) {
+        if (state.cartProducts[i].id === state.product.id) {
+          console.log(state.cartProducts);
+        }
+      }
       return state.cartProducts.push(product);
     },
     REMOVE_CART(state, n) {
@@ -241,35 +248,39 @@ export default new Vuex.Store({
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
 
       axios.get('http://localhost/api/purchase_items/').then((response) => {
-        // const purchaseItemId = response.data['hydra:member']
-        //   .flatMap((e) => Object.values(e.product))
-        //   .toString()
-        //   .split('/')
-        //   .pop();
         const purchaseItemId = response.data['hydra:member'].flatMap((e) =>
           Object.values(e.product)[0].toString().split('/').pop()
         );
 
-        const productId = response.data['hydra:member']
-          .map((e) => e.product)
-          .flatMap((e) => e.purchaseItems)
-          .toString()
-          .split('/')
-          .pop();
-        const productId2 = response.data['hydra:member'];
-        console.log(productId2);
-        console.log(productId);
+        // const productId = JSON.stringify(response.data['hydra:member']);
+        //   .flatMap((e) => e.purchaseItems);
+
+        // const productId2 = response.data['hydra:member'];
+        // console.log(productId2);
+        // console.log(productId);
         // console.log(test);
         // console.log(product);
         //const searchId = purchaseItemId.find(product.id);
         // console.log(purchaseItemId, product);
+        const productIdSearch = JSON.stringify(
+          response.data['hydra:member'].every(function (element) {
+            console.log('el', element.productId);
+            console.log('product', product);
+            // console.log(element.productId === product);
+            if (element.productId[0] === 7) {
+              return element.id;
+            }
+            // return true;
+          })
+        );
+        console.log(productIdSearch);
         const searchId = purchaseItemId.find(
           (element) => element === product.toString()
         );
-        console.log(searchId, product.toString());
+        // console.log(searchId, product.toString());
         if (product.toString() === searchId) {
           commit('REMOVE_CART', product);
-          axios.delete(`//localhost/api/purchase_items/${productId}`);
+          axios.delete(`//localhost/api/purchase_items/${productIdSearch}`);
         }
       });
     },

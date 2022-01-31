@@ -103,10 +103,12 @@ export default {
       // Info box Decrememnt button
       if (this.quan > 1) return this.quan--;
     },
-    addtoCart(product, id) {
+    addtoCart(product) {
       // Info box Add to cart button
+      //console.log(this.quan);
+
       for (var i = 0; i < this.quan; i++) {
-        this.$store.dispatch('addCart', product, id);
+        this.$store.dispatch('addCart', product);
       }
     },
   },

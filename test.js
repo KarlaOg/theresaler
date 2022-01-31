@@ -34,4 +34,35 @@ const purchaseItemId = arr
 //   .split('/')
 //   .pop();
 
-console.log(purchaseItemId);
+// console.log(purchaseItemId);
+
+const arr2 = [
+  {
+    id: 198,
+    product: '/api/products/7',
+    productName: 'Enormous Concrete Keyboard',
+    productPrice: 79,
+    purchase: null,
+    productId: 7,
+  },
+  {
+    id: 199,
+    product: '/api/products/7',
+    productName: 'Enormous Concrete Keyboard',
+    productPrice: 79,
+    purchase: null,
+    productId: 7,
+  },
+];
+
+// const searchId = arr2.find(
+//     (element) => element === product
+//   );
+const test = arr2.every(function (element, index, array) {
+  //   console.log('élément :', element);
+  console.log(element.id);
+  if (element.productId[0] === 7) {
+    return element.id;
+  }
+});
+console.log(test);

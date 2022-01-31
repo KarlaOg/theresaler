@@ -31,6 +31,8 @@ class PurchaseItem
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"purchaseItem:read"})
+
      */
     private $id;
 
@@ -110,5 +112,13 @@ class PurchaseItem
         $this->productPrice = $productPrice;
 
         return $this;
+    }
+
+    /**
+     * @Groups({"purchaseItem:read"})
+     */
+    public function getProductId()
+    {
+        return $this->getProduct()->getId();
     }
 }

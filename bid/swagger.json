@@ -1,0 +1,14 @@
+{
+  "swagger":"2.0",
+  "info":{
+    "title": "Bid API",
+    "version": "v0"
+  }, 
+  "paths":{
+    "/":{
+      "get":{
+        
+      }
+    }
+  }
+}

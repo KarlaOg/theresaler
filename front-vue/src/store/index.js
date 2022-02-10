@@ -4,7 +4,7 @@ import axios from 'axios';
 import ProductService from '../services/ProductService';
 import UserService from '../services/UserService';
 import jwt_decode from 'jwt-decode';
-
+import { sendEmailRegister } from '../services/sendEmailRegister';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -123,10 +123,12 @@ export default new Vuex.Store({
           commit('SET_USER_DATA', data);
         });
     },
+
     register({ commit, dispatch }, credentials) {
       return axios
         .post('//localhost/api/users', credentials)
         .then(({ data }) => {
+          sendEmailRegister(data.email, data.firstname);
           commit('SET_REGISTRATION_DATA', data);
           const notification = {
             type: 'success',

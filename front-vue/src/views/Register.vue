@@ -1,10 +1,13 @@
 <template>
   <div class="container min-heigh">
     <h1>Register</h1>
+    <button @click="magic(), copyEmail()" class="btn btn-info btn-sm mb-3">
+      Click on magic 🪄
+    </button>
     <div class="d-flex">
       <form @submit.prevent="register">
         <label for="email"> Email: </label>
-        <input v-model="email" type="email" name="email" value />
+        <input v-model="email" type="email" name="email" value ref="myEmail" />
 
         <label for="firstname">firstname: </label>
         <input v-model="firstname" type="text" name="firstname" value />
@@ -19,7 +22,7 @@
             {{ err.message }}
           </li>
         </ul>
-        <button type="submit" name="button" class="btn">Register</button>
+        <button type="submit" name="button" class="btn0">Register</button>
 
         <router-link to="/login"> Have an account? Login. </router-link>
       </form>
@@ -38,7 +41,29 @@ export default {
       errors: null,
     };
   },
+
   methods: {
+    magic() {
+      var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+      var string = '';
+      for (var i = 0; i < 15; i++) {
+        string += chars[Math.floor(Math.random() * chars.length)];
+      }
+      this.firstname = 'Jean';
+      this.lastname = 'Dupont';
+      this.email = `${string}@gmail.com`;
+      this.password = 'password';
+    },
+    async copyEmail() {
+      await this.magic();
+      const copyText = this.$refs.myEmail;
+      copyText.select();
+      document.execCommand('copy');
+      alert(`
+       Email "${copyText.value}" copied!
+       Your password is "password"
+       `);
+    },
     register() {
       this.$store
         .dispatch('register', {
@@ -83,7 +108,7 @@ input[type='password']:focus {
 }
 
 /* Set a style for the submit/register button */
-.btn {
+.btn0 {
   background-color: black;
   color: white;
   padding: 16px 20px;
@@ -94,7 +119,7 @@ input[type='password']:focus {
   opacity: 0.9;
 }
 
-.btn:hover {
+.btn0:hover {
   opacity: 1;
 }
 

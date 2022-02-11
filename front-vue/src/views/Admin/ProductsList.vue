@@ -112,7 +112,7 @@ export default {
 }
 
 img {
-  object-fit: contain;
+  object-fit: cover;
   height: 100px;
 }
 </style>

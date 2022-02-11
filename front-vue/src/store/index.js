@@ -5,6 +5,7 @@ import ProductService from '../services/ProductService';
 import UserService from '../services/UserService';
 import jwt_decode from 'jwt-decode';
 import { sendEmailRegister } from '../services/sendEmailRegister';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,8 +15,8 @@ export default new Vuex.Store({
     admin: false,
     loading: true,
     cartProducts: JSON.parse(localStorage.getItem('cart')) || [],
+
     products: [],
-    productItems: [],
     notifications: [],
     userInfo: null,
     product: {},
@@ -34,20 +35,26 @@ export default new Vuex.Store({
     },
 
     productsNumber(state) {
-      return state.cartProducts.length;
+      return state.cartProducts
+        .map((e) => e.quantity)
+        .reduce(
+          (accumulator, currentElement) => accumulator + currentElement,
+          0
+        );
     },
 
     getProductById: (state) => (id) => {
       return state.products.find((product) => product.id === id);
     },
+
     totalPrice(state) {
-      if (state.cartProducts.length != 0) {
-        return state.cartProducts.reduce((a, b) => {
-          return parseInt(b.price) == null
-            ? parseInt(a)
-            : parseInt(a) + parseInt(b.price);
-        }, 0);
-      }
+      return state.cartProducts
+        .map((e) => e.price * e.quantity)
+        .reduce(
+          (accumulator, currentElement) =>
+            parseInt(accumulator + currentElement),
+          0
+        );
     },
   },
 
@@ -84,9 +91,7 @@ export default new Vuex.Store({
     SET_PRODUCTS(state, product) {
       state.products = product;
     },
-    SET_PRODUCT_ITEMS(state, productItem) {
-      state.productItems = productItem;
-    },
+
     SET_PRODUCT(state, product) {
       state.product = product;
     },
@@ -95,7 +100,29 @@ export default new Vuex.Store({
       return state.products.splice(index, 1);
     },
     ADD_CART(state, product) {
-      return state.cartProducts.push(product);
+      const pdt = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        brand: product.brand,
+        description: product.description,
+        mainPicture: product.mainPicture,
+        quantity: product.quantity,
+        totalPrice: product.totalPrice,
+      };
+      const indexItem = state.cartProducts.findIndex(
+        (x) => x.id === product.id
+      );
+      if (indexItem >= 0) {
+        state.cartProducts[indexItem].quantity += 1;
+        state.cartProducts[indexItem].totalPrice += 1 * pdt.price;
+      } else {
+        pdt.quantity = 1;
+        pdt.totalPrice = pdt.price;
+        state.cartProducts.push(pdt);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
     },
     REMOVE_CART(state, n) {
       let index = state.cartProducts.findIndex((x) => x.id === n);
@@ -194,6 +221,7 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+
     editProduct({ commit, dispatch }, product) {
       return axios
         .put(`//localhost/api/products/${product.id}`, product, {
@@ -211,6 +239,7 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+
     deleteProduct({ commit, dispatch }, product) {
       commit('DELETE_PRODUCT', product);
       const notification = {
@@ -224,42 +253,69 @@ export default new Vuex.Store({
     addNotification({ commit }, notification) {
       commit('PUSH_NOTIFICATION', notification);
     },
+
     removeNotification({ commit }, notificationToRemove) {
       commit('DELETE_NOTIFICATION', notificationToRemove);
     },
 
-    addCart({ commit }, product) {
+    addCart({ commit, state }, product) {
+      const productId = state.cartProducts.find((d) => d.id === product.id);
       commit('ADD_CART', product);
-      //   let pdtId = this.state.cartProducts.map((pdt) => pdt.id);
-      localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
-      //   return axios.post('//localhost/api/purchase_items', data).then(({ pdt }) => {
-      //     commit('ADD_CART', product);
+      if (productId === undefined) {
+        return axios
+          .post('//localhost/api/purchase_items', {
+            product: `/api/products/${product.id}`,
+            productName: product.name,
+            productPrice: product.price,
+            total: product.price,
+            quantity: 1,
+          })
+          .then(function (reponse) {
+            const id = reponse.data.id;
+            const itemIndex = state.cartProducts.findIndex(
+              (x) => x.id === product.id
+            );
+            state.cartProducts[itemIndex].purchaseId = id;
 
-      //   });
-    },
-    removeCart({ commit }, product) {
-      commit('REMOVE_CART', product);
-      localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
-    },
-
-    delivery({ commit, dispatch }, data) {
-      return axios.post('//localhost/api/purchases', data).then(({ pdt }) => {
-        commit('SET_DELIVERY_DATA', pdt);
-        const notification = {
-          type: 'success',
-          message: 'Your account have been created. Login !',
-        };
-        dispatch('addNotification', notification, { root: true });
-      });
-    },
-
-    confirmCart({ commit }, product) {
-      return axios
-        .post('//localhost/api/purchase_items', product)
-        .then(({ data }) => {
-          console.log(data);
-          commit('SET_PRODUCT_ITEMS', data);
+            localStorage.setItem('cart', JSON.stringify(state.cartProducts));
+          });
+      } else {
+        const purchaseId = state.cartProducts.find(
+          (d) => d.id === product.id
+        ).purchaseId;
+        const total = state.cartProducts.find(
+          (d) => d.id === product.id
+        ).totalPrice;
+        const quantity = state.cartProducts.find(
+          (d) => d.id === product.id
+        ).quantity;
+        return axios.put(`//localhost/api/purchase_items/${purchaseId}`, {
+          product: `/api/products/${product.id}`,
+          productName: state.cartProducts.name,
+          productPrice: state.cartProducts.price,
+          total: total,
+          quantity: quantity,
         });
+      }
     },
+
+    removeCart({ state, commit }, product) {
+      const purchaseId = state.cartProducts.find((d) => d.id === product);
+      commit('REMOVE_CART', product);
+      axios.delete(`//localhost/api/purchase_items/${purchaseId.purchaseId}`);
+
+      localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
+    },
+
+    // delivery({ commit, dispatch }, data) {
+    //   return axios.post('//localhost/api/purchases', data).then(({ pdt }) => {
+    //     commit('SET_DELIVERY_DATA', pdt);
+    //     const notification = {
+    //       type: 'success',
+    //       message: 'Your account have been created. Login !',
+    //     };
+    //     dispatch('addNotification', notification, { root: true });
+    //   });
+    // },
   },
 });

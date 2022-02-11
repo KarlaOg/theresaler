@@ -23,7 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "get",
  * },
  *  itemOperations={
- *     "get",
+ *     "get"={ "normalization_context"={"groups"={"product:read","product:write"}},
+ *       },
  *     "put"={
  *          "access_control"="is_granted('ROLE_ADMIN')",
 
@@ -41,7 +42,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"product:read"})
+     * @Groups("product:read")
      */
     private $id;
 
@@ -64,7 +65,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The stock of the product is mandatory")
-     * @Groups({"product:write","purchaseItem:item:get", "admin:product_read"})
+     * @Groups({"product:write","admin:product_read","purchaseItem:item:get","product:read"})
      */
     private $stock;
 
@@ -91,13 +92,13 @@ class Product
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"product:read","product:write", "purchaseItem:item:get"})
+     * @Groups({"admin:product_read","product:write", "purchaseItem:item:get",})
      */
     private $date;
 
     /**
      * @ORM\OneToMany(targetEntity=PurchaseItem::class, mappedBy="product", orphanRemoval=true)
-     * @Groups({"admin:product_read"})
+     * @Groups({"purchaseItem:read", "purchaseItem:item:get"})
      */
     private $purchaseItems;
 

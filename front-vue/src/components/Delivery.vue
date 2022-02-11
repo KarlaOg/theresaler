@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Confirm your purchase</h1>
+    <h1 class="text-center">Confirm your purchase 📦</h1>
     <div class="d-flex">
       <form @submit.prevent="delivery">
         <label for="fullName">Full name: </label>

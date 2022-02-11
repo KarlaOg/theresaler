@@ -102,9 +102,9 @@ export default {
           name: this.name,
           description: this.description,
           brand: this.brand,
-          price: this.price,
+          price: parseInt(this.price),
           mainPicture: this.mainPicture,
-          salesType: this.salesType,
+          salesType: Boolean(this.salesType),
           date: this.date,
           stock: parseInt(this.stock),
         })

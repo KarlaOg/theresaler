@@ -18,6 +18,7 @@
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.6",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1"
   }

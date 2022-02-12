@@ -201,6 +201,9 @@
     "react/promise": {
         "version": "v2.8.0"
     },
+    "stripe/stripe-php": {
+        "version": "v7.112.0"
+    },
     "symfony/asset": {
         "version": "v5.4.0"
     },

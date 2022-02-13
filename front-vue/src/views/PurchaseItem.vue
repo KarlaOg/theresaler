@@ -93,15 +93,8 @@ export default {
     removeProduct(id) {
       this.$store.dispatch('removeCart', id);
     },
-    inc() {
-      //   this.$store.commit('INC_CART', id);
-      //console.log(localStorage.getItem('cart'));
-    },
-    dec() {
-      // Info box Decrememnt button
-      //   console.log(this.$store.state.cartProducts);
-      //   return this.product.quantity - 1;
-    },
+    inc() {},
+    dec() {},
   },
 };
 </script>

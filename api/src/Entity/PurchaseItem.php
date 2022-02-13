@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  itemOperations={
  *     "put",
  *     "get"={
- *          "normalization_context"={"groups"={"purchaseItem:read","purchaseItem:item:get"}},
+ *          "normalization_context"={"groups"={"purchaseItem:item:get", "purchaseItem:read"}},
  *          },
  *     "delete"
  *
@@ -36,49 +36,49 @@ class PurchaseItem
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read"})
+     * @Groups("purchaseItem:read")
 
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="purchaseItems")
-     * @Groups({"purchaseItem:read","purchase:item:get", "purchaseItem:write"})
      * @Assert\NotBlank(message="The product is mandatory")
+     * @Groups({"purchaseItem:read","purchase:read", "purchaseItem:write","purchases_subresources"})
      */
     private $product;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The product name is mandatory")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write"})
      */
     private $productName;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The product price is mandatory")
-     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write","purchase:item:get"})
+     * @Groups({"purchaseItem:read","purchaseItem:write", "purchase:write"})
      */
     private $productPrice;
 
     /**
      * @ORM\ManyToOne(targetEntity=Purchase::class, inversedBy="purchaseItems")
-     * @Groups({"purchaseItem:read", "purchase:item:get"})
+     * @Groups({"purchaseItem:read", "purchase:read"})
      */
     private $purchase;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"purchaseItem:read", "purchaseItem:write"})
      * @Assert\NotBlank(message="The product total is mandatory")
+     * @Groups({"purchaseItem:read", "purchaseItem:write", "purchases_subresources","purchase:read"})
      */
     private $total;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The product quantity is mandatory")
-     * @Groups({"purchaseItem:read", "purchaseItem:write"})
+     * @Groups({"purchaseItem:read", "purchaseItem:write", "purchases_subresources","purchase:read"})
      */
     private $quantity;
 
@@ -136,7 +136,7 @@ class PurchaseItem
     }
 
     /**
-     * @Groups({"purchaseItem:read"})
+     * @Groups("purchaseItem:read")
      */
     public function getProductId()
     {

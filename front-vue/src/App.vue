@@ -30,6 +30,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #000000;
 }
+* {
+  outline: none;
+}
 
 a,
 a:hover {

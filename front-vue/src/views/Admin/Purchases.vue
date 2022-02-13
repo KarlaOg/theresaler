@@ -7,14 +7,15 @@
     >
       <h4 style="margin-left: 9rem; margin-right: 9rem">Loading data ...</h4>
     </div>
-    <div v-else class="container m-3">
-      <h3 class="mb-2">My purchase</h3>
+    <div class="container m-3">
+      <h3 class="mb-2">All purchase</h3>
       <div
-        v-for="(p, index) in purchase"
+        v-for="(p, index) in purchases"
         :key="index"
         class="card mt-2 mb-3 p-3"
       >
         <h4>Purchase # {{ index + 1 }}</h4>
+        <p>USER: {{ p.userPurchase }}</p>
         <p>Full name : {{ p.fullName }}</p>
         <p>Address : {{ p.address }}</p>
         <p>Postal code : {{ p.postalCode }}</p>
@@ -44,25 +45,43 @@
           </div>
         </div>
       </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <template v-if="page != 1">
+          <router-link
+            :to="{ name: 'Purchases', query: { page: page - 1 } }"
+            rel="prev"
+            ><b class="breadcrumb">Prev Page</b></router-link
+          >
+        </template>
+        <template v-if="purchases.length > 30">
+          <router-link :to="{ name: 'Purchases', query: { page: page + 1 } }"
+            ><b class="breadcrumb">Next Page</b></router-link
+          >
+        </template>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from '@/components/Admin/Sidebar.vue';
 import { mapState } from 'vuex';
 
 export default {
   components: {
     Sidebar,
   },
-
-  computed: {
-    ...mapState(['userInfo', 'purchase', 'loading']),
-  },
-
+  name: 'Purchases',
   created() {
-    this.$store.dispatch('fetchPurchase');
+    this.$store.dispatch('fetchPurchases', {
+      page: this.page,
+    });
+  },
+  computed: {
+    page() {
+      return parseInt(this.$route.query.page) || 1;
+    },
+    ...mapState(['userInfo', 'purchases', 'loading']),
   },
 };
 </script>

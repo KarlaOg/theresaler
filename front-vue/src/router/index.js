@@ -11,6 +11,7 @@ import PurchaseItem from '../views/PurchaseItem.vue';
 import Error from '../views/Error.vue';
 import ProductCreate from '../views/Admin/ProductCreate.vue';
 import ProductEdit from '../views/Admin/ProductEdit.vue';
+import Purchases from '../views/Admin/Purchases.vue';
 import UsersList from '../views/Admin/UsersList.vue';
 import ProductsList from '../views/Admin/ProductsList.vue';
 import { getAdminRole } from '@/services/auth';
@@ -61,12 +62,12 @@ const routes = [
     component: Dashboard,
     meta: { requiresAuth: true },
   },
-    {
-      path: '/my-purhcase',
-      name: 'MyPurchase',
-      component: MyPurchase,
-      meta: { requiresAuth: true },
-    },
+  {
+    path: '/my-purchase',
+    name: 'MyPurchase',
+    component: MyPurchase,
+    meta: { requiresAuth: true },
+  },
   {
     path: '/admin/create-product',
     name: 'ProductCreate',
@@ -90,6 +91,12 @@ const routes = [
     path: '/admin/list-users',
     name: 'UsersList',
     component: UsersList,
+    meta: { requiresAdmin: true, requiresAuth: true },
+  },
+  {
+    path: '/admin/purchases',
+    name: 'Purchases',
+    component: Purchases,
     meta: { requiresAdmin: true, requiresAuth: true },
   },
   {

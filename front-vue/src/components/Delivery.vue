@@ -35,10 +35,14 @@ export default {
       address: '',
       postalCode: '',
       city: '',
+      total: parseInt(this.$store.getters.totalPrice),
+      status: 'PENDING',
+      purchasedAt: new Date().toISOString(),
+      purchaseItems: this.$store.getters.getPurchaseId,
       errors: null,
-      
     };
   },
+
   methods: {
     delivery() {
       this.$store
@@ -47,9 +51,13 @@ export default {
           address: this.address,
           postalCode: this.postalCode,
           city: this.city,
+          total: this.total,
+          status: this.status,
+          purchasedAt: this.purchasedAt,
+          purchaseItems: this.purchaseItems,
         })
         .then(() => {
-          this.$router.push({ name: '/purchase' });
+          this.$router.push({ name: 'Purchase' });
         })
         .catch((err) => {
           this.errors = err.response.data.violations;

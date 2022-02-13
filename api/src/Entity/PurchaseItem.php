@@ -15,7 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  normalizationContext={"groups"={"purchaseItem:read"} },
  *  denormalizationContext={"groups"={"purchaseItem:write"} },
  *  collectionOperations={
- *     "get",
+ *     "get"={
+ * },
  *     "post",
  * },
  *  itemOperations={

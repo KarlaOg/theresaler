@@ -22,7 +22,7 @@ export default new Vuex.Store({
     purchase: {},
     notifications: [],
     userInfo: null,
-    delivery: [],
+    delivery: JSON.parse(localStorage.getItem('delivery')) || [],
   },
 
   getters: {
@@ -352,6 +352,7 @@ export default new Vuex.Store({
         .post('//localhost/api/purchases', del)
         .then(({ data }) => {
           commit('SET_DELIVERY', data);
+          localStorage.setItem('delivery', JSON.stringify(this.state.delivery));
         })
         .catch((error) => {
           const notification = {

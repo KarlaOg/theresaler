@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 
 /**
@@ -20,12 +21,18 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *  normalizationContext={"groups"={"user:read"} },
  *  denormalizationContext={"groups"={"user:write"} },
  *  collectionOperations={
- *     "get",
- *     "post",
- * },
- *  itemOperations={
  *     "get"={
  *         "access_control"="is_granted('ROLE_ADMIN')",
+ *     },
+ *     "post",
+ * },
+ * subresourceOperations={
+ *         "purchases_get_subresource"={"path"="/users/{id}/purcharse"},
+ * },
+ *
+ *  itemOperations={
+ *     "get"={
+ *          "access_control"="is_granted('VIEW_USER', previous_object)",
  *          "normalization_context"={"groups"={"user:read","user:item:get"}},
  *          },
  *     "put"={
@@ -53,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="The email must be filled in")
      * @Assert\Email(message="The email must have a valid format")
-     * @Groups({"user:read","user:write", "purchase:item:get", "purchase:write"})
+     * @Groups({"user:read","user:write", "purchase:read", "purchase:write"})
      */
     private $email;
 
@@ -75,7 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Last name must be provided")
      * @Assert\Length(min=2, minMessage="Last name must be at least 2 characters")
-     * @Groups({"user:read","user:write", "purchase:item:get"})
+     * @Groups({"user:read","user:write", "purchase:read"})
      */
     private $lastname;
 
@@ -83,7 +90,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The name must be entered")
      * @Assert\Length(min=2, minMessage="First name must be at least 2 characters")
-     * @Groups({"user:read","user:write", "purchase:item:get"})
+     * @Groups({"user:read","user:write", "purchase:read"})
      */
     private $firstname;
 
@@ -91,6 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="userPurchase", cascade={"persist"})
      * @Groups({"user:read", "user:write"})
+     * @ApiSubresource
      */
     private $purchases;
 

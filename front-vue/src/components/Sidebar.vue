@@ -17,7 +17,7 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="/my-purhcase">
+        <router-link to="/my-purchase">
           <v-list-item dense nav>
             <v-list-item-content link>
               <v-list-item-title>Purchase</v-list-item-title>

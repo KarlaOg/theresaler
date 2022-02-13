@@ -25,20 +25,13 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <!-- <router-link to="/">
+        <router-link to="/admin/purchases">
           <v-list-item dense nav>
             <v-list-item-content link>
-              <v-list-item-title>User sales</v-list-item-title>
+              <v-list-item-title>Purchases</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
-        <router-link to="/">
-          <v-list-item dense nav>
-            <v-list-item-content link>
-              <v-list-item-title>Purchase</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </router-link> -->
       </v-list>
     </v-navigation-drawer>
   </v-card>

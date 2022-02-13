@@ -5,6 +5,7 @@ import ProductService from '../services/ProductService';
 import UserService from '../services/UserService';
 import jwt_decode from 'jwt-decode';
 import { sendEmailRegister } from '../services/sendEmailRegister';
+import PurchaseService from '../services/PurchaseService';
 
 Vue.use(Vuex);
 
@@ -15,11 +16,12 @@ export default new Vuex.Store({
     admin: false,
     loading: true,
     cartProducts: JSON.parse(localStorage.getItem('cart')) || [],
-
     products: [],
+    product: {},
+    purchases: [],
+    purchase: {},
     notifications: [],
     userInfo: null,
-    product: {},
     delivery: [],
   },
 
@@ -91,9 +93,14 @@ export default new Vuex.Store({
     SET_PRODUCTS(state, product) {
       state.products = product;
     },
-
     SET_PRODUCT(state, product) {
       state.product = product;
+    },
+    SET_PURCHASE(state, purchase) {
+      state.purchase = purchase;
+    },
+    SET_PURCHASES(state, purchase) {
+      state.purchases = purchase;
     },
     DELETE_PRODUCT(state, product) {
       let index = state.products.findIndex((x) => x.id === product);
@@ -276,7 +283,6 @@ export default new Vuex.Store({
               (x) => x.id === product.id
             );
             state.cartProducts[itemIndex].purchaseId = id;
-
             localStorage.setItem('cart', JSON.stringify(state.cartProducts));
           });
       } else {
@@ -303,19 +309,37 @@ export default new Vuex.Store({
       const purchaseId = state.cartProducts.find((d) => d.id === product);
       commit('REMOVE_CART', product);
       axios.delete(`//localhost/api/purchase_items/${purchaseId.purchaseId}`);
-
       localStorage.setItem('cart', JSON.stringify(this.state.cartProducts));
     },
 
-    // delivery({ commit, dispatch }, data) {
-    //   return axios.post('//localhost/api/purchases', data).then(({ pdt }) => {
-    //     commit('SET_DELIVERY_DATA', pdt);
-    //     const notification = {
-    //       type: 'success',
-    //       message: 'Your account have been created. Login !',
-    //     };
-    //     dispatch('addNotification', notification, { root: true });
-    //   });
-    // },
+    fetchPurchases({ commit, dispatch }) {
+      return PurchaseService.getPurchases()
+        .then(({ data }) => {
+          commit('SET_PURCHASES', data);
+          commit('SET_LOADING', false);
+        })
+        .catch((err) => {
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetch' + err.message,
+          };
+          dispatch('addNotification', notification, { root: true });
+        });
+    },
+
+    fetchPurchase({ commit, dispatch, state }) {
+      return PurchaseService.getPurchase(state.userInfo.id)
+        .then(({ data }) => {
+          commit('SET_PURCHASE', data);
+          commit('SET_LOADING', false);
+        })
+        .catch((error) => {
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching products: ' + error.message,
+          };
+          dispatch('addNotification', notification, { root: true });
+        });
+    },
   },
 });

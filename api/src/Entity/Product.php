@@ -50,7 +50,7 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Product name is required")
      * @Assert\Length(min=3, max=255, minMessage="The product name must have at least 3 characters!")
-     * @Groups({"product:read","product:write","purchaseItem:item:get"})
+     * @Groups({"product:read","product:write","purchaseItem:item:get","purchases_subresources","purchase:read"})
      */
     private $name;
 
@@ -58,7 +58,7 @@ class Product
      * @ORM\Column(type="text")
      *  @Assert\NotBlank(message="The short description is mandatory")
      *  @Assert\Length(min=20, minMessage="The short description must still be at least 20 characters")
-     * @Groups({"product:read","product:write","purchaseItem:item:get"})
+     * @Groups({"product:read","product:write","purchaseItem:item:get","purchases_subresources",  "purchase:read"})
      */
     private $description;
 
@@ -73,26 +73,26 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="The brand name is mandatory")
      * @Assert\Length(min=3, max=255, minMessage="The brand name must have at least 3 characters")
-     * @Groups({"product:read","product:write","purchaseItem:item:get"})
+     * @Groups({"product:read","product:write","purchaseItem:item:get","purchases_subresources", "purchase:read"})
      */
     private $brand;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"product:write", "admin:product_read", "purchaseItem:item:get"})
+     * @Groups({"product:write", "admin:product_read", "purchaseItem:item:get","purchase:read"})
      */
     private $salesType;
 
     /**
      * @ORM\Column(type="string", length=100000)
      * @Assert\NotBlank(message="Main photo is required")
-     * @Groups({"product:read","product:write", "purchaseItem:item:get"})
+     * @Groups({"product:read","product:write", "purchaseItem:item:get","purchases_subresources","purchase:read"})
      */
     private $mainPicture;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"admin:product_read","product:write", "purchaseItem:item:get",})
+     * @Groups({"admin:product_read","product:write", "purchaseItem:item:get","purchases_subresources", "purchase:read"})
      */
     private $date;
 
@@ -105,7 +105,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="The price of the product is binding")
-     * @Groups({"product:read","product:write", "purchaseItem:item:get"})
+     * @Groups({"product:read","product:write", "purchaseItem:item:get","purchases_subresources", "purchase:read"})
      */
     private $price;
 

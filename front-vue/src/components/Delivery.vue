@@ -36,6 +36,7 @@ export default {
       postalCode: '',
       city: '',
       errors: null,
+      
     };
   },
   methods: {
@@ -48,7 +49,7 @@ export default {
           city: this.city,
         })
         .then(() => {
-          this.$router.push({ name: '/' });
+          this.$router.push({ name: '/purchase' });
         })
         .catch((err) => {
           this.errors = err.response.data.violations;

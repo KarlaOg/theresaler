@@ -22,7 +22,7 @@ export default new Vuex.Store({
     purchase: {},
     notifications: [],
     userInfo: null,
-    delivery: [],
+    delivery: JSON.parse(localStorage.getItem('delivery')) || [],
   },
 
   getters: {
@@ -47,6 +47,11 @@ export default new Vuex.Store({
 
     getProductById: (state) => (id) => {
       return state.products.find((product) => product.id === id);
+    },
+    getPurchaseId: (state) => {
+      return state.cartProducts.map(
+        (e) => `/api/purchase_items/${e.purchaseId}`
+      );
     },
 
     totalPrice(state) {
@@ -80,7 +85,7 @@ export default new Vuex.Store({
     SET_REGISTRATION_DATA(state, userData) {
       state.user = userData;
     },
-    SET_DELIVERY_DATA(state, del) {
+    SET_DELIVERY(state, del) {
       state.delivery = del;
     },
     CLEAR_USER_DATA() {
@@ -332,6 +337,22 @@ export default new Vuex.Store({
         .then(({ data }) => {
           commit('SET_PURCHASE', data);
           commit('SET_LOADING', false);
+        })
+        .catch((error) => {
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching products: ' + error.message,
+          };
+          dispatch('addNotification', notification, { root: true });
+        });
+    },
+
+    delivery({ commit, dispatch }, del) {
+      return axios
+        .post('//localhost/api/purchases', del)
+        .then(({ data }) => {
+          commit('SET_DELIVERY', data);
+          localStorage.setItem('delivery', JSON.stringify(this.state.delivery));
         })
         .catch((error) => {
           const notification = {

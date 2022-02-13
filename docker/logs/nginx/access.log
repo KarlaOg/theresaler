@@ -806,8 +806,6 @@
 172.24.0.1 - - [01/Feb/2022:19:46:41 +0000] "POST /api/purchase_items HTTP/1.1" 422 489 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 172.24.0.1 - - [01/Feb/2022:19:46:42 +0000] "OPTIONS /api/purchase_items HTTP/1.1" 200 31 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 172.24.0.1 - - [01/Feb/2022:19:46:42 +0000] "POST /api/purchase_items HTTP/1.1" 422 489 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
-<<<<<<< HEAD
-=======
 172.18.0.1 - - [30/Jan/2022:21:34:35 +0000] "GET / HTTP/1.1" 404 9362 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 172.18.0.1 - - [30/Jan/2022:21:34:35 +0000] "GET /favicon.ico HTTP/1.1" 404 27496 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 172.18.0.1 - - [30/Jan/2022:21:34:45 +0000] "GET /api HTTP/1.1" 200 5019 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
@@ -1532,4 +1530,4 @@
 172.18.0.1 - - [15/Feb/2022:01:26:22 +0000] "GET /favicon.ico HTTP/1.1" 404 41444 "http://localhost/api" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
 172.18.0.1 - - [15/Feb/2022:01:26:52 +0000] "GET /api/products/1 HTTP/1.1" 200 492 "http://localhost/api" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
 172.18.0.1 - - [15/Feb/2022:01:33:00 +0000] "GET /api/users/2/purcharse HTTP/1.1" 200 1788 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
->>>>>>> 9055051 (Fetch from API BET)
+

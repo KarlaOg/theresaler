@@ -16,6 +16,7 @@ export default new Vuex.Store({
     admin: false,
     loading: true,
     cartProducts: JSON.parse(localStorage.getItem('cart')) || [],
+
     products: [],
     product: {},
     purchases: [],

@@ -14,10 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Bid.init({
-    priceOffer: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Bid',
-  });
+    priceOffer: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    productId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    idBidValidated: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+  },
+    {
+      sequelize,
+      modelName: 'Bid',
+    });
   return Bid;
 };

@@ -10,7 +10,7 @@ const bids = [...Array(10)].map((bid) => (
 ))
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInscd ert('Bids', bids,{});
+    await queryInterface.bulkInsert('Bids', bids,{});
 
   },
 

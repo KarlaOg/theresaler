@@ -48,11 +48,6 @@ export default new Vuex.Store({
     getProductById: (state) => (id) => {
       return state.products.find((product) => product.id === id);
     },
-    getPurchaseId: (state) => {
-      return state.cartProducts.map(
-        (e) => `/api/purchase_items/${e.purchaseId}`
-      );
-    },
 
     totalPrice(state) {
       return state.cartProducts

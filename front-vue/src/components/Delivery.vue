@@ -38,7 +38,9 @@ export default {
       total: parseInt(this.$store.getters.totalPrice),
       status: 'PENDING',
       purchasedAt: new Date().toISOString(),
-      purchaseItems: this.$store.getters.getPurchaseId,
+      purchaseItems: this.$store.state.cartProducts.map(
+        (e) => `/api/purchase_items/${e.purchaseId}`
+      ),
       errors: null,
     };
   },

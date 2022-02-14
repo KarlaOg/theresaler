@@ -63,8 +63,7 @@ class AppFixtures extends Fixture
                 ->setPrice($faker->randomNumber(2))
                 ->setStock($faker->randomNumber(2))
                 ->setDate($faker->dateTime())
-                ->setMainPicture($faker->avatar("$p", '300x300', 'jpg', "set$p", 'bg2'))
-                ->setSalesType($faker->boolean());
+                ->setMainPicture($faker->avatar("$p", '300x300', 'jpg', "set$p", 'bg2'));
 
 
             $products[] = $product;

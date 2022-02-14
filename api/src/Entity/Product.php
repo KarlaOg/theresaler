@@ -77,11 +77,7 @@ class Product
      */
     private $brand;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"product:write", "admin:product_read", "purchaseItem:item:get","purchase:read"})
-     */
-    private $salesType;
+
 
     /**
      * @ORM\Column(type="string", length=100000)
@@ -170,17 +166,7 @@ class Product
         return $this;
     }
 
-    public function getSalesType(): ?bool
-    {
-        return $this->salesType;
-    }
 
-    public function setSalesType(bool $salesType): self
-    {
-        $this->salesType = $salesType;
-
-        return $this;
-    }
 
     public function getMainPicture(): ?string
     {

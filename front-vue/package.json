@@ -9,6 +9,7 @@
     "start": "vue-cli-service serve --open"
   },
   "dependencies": {
+    "@vue-stripe/vue-stripe": "^4.4.1",
     "core-js": "^3.6.5",
     "jwt-decode": "^3.1.2",
     "vue": "^2.6.11",

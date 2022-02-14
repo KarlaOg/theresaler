@@ -1,16 +1,19 @@
 'use strict';
 const { faker } = require('@faker-js/faker');
 
-const bids = [...Array(10)].map((bid) => (
+const bets = [...Array(10)].map((bet) => (
   {
-    priceOffer: faker.commerce.price(),
+    priceOffer: faker.datatype.number(),
+    userId : faker.datatype.number(),
+    productId: faker.datatype.number(),
+    isBetValidated : faker.datatype.boolean(),
     createdAt: new Date(),
     updatedAt: new Date()
   }
 ))
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Bids', bids,{});
+    await queryInterface.bulkInsert('Bets', bets,{});
 
   },
 

@@ -29,12 +29,7 @@
             class="form-control"
           />
 
-          <label>Sales Type ?</label>
-          <select v-model="product.salesType" class="form-control">
-            <option value="true">True</option>
-            <option value="false">False</option>
-          </select>
-          <label>stock</label>
+          <label>Stock</label>
           <input
             v-model="product.stock"
             type="number"
@@ -103,7 +98,6 @@ export default {
           brand: this.product.brand,
           price: parseInt(this.product.price),
           mainPicture: this.product.mainPicture,
-          salesType: Boolean(this.product.salesType),
           stock: parseInt(this.product.stock),
           id: this.id,
         })

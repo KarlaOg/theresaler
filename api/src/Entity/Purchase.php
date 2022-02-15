@@ -17,18 +17,18 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  * @ApiResource(
  *  collectionOperations={
  *     "get"={
- *  "access_control"="is_granted('ROLE_ADMIN')",
+ *         "access_control"="is_granted('ROLE_ADMIN')",
+ *
  *          },
- *     "post"={"access_control"="is_granted('ROLE_USER')"},
+ *     "post"={
+ *          "access_control"="is_granted('ROLE_USER')",
  * },
  * },
  *  subresourceOperations={
  *     "api_users_purchases_get_subresource"={
  *           "normalization_context"={"groups"={"purchases_subresources"}},
-
  *      }
  * },
-
  *  itemOperations={
  *     "get"={
  *          "normalization_context"={"groups"={"purchase:read","purchase:item:get"}},

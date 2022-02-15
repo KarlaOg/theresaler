@@ -38,8 +38,9 @@
               ADD TO CART
             </button>
             <br /><br /><br />
-            <div>
-              <div class="row g-3 align-items-center">
+
+            <div v-if="userId != null">
+              <div class="row g-3 align-items-center" >
                 <div class="col-auto">
                   <label for="inputPassword6" class="col-form-label"
                     >Make a bet</label
@@ -53,7 +54,7 @@
                     v-model="priceOffer"
                   />
                 </div>
-                <div class="col-auto">
+                <div class="col-auto" >
                   <button
                     :class="[
                       product.stock <= 0 ? 'button-disable' : 'button-dark',
@@ -132,13 +133,12 @@ export default {
   computed: mapState({
     product: (state) => state.product,
   }),
-  breforeMount() {
-    this.methods.decodeJWT();
-  },
   created() {
     this.fetchProduct(this.id);
-    this.methods.decodeJWT();
   },
+  mounted(){
+    this.decodeJWT();
+  }
 };
 </script>
 

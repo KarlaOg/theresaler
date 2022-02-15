@@ -13,6 +13,8 @@ import Error from '../views/Error.vue';
 import ProductCreate from '../views/Admin/ProductCreate.vue';
 import ProductEdit from '../views/Admin/ProductEdit.vue';
 import Purchases from '../views/Admin/Purchases.vue';
+import Bets from '../views/Admin/Bets.vue';
+
 import UsersList from '../views/Admin/UsersList.vue';
 import ProductsList from '../views/Admin/ProductsList.vue';
 import { getAdminRole } from '@/services/auth';
@@ -104,6 +106,12 @@ const routes = [
     path: '/admin/purchases',
     name: 'Purchases',
     component: Purchases,
+    meta: { requiresAdmin: true, requiresAuth: true },
+  },
+  {
+    path: '/admin/bets/:id',
+    name: 'Bets',
+    component: Bets,
     meta: { requiresAdmin: true, requiresAuth: true },
   },
   {

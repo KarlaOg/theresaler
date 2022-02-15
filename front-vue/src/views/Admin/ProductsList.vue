@@ -24,6 +24,15 @@
             >
               <button class="btn btn-info">Edit</button>
             </router-link>
+
+            <router-link :to="{ name: 'Bets',params: { id: product.id } }">
+              <button
+                @click="getBetsByProductId(product.id)"
+                class="btn btn-info"
+              >
+                Bet
+              </button>
+            </router-link>
           </div>
           <div class="card mt-2 mb-3">
             <img
@@ -62,8 +71,8 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Admin/Sidebar.vue';
-import { mapState } from 'vuex';
+import Sidebar from "@/components/Admin/Sidebar.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -72,10 +81,10 @@ export default {
   props: {
     product: [String, Object, Number],
   },
-  name: 'ProductsList',
+  name: "ProductsList",
 
   created() {
-    this.$store.dispatch('fetchProducts', {
+    this.$store.dispatch("fetchProducts", {
       page: this.page,
     });
   },
@@ -83,13 +92,17 @@ export default {
     page() {
       return parseInt(this.$route.query.page) || 1;
     },
-    ...mapState(['products', 'loading']),
+    ...mapState(["products", "loading"]),
   },
   methods: {
     deleteProduct(id) {
-      if (confirm('Are you sur to delete ?')) {
-        this.$store.dispatch('deleteProduct', id);
+      if (confirm("Are you sur to delete ?")) {
+        this.$store.dispatch("deleteProduct", id);
       }
+    },
+
+    getBetsByProductId(id) {
+      this.$store.dispatch("getBetByProductById", id);
     },
   },
 };

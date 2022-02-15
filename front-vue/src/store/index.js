@@ -23,6 +23,10 @@ export default new Vuex.Store({
     notifications: [],
     userInfo: null,
     delivery: JSON.parse(localStorage.getItem('delivery')) || [],
+<<<<<<< HEAD
+    betsByProductId: null
+=======
+>>>>>>> origin/master
   },
 
   getters: {
@@ -147,6 +151,9 @@ export default new Vuex.Store({
         (notification) => notification.id !== notificationToRemove.id
       );
     },
+    SET_BET(state, betsByProductId) {
+      state.betsByProductId = betsByProductId;
+    }
   },
 
   actions: {
@@ -357,5 +364,25 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+<<<<<<< HEAD
+
+    getBetByProductById({ commit, dispatch }, id ) {
+      console.log(id)
+      return axios
+        .get(`http://localhost:3001/api/v1/product/${id}/bets`)
+        .then((response) => {
+          commit('SET_BET', response.data)
+        })
+        .catch((error) => {
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching products: ' + error.message,
+          };
+          dispatch('addNotification', notification, { root: true });
+
+        });
+    },
+=======
+>>>>>>> origin/master
   },
 });

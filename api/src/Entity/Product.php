@@ -78,7 +78,6 @@ class Product
     private $brand;
 
 
-
     /**
      * @ORM\Column(type="string", length=100000)
      * @Assert\NotBlank(message="Main photo is required")

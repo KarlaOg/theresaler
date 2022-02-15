@@ -24,6 +24,13 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+        <router-link to="/my-bet">
+          <v-list-item dense nav>
+            <v-list-item-content link>
+              <v-list-item-title>My Bet</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
   </v-card>

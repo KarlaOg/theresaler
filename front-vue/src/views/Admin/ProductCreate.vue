@@ -29,11 +29,6 @@
             class="form-control"
           />
 
-          <label>Sales Type ?</label>
-          <select v-model="salesType" class="form-control">
-            <option value="true">True</option>
-            <option value="false">False</option>
-          </select>
           <label>stock</label>
           <input
             v-model="stock"
@@ -90,7 +85,6 @@ export default {
       price: 0,
       stock: 0,
       mainPicture: '',
-      salesType: true,
       date: new Date().toISOString(),
       errors: null,
     };
@@ -104,7 +98,6 @@ export default {
           brand: this.brand,
           price: parseInt(this.price),
           mainPicture: this.mainPicture,
-          salesType: Boolean(this.salesType),
           date: this.date,
           stock: parseInt(this.stock),
         })
@@ -115,7 +108,6 @@ export default {
           this.price = 0;
           this.stock = 0;
           this.mainPicture = '';
-          this.salesType = true;
         })
         .catch((err) => {
           this.errors = err.response.data.violations;

@@ -17,11 +17,9 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  * @ApiResource(
  *  collectionOperations={
  *     "get"={
- *         "access_control"="is_granted('ROLE_ADMIN')",
- *
+ *  "access_control"="is_granted('ROLE_ADMIN')",
  *          },
- *     "post"={
- *          "access_control"="is_granted('ROLE_USER')",
+ *     "post"={"access_control"="is_granted('ROLE_USER')"},
  * },
  * },
  *  subresourceOperations={

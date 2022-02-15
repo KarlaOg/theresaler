@@ -13,8 +13,11 @@ import Error from '../views/Error.vue';
 import ProductCreate from '../views/Admin/ProductCreate.vue';
 import ProductEdit from '../views/Admin/ProductEdit.vue';
 import Purchases from '../views/Admin/Purchases.vue';
+<<<<<<< HEAD
 import Bets from '../views/Admin/Bets.vue';
 
+=======
+>>>>>>> origin/master
 import UsersList from '../views/Admin/UsersList.vue';
 import ProductsList from '../views/Admin/ProductsList.vue';
 import { getAdminRole } from '@/services/auth';
@@ -71,12 +74,15 @@ const routes = [
     component: MyPurchase,
     meta: { requiresAuth: true },
   },
+<<<<<<< HEAD
   {
     path: '/my-bet',
     name: 'MyBets',
     component: MyBets,
     meta: { requiresAuth: true },
   },
+=======
+>>>>>>> origin/master
   {
     path: '/admin/create-product',
     name: 'ProductCreate',
@@ -109,12 +115,15 @@ const routes = [
     meta: { requiresAdmin: true, requiresAuth: true },
   },
   {
+<<<<<<< HEAD
     path: '/admin/bets/:id',
     name: 'Bets',
     component: Bets,
     meta: { requiresAdmin: true, requiresAuth: true },
   },
   {
+=======
+>>>>>>> origin/master
     path: '*',
     name: 'Error',
     component: Error,

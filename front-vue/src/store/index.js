@@ -23,7 +23,10 @@ export default new Vuex.Store({
     notifications: [],
     userInfo: null,
     delivery: JSON.parse(localStorage.getItem('delivery')) || [],
+<<<<<<< HEAD
     betsByProductId: null
+=======
+>>>>>>> origin/master
   },
 
   getters: {
@@ -361,6 +364,7 @@ export default new Vuex.Store({
           dispatch('addNotification', notification, { root: true });
         });
     },
+<<<<<<< HEAD
 
     getBetByProductById({ commit, dispatch }, id ) {
       console.log(id)
@@ -378,5 +382,7 @@ export default new Vuex.Store({
 
         });
     },
+=======
+>>>>>>> origin/master
   },
 });

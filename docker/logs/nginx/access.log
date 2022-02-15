@@ -807,6 +807,7 @@
 172.24.0.1 - - [01/Feb/2022:19:46:42 +0000] "OPTIONS /api/purchase_items HTTP/1.1" 200 31 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 172.24.0.1 - - [01/Feb/2022:19:46:42 +0000] "POST /api/purchase_items HTTP/1.1" 422 489 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 172.18.0.1 - - [30/Jan/2022:21:34:35 +0000] "GET / HTTP/1.1" 404 9362 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 172.18.0.1 - - [30/Jan/2022:21:34:35 +0000] "GET /favicon.ico HTTP/1.1" 404 27496 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
@@ -872,6 +873,8 @@
 172.18.0.1 - - [31/Jan/2022:01:08:05 +0000] "GET /bundles/apiplatform/fonts/open-sans/files/open-sans-latin-700-normal.woff2 HTTP/1.1" 304 0 "http://localhost/bundles/apiplatform/fonts/open-sans/700.css" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
 >>>>>>> 243d9f1b710248773eb0d067390d8d27d403217f
 =======
+=======
+>>>>>>> origin/master
 172.24.0.1 - - [13/Feb/2022:09:06:19 +0000] "GET /api/products/30 HTTP/1.1" 502 157 "-" "PostmanRuntime/7.29.0"
 172.24.0.1 - - [13/Feb/2022:09:06:30 +0000] "OPTIONS /api/purchases HTTP/1.1" 502 559 "http://localhost:8082/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.87 Safari/537.36"
 172.24.0.1 - - [13/Feb/2022:09:06:31 +0000] "OPTIONS /api/products?page=1 HTTP/1.1" 502 559 "http://localhost:8082/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.87 Safari/537.36"
@@ -1289,6 +1292,7 @@
 172.24.0.1 - - [13/Feb/2022:16:14:53 +0000] "GET /bundles/apiplatform/init-swagger-ui.js HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.87 Safari/537.36"
 172.24.0.1 - - [13/Feb/2022:16:14:53 +0000] "GET /_wdt/fa9340 HTTP/1.1" 200 4769 "http://localhost/api" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.87 Safari/537.36"
 172.24.0.1 - - [13/Feb/2022:16:15:05 +0000] "GET /api/purchases/4/user HTTP/1.1" 200 195 "http://localhost/api" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.87 Safari/537.36"
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 2358e35 (add call purchase api (#35))
 =======
@@ -1850,3 +1854,5 @@
 172.18.0.1 - - [15/Feb/2022:17:53:55 +0000] "GET /api/products/17 HTTP/1.1" 200 424 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
 172.18.0.1 - - [15/Feb/2022:17:53:59 +0000] "GET /api/products?page=1 HTTP/1.1" 499 0 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
 172.18.0.1 - - [15/Feb/2022:17:53:59 +0000] "GET /api/products/17 HTTP/1.1" 200 424 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
+=======
+>>>>>>> origin/master

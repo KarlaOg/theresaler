@@ -10,3 +10,12 @@ export function getAdminRole() {
   }
   return false;
 }
+
+// export function isUserConnected() {
+//   const userToken = localStorage.getItem("user");
+//   if (userToken) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }

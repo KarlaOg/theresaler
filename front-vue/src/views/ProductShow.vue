@@ -7,7 +7,13 @@
         </div>
 
         <div
-          class="col6 col-xl-6 col-lg-6 d-flex align-items-center justify-content-start"
+          class="
+            col6
+            col-xl-6 col-lg-6
+            d-flex
+            align-items-center
+            justify-content-start
+          "
         >
           <div class="info pt-xl-0 pt-lg-0 pt-5">
             <p v-if="product.stock <= 0" class="text-danger font-weight-bold">
@@ -31,6 +37,36 @@
             >
               ADD TO CART
             </button>
+            <br /><br /><br />
+            <div>
+              <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                  <label for="inputPassword6" class="col-form-label"
+                    >Make a bet</label
+                  >
+                </div>
+                <div class="col-auto">
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-describedby="passwordHelpInline"
+                    v-model="priceOffer"
+                  />
+                </div>
+                <div class="col-auto">
+                  <button
+                    :class="[
+                      product.stock <= 0 ? 'button-disable' : 'button-dark',
+                      'add-to-cart-button',
+                    ]"
+                    @click="postBet(product)"
+                    :disabled="product.stock <= 0"
+                  >
+                    BET
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,30 +85,59 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export default {
-  props: ['id'],
-  name: 'ProductShow',
+  props: ["id"],
+  name: "ProductShow",
   data() {
     return {
       quantity: 1,
+      priceOffer: null,
+      userId: null,
+      isConnected: false,
     };
   },
   methods: {
-    ...mapActions(['fetchProduct']),
+    ...mapActions(["fetchProduct"]),
 
     addtoCart(product) {
       for (var i = 0; i < this.quantity; i++) {
-        this.$store.dispatch('addCart', product);
+        this.$store.dispatch("addCart", product);
       }
+    },
+
+    decodeJWT() {
+      const userToken = localStorage.getItem("user");
+      if (userToken) {
+        const userTokenDecoded = jwt_decode(userToken);
+        this.userId = userTokenDecoded.id;
+        this.isConnected = true;
+      } else {
+        this.isConnected = false;
+      }
+    },
+
+    postBet(product) {
+      axios.post("http://localhost:3001/api/v1", {
+        priceOffer: this.priceOffer,
+        userId: this.userId,
+        productId: product.id,
+        isBetValidated: false,
+      });
     },
   },
   computed: mapState({
     product: (state) => state.product,
   }),
+  breforeMount() {
+    this.methods.decodeJWT();
+  },
   created() {
     this.fetchProduct(this.id);
+    this.methods.decodeJWT();
   },
 };
 </script>

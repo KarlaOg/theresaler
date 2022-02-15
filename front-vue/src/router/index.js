@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
 import MyPurchase from '../views/MyPurchase.vue';
+import MyBets from '../views/MyBets.vue';
 import Purchase from '../views/Purchase.vue';
 import PurchaseItem from '../views/PurchaseItem.vue';
 import Error from '../views/Error.vue';
@@ -66,6 +67,12 @@ const routes = [
     path: '/my-purchase',
     name: 'MyPurchase',
     component: MyPurchase,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/my-bet',
+    name: 'MyBets',
+    component: MyBets,
     meta: { requiresAuth: true },
   },
   {

@@ -14,10 +14,27 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Bet.init({
-    priceOffer: DataTypes.INTEGER,
-    userId: DataTypes.STRING,
-    productId: DataTypes.STRING,
-    isBetValidated: DataTypes.BOOLEAN
+    priceOffer: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+
+    },
+
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+
+    productId: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+
+    isBetValidated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'Bet',

@@ -1,7 +1,7 @@
 'use strict';
 const { faker } = require('@faker-js/faker');
 
-const bets = [...Array(10)].map((bet) => (
+const bets = [...Array(100)].map((bet) => (
   {
     priceOffer: faker.datatype.number(),
     userId : faker.datatype.number(),

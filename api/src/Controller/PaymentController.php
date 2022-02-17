@@ -20,7 +20,7 @@ class PaymentController extends AbstractController
         
         $FRONT = 'http://localhost/payment';
 
-        \Stripe\Stripe::setApiKey('sk_live_dr3rWSlttoThoDrrlU3HpSoB00kBVgMvFA');
+        // \Stripe\Stripe::setApiKey('sk_live_dr3rWSlttoThoDrrlU3HpSoB00kBVgMvFA');
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
